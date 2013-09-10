@@ -104,7 +104,7 @@ void world::sortinvites(vector<int> invites, int firmid)
 {
 	for (int i = 0; i < invites.size(); i++)
 	{
-		_invitations[invites[i]].push_back(_labordemand[firmid]);
+		_invitations[invites[i]].push_back(_labordemand[findmatch(firmid, _labordemand)]);
 	}
 }
 

@@ -1,4 +1,9 @@
 #pragma once
+
+#include <vector>
+
+using namespace std;
+
 class vacancy
 {
 public:
@@ -14,3 +19,4 @@ private:
 	int _firmid;
 };
 
+int findmatch(int firmid, vector<vacancy> labordemand);

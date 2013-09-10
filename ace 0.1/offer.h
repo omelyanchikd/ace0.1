@@ -14,6 +14,7 @@ public:
 	double getprice();
 	double getcount();
 	int getid();
+	
 	void setcount(double value);
 
 private:
