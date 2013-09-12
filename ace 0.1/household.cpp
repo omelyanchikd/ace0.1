@@ -30,7 +30,7 @@ household::household(int id, double money)
 }
 
 //ѕредставленный алгоритм поиска работы пока не учитывает необходимость уволитьс€ с фирмы при устройстве на другую работу.
-vector<int> household::searchwork(vector<vacancy> labordemand)
+vector<int> household::searchwork(map<int, double> labordemand)
 {
     if (_employed && (_salary  < _reservation_wage))
     {
@@ -38,11 +38,11 @@ vector<int> household::searchwork(vector<vacancy> labordemand)
 //      L.quit(HouseholdId);
     }
 	vector<int> possibleemployee; 
-    for(int i = 0; i < labordemand.size(); i++)
+	for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); i++)
     {
-       if ((!_employed) || (_employed && (labordemand[i].getsalary() > _salary)))
+       if ((!_employed) || (_employed && (labordemand[i] > _salary)))
        {
-		   possibleemployee.push_back(labordemand[i].getid());
+		   possibleemployee.push_back(i);
        }
     }  
 	return possibleemployee;

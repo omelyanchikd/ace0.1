@@ -39,14 +39,14 @@ void world::step()
 		//Фирмы открывают вакансии на рынке труда
 		for (int i = 0; i < firms.size(); i++)
 		{
-			_labordemand.push_back(firms[i].postvacancy());	
+			_labormarket.setvacancies(firms[i].postvacancy());	
 		}
 		_laborsupply.resize(_labordemand.size());
 		_invitations.resize(households.size());
 		//Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться
 		for (int i = 0; i < households.size(); i++)
 		{
-			sortresumes(households[i].searchwork(_labordemand), households[i].getid());
+			_labormarket.setresumes(households[i].searchwork(_labormarket.getvacancies()), households[i].getid());
 		}
 		//Фирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников
 		for (int i = 0; i < firms.size(); i++)

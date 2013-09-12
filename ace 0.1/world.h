@@ -3,6 +3,8 @@
 #include "firm.h"
 #include "household.h"
 
+#include "labormarket.h"
+
 #include "offer.h"
 #include "vacancy.h"
 
@@ -32,6 +34,8 @@ private:
 	vector<vacancy> _labordemand;
 	vector<vector<int>> _laborsupply;
 	vector<vector<vacancy>> _invitations;  
+
+	labormarket _labormarket;
 
 	void sortinvites(vector<int> invites, int firmid);
 	void sortresumes(vector<int> resumes, int householdid);

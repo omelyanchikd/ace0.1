@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 
 #include "stdlib.h"
 
@@ -18,7 +19,7 @@ public:
 	household(void);
 	household(int id, double money);
 	//Активность на рынке труда
-	vector<int> searchwork(vector<vacancy> labordemand);
+	vector<int> searchwork(map<int, double> labordemand);
 	int chooseemployee(vector<vacancy> proposals);
 	//Получение дохода
 
