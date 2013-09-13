@@ -51,12 +51,12 @@ void world::step()
 		//Фирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников
 		for (int i = 0; i < firms.size(); i++)
 		{
-			sortinvites(firms[i].checkresumes(_laborsupply[i]), firms[i].getid());
+			_labormarket.setinvites(firms[i].checkresumes(_labormarket.getresumes(firms[i].getid())), firms[i].getid());
 		}
 		//Домохозяйства получают предложения работы и выбирают работодателя, а фирмы нанимают на работу домохозяйства, принявшие их предложение
 		for (int i = 0; i < households.size(); i++)
 		{
-			firms[households[i].chooseemployee(_invitations[i])-1].hire(households[i].getid());
+			firms[households[i].chooseemployee(_invitations[i])].hire(households[i].getid());
 		}
 	}
 	//Фирмы производят продукцию
@@ -90,23 +90,8 @@ void world::step()
 	}
 }
 
-//Функция требует проверки на случай а. нумерация фирм начинается с 1, а не с 0 б. порядок резюме в векторе предложения труда не совпадает с порядком активации фирм
-void world::sortresumes(vector<int> resumes, int householdid)
-{
-	for (int i = 0; i < resumes.size(); i++)
-	{
-		_laborsupply[resumes[i]-1].push_back(householdid);
-	}
-}
 
-//Функция требует проверки
-void world::sortinvites(vector<int> invites, int firmid)
-{
-	for (int i = 0; i < invites.size(); i++)
-	{
-		_invitations[invites[i]].push_back(_labordemand[findmatch(firmid, _labordemand)]);
-	}
-}
+
 
 double world::sales(int firmid)
 {

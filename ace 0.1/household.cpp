@@ -40,9 +40,9 @@ vector<int> household::searchwork(map<int, double> labordemand)
 	vector<int> possibleemployee; 
 	for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); i++)
     {
-       if ((!_employed) || (_employed && (labordemand[i] > _salary)))
+	   if ((!_employed) || (_employed && (i->second > _salary)))
        {
-		   possibleemployee.push_back(i);
+		   possibleemployee.push_back(i->first);
        }
     }  
 	return possibleemployee;

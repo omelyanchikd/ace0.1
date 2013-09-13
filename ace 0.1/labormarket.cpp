@@ -18,5 +18,22 @@ map<int, double> labormarket::getvacancies()
 
 void labormarket::setresumes(vector<int> resumes, int householdid)
 {
-	_resumes[householdid] = resumes;
+	for (int i = 0; i < resumes.size(); i++)
+	{
+		_resumes[resumes[i]].push_back(householdid);
+	}
+}
+
+vector<int> labormarket::getresumes(int firmid)
+{
+	return _resumes[firmid];
+}
+
+void labormarket::setinvites(vector<int> invites, int firmid)
+{
+	_resumes.clear();
+	for (int i = 0; i < invites.size(); i++)
+	{
+		_resumes[invites[i]].push_back(firmid);
+	}
 }

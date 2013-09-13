@@ -37,9 +37,6 @@ private:
 
 	labormarket _labormarket;
 
-	void sortinvites(vector<int> invites, int firmid);
-	void sortresumes(vector<int> resumes, int householdid);
-
 	double sales(int firmid);
 };
 
