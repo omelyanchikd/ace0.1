@@ -5,6 +5,7 @@
 #include "agents.h"
 #include "stdlib.h"
 
+#include "vacancy.h"
 #include "offer.h"
 #include "service.h"
 
@@ -17,9 +18,9 @@ public:
 
 	//-----Constructor-----//
 	firm(void);
-	firm (double money);
+	firm (int id, double money);
 	//-----Labor-market-----//
-	double postvacancy();          //Open vacancy at the local labor market
+	vacancy postvacancy();          //Open vacancy at the local labor market
 	vector<int> checkresumes(vector<int> resumes);         //Check income resumes and select appropriate candidates   
 	void hire(int id);                 //Hire final candidates 
 	void hire(vector<int> ids);
@@ -28,7 +29,8 @@ public:
 	void getsales(double sold);//, int buyers);             //Get money from sales   
 	//-----Production-----//
 	void produce();
-
+	//Доступ к приватной информации
+	int getid();
 
 private:
 

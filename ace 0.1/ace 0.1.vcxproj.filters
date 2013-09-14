@@ -48,9 +48,6 @@
     <ClInclude Include="labormarket.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="goodmarket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -81,9 +78,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="labormarket.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="goodmarket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

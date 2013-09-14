@@ -4,14 +4,13 @@
 #include "household.h"
 
 #include "labormarket.h"
-#include "goodmarket.h"
 
 #include "offer.h"
+#include "vacancy.h"
 
 #include "service.h"
 
 #include <vector>
-#include <map>
 
 #include "agents.h"
 
@@ -25,15 +24,18 @@ public:
 
 private:
 
-	map<int, firm> firms;
+	vector<firm> firms;
 	vector<household> households;
 	
 	vector<offer> goodsupply;
 	vector<double> gooddemand;
 	vector<offer> goodsupplyinfo;
 
+	vector<vacancy> _labordemand;
+	vector<vector<int>> _laborsupply;
+	vector<vector<vacancy>> _invitations;  
+
 	labormarket _labormarket;
-	goodmarket _goodmarket;
 
 	double sales(int firmid);
 };
