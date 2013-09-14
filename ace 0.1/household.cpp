@@ -48,7 +48,7 @@ vector<int> household::searchwork(map<int, double> labordemand)
 	return possibleemployee;
 }
 
-int household::chooseemployee(vector<vacancy> proposals)
+int household::chooseemployee(vector<int> proposals, map<int,double> labordemand)
 { 
     if (proposals.size() == 0)
        return 0;
@@ -57,14 +57,14 @@ int household::chooseemployee(vector<vacancy> proposals)
        _employed = false;
 //     L.quit(HouseholdId);
     }  
-    double max = proposals[0].getsalary();
-    int maxid = proposals[0].getid();
+    double max = labordemand[proposals[0]];
+    int maxid = proposals[0];
     for(int i = 1; i < proposals.size(); i++)
     {
-       if (proposals[i].getsalary() > max)
+       if (labordemand[proposals[i]] > max)
        {
-           max = proposals[i].getsalary();
-           maxid = proposals[i].getid();
+           max = labordemand[proposals[i]];
+           maxid = proposals[i];
        }
     }
     _employed = true;
@@ -85,17 +85,17 @@ void household::gethelp()
 	_reservation_wage *= 0.8;
 }
 
-void household::buygoods(vector<offer> goodsupply)
+void household::buygoods(map<int, offer> supply)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
-	while ((spent < _consumption_budget) && (goodsupply.size() > 0))
+	while ((spent < _consumption_budget) && (supply.size() > 0))
     {
-        int j = getrandom(rand()/(double)RAND_MAX, goodsupply);
-        buy(goodsupply[j], available, spent);
-		if (goodsupply[j].getcount() == 0)
+        int j = getrandom(rand()/(double)RAND_MAX, supply);
+        buy(supply[j], available, spent);
+		if (supply[j].getcount() == 0)
 		{
-			goodsupply.erase(goodsupply.begin() + j, goodsupply.begin() + j + 1);
+			supply.erase(supply.begin() + j);
 		}
 
     }
