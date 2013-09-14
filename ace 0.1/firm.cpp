@@ -3,8 +3,6 @@
 
 firm::firm(void)
 {
-    //-----Identifier-----//
-	_id = 0;
 	//-----Exogenous parameters-----//
 	_elasticity = 0; 
 	_productivity = 0;
@@ -23,10 +21,8 @@ firm::firm(void)
 	_desired_workers = 0;
 }
 
-firm::firm(int id, double money)
+firm::firm(double money)
 {
-    //-----Identifier-----//
-	_id = id;
 	//-----Exogenous parameters-----//
 	_elasticity = -1.5; 
 	_productivity = 2;
@@ -45,9 +41,9 @@ firm::firm(int id, double money)
 	_desired_workers = 5;
 }
 
-vacancy firm::postvacancy()
+double firm::postvacancy()
 {
-	return vacancy(_salary, _id);
+	return _salary;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -88,7 +84,7 @@ void firm::hire(int id)
 
 offer firm::postoffer()
 {
-	return offer(_stock, _price, _id);
+	return offer(_stock, _price);
 }
 
 void firm::getsales(double sold)//, int buyers)
@@ -104,7 +100,3 @@ void firm::produce()
 	_money -= _salary * _workers;
 }
 
-int firm::getid()
-{
-	return _id;
-}

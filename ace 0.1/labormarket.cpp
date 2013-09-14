@@ -6,9 +6,9 @@ labormarket::labormarket(void)
 
 }
 
-void labormarket::setvacancies(vacancy _vacancy)
+void labormarket::setvacancies(int firmid, double salary)
 {
-	_vacancies[_vacancy.getid()] = _vacancy.getsalary();
+	_vacancies[firmid] = salary;
 }
 
 map<int, double> labormarket::getvacancies()
@@ -36,4 +36,10 @@ void labormarket::setinvites(vector<int> invites, int firmid)
 	{
 		_resumes[invites[i]].push_back(firmid);
 	}
+}
+
+void labormarket::clear()
+{
+	_vacancies.clear();
+	_resumes.clear();
 }
