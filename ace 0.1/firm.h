@@ -24,11 +24,12 @@ public:
 	void hire(int id);                 //Hire final candidates 
 	void hire(vector<int> ids);
 	//-----Good-market-----//
-	offer postoffer();            //Post offer of goods at the global good market
 	void getsales(double sold);//, int buyers);             //Get money from sales   
 	//-----Production-----//
 	void produce();
-
+	//Доступ к частной информации
+	double getstock();
+	double getprice();
 
 private:
 

@@ -31,7 +31,7 @@ public:
 
 	//Активность на рынке товаров
 	double consumptionbudget();
-	void buygoods(map<int,offer> supply);
+	void buygoods(vector<offer> supply);
 	void buy(offer good, double& available, double& spent);
 	//Доступ к частной информации
 	bool isemployed();

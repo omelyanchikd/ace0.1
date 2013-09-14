@@ -82,11 +82,6 @@ void firm::hire(int id)
     _workers_ids.push_back(id);	
 }
 
-offer firm::postoffer()
-{
-	return offer(_stock, _price);
-}
-
 void firm::getsales(double sold)//, int buyers)
 {
 	_sold = sold;
@@ -100,3 +95,12 @@ void firm::produce()
 	_money -= _salary * _workers;
 }
 
+double firm::getstock()
+{
+	return _stock;
+}
+
+double firm::getprice()
+{
+	return _price;
+}

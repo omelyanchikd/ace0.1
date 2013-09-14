@@ -17,17 +17,12 @@ world::world(int firmnumber, int householdnumber, double firmmoney, double house
 	{
 		households.push_back(household(i+1, householdmoney));
 	}
-	goodsupply.clear();
-	gooddemand.clear();
-	goodsupplyinfo.clear();
+	_goodmarket.clear();
 	_labormarket.clear();
 }
 
 void world::step()
 {
-	goodsupply.clear();
-	gooddemand.clear();
-	goodsupplyinfo.clear();
 	for (int iter = 0; iter < 2; iter++)
 	{
 		//‘ирмы открывают вакансии на рынке труда
@@ -68,30 +63,21 @@ void world::step()
 	//‘ирмы поставл€ют на рынок товаров продукцию дл€ продажи
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		_goodmarket.setsupply((i->second).postoffer());
+		_goodmarket.setsupply((i->second).getprice(), (i->second).getstock(), i->first);
 	}
-	goodsupplyinfo = duplicate<offer>(goodsupply);
 	//ƒомохоз€йства выбирают товары из предложенных
 	for (int i = 0; i < households.size(); i++)
 	{
-		households[i].buygoods(goodsupply);
+		households[i].buygoods(_goodmarket.getdemand());
 	}
 	//‘ирмы забирают полученную выручку
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		(i->second).getsales(sales(i->first));
+		(i->second).getsales(_goodmarket.getsales(i->first));
 	}
 }
 
 
 
 
-double world::sales(int firmid)
-{
-//	double stock = getcount(firmid, goodsupplyinfo);
-//	double unsold = getcount(firmid, goodsupply);
-//	double price = getprice(firmid, goodsupplyinfo);
-//	return (stock - unsold);
-	return 0;
-}
 

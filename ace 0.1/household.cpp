@@ -85,7 +85,7 @@ void household::gethelp()
 	_reservation_wage *= 0.8;
 }
 
-void household::buygoods(map<int, offer> supply)
+void household::buygoods(vector<offer> supply)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;

@@ -28,10 +28,6 @@ private:
 	map<int, firm> firms;
 	vector<household> households;
 	
-	vector<offer> goodsupply;
-	vector<double> gooddemand;
-	vector<offer> goodsupplyinfo;
-
 	labormarket _labormarket;
 	goodmarket _goodmarket;
 

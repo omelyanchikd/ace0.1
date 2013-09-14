@@ -5,6 +5,7 @@ offer::offer(void)
 {
 	_count = 0;
 	_price = 0;
+	_firmid = 0;
 }
 
 double offer::getprice()
@@ -22,13 +23,18 @@ void offer::setcount(double value)
 	_count = value;
 }
 
-int getrandom(double value, map<int,offer> supply)
+int offer::getid()
+{
+	return _firmid;
+}
+
+int getrandom(double value, vector<offer> gooddemand)
 {
     vector<double> probabilities;
 	probabilities.clear();
-	for(map<int, offer>::iterator i = supply.begin(); i != supply.end(); i++)
+	for(int i = 0; i <gooddemand.size(); i++)
 	{
-		probabilities[i].push_back(1/(i->second).getprice());
+		probabilities.push_back(1/gooddemand[i].getprice());
 	}
 	vector<double> distribution;
 	distribution.clear();
@@ -39,13 +45,21 @@ int getrandom(double value, map<int,offer> supply)
     }
 	for (int i = 0; i < probabilities.size(); i++)
     {
-        if (distribution[i] <= value) && (value <= distribution[i])
-           return ((supply.begin()+i)->first);
+        if ((distribution[i] <= value) && (value <= distribution[i]))
+           return (gooddemand[i].getid());
     }
     return 0;
 }
 
-
+double getcount(int firmid, vector<offer> good)
+{
+	for (int i = 0; i < good.size(); i++)
+	{
+		if (i == firmid)
+			return good[i].getcount();
+	}
+	return 0;
+}
 
 
 
