@@ -48,6 +48,7 @@ double firm::postvacancy()
 
 vector<int> firm::checkresumes(vector<int> resumes)
 {
+   _workers_ids.clear();
    _resume_number = resumes.size();
    vector <int> invite;
    if (_desired_workers > _workers)

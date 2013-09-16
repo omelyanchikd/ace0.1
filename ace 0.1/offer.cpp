@@ -57,7 +57,7 @@ double getcount(int firmid, vector<offer> good)
 {
 	for (int i = 0; i < good.size(); i++)
 	{
-		if (i == firmid)
+		if (i+1 == firmid)
 			return good[i].getcount();
 	}
 	return 0;

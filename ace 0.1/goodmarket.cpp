@@ -12,10 +12,10 @@ void goodmarket::setsupply(double price, double stock, int firmid)
 	_demand.push_back(good);
 }
 
-vector<offer> goodmarket::getdemand()
+/*vector<offer> goodmarket::getdemand()
 {
 	return _demand;
-}
+}//*/
 
 double goodmarket::getsales(int firmid)
 {

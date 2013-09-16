@@ -11,9 +11,9 @@ class goodmarket
 public:
 	goodmarket(void);
 
-	void setsupply(double price, double stock, int firmid);
+	void setsupply(double price, double stock, int firmid);	
 
-	vector<offer> getdemand();
+	vector<offer> _demand;
 
 	double getsales(int firmid);
 
@@ -23,6 +23,6 @@ public:
 
 private:
 	vector<offer> _supply;
-	vector<offer> _demand;
+
 };
 

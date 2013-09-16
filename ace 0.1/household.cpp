@@ -87,7 +87,7 @@ void household::gethelp()
 	_reservation_wage *= 0.8;
 }
 
-void household::buygoods(vector<offer> supply)
+void household::buygoods(vector<offer> &supply)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
@@ -102,8 +102,6 @@ void household::buygoods(vector<offer> supply)
 
     }
 	_money -= spent; 
-
-
 }
 
 bool household::isemployed()
@@ -125,7 +123,7 @@ double household::consumptionbudget()
 }
 
 //Покупка товаров, если товар считается бесконечно делимым. В дальнейшем эту процедуру следует переписать так, чтобы товар имел пределы делимости. Например, нельзя купить 0.00000001-ую часть айфона.
-void household::buy(offer good, double& available, double& spent)
+void household::buy(offer& good, double& available, double& spent)
 {
 	if (good.getcount() * good.getprice() >= available)
 	{
