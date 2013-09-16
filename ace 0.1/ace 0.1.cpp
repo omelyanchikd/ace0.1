@@ -20,6 +20,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int iteration = 0; iteration < i; iteration++)
 	{
 		earth.step();
+		cout<<"Iteration "<<iteration;
+		earth.printinfo();
 	}
 	return 0;
 }

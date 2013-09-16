@@ -11,11 +11,11 @@ world::world(int firmnumber, int householdnumber, double firmmoney, double house
 	households.clear();
 	for (int i = 1; i <= firmnumber; i++)
 	{
-		//firms[i] = firm firmmoney));
+		firms[i] = firm(firmmoney);
 	}
-	for (int i = 0; i < householdnumber; i++)
+	for (int i = 1; i <= householdnumber; i++)
 	{
-		households.push_back(household(i+1, householdmoney));
+		households[i] = household(householdmoney);
 	}
 	_goodmarket.clear();
 	_labormarket.clear();
@@ -31,9 +31,9 @@ void world::step()
 			_labormarket.setvacancies(i->first, (i->second).postvacancy());	
 		}
 		//Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться
-		for (int i = 0; i < households.size(); i++)
+		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
-			_labormarket.setresumes(households[i].searchwork(_labormarket.getvacancies()), households[i].getid());
+			_labormarket.setresumes((i->second).searchwork(_labormarket.getvacancies()), i->first);
 		}
 		//Фирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников
 		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
@@ -41,9 +41,9 @@ void world::step()
 			_labormarket.setinvites((i->second).checkresumes(_labormarket.getresumes(i->first)), i->first);
 		}
 		//Домохозяйства получают предложения работы и выбирают работодателя, а фирмы нанимают на работу домохозяйства, принявшие их предложение
-		for (int i = 0; i < households.size(); i++)
+		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
-			firms[households[i].chooseemployee(_labormarket.getresumes(households[i].getid()), _labormarket.getvacancies())].hire(households[i].getid());
+			firms[(i->second).chooseemployee(_labormarket.getresumes((i->first)), _labormarket.getvacancies())].hire(i->first);
 		}
 		_labormarket.clear();
 	}
@@ -53,12 +53,12 @@ void world::step()
 		(i->second).produce();
 	}
 	//Домохозяйства получают зарплату или пособие по безработице
-	for (int i = 0; i < households.size(); i++)
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 	{
-		if (households[i].isemployed())
-			households[i].work();
+		if ((i->second).isemployed())
+			(i->second).work();
 		else
-			households[i].gethelp();
+			(i->second).gethelp();
 	}
 	//Фирмы поставляют на рынок товаров продукцию для продажи
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
@@ -66,18 +66,31 @@ void world::step()
 		_goodmarket.setsupply((i->second).getprice(), (i->second).getstock(), i->first);
 	}
 	//Домохозяйства выбирают товары из предложенных
-	for (int i = 0; i < households.size(); i++)
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 	{
-		households[i].buygoods(_goodmarket.getdemand());
+		(i->second).buygoods(_goodmarket.getdemand());
 	}
 	//Фирмы забирают полученную выручку
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
 		(i->second).getsales(_goodmarket.getsales(i->first));
 	}
+	_goodmarket.clear();
 }
 
-
+void world::printinfo()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		cout<<"Firm "<<i->first<<": ";
+		(i->second).printinfo();
+	}
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		cout<<"Household "<<i->first<<": ";
+		(i->second).printinfo();
+	}
+}
 
 
 

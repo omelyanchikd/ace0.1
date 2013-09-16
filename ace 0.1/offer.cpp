@@ -31,13 +31,15 @@ int offer::getid()
 int getrandom(double value, vector<offer> gooddemand)
 {
     vector<double> probabilities;
+	vector<double> distribution;
+	distribution.clear();
 	probabilities.clear();
 	for(int i = 0; i <gooddemand.size(); i++)
 	{
 		probabilities.push_back(1/gooddemand[i].getprice());
+		distribution.push_back(0);
+
 	}
-	vector<double> distribution;
-	distribution.clear();
     distribution.push_back(0);
     for (int i = 1; i < probabilities.size(); i++)
     {
@@ -45,7 +47,7 @@ int getrandom(double value, vector<offer> gooddemand)
     }
 	for (int i = 0; i < probabilities.size(); i++)
     {
-        if ((distribution[i] <= value) && (value <= distribution[i]))
+        if ((distribution[i] <= value) && (value <= distribution[i+1]))
            return (gooddemand[i].getid());
     }
     return 0;

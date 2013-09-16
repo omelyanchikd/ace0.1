@@ -21,16 +21,18 @@ public:
 	
 	world(void);
 	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney);
+	
 	void step();
+
+	void printinfo();
 
 private:
 
 	map<int, firm> firms;
-	vector<household> households;
+	map<int, household> households;
 	
 	labormarket _labormarket;
 	goodmarket _goodmarket;
-
-	double sales(int firmid);
+	
 };
 

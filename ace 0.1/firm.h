@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 #include "agents.h"
 #include "stdlib.h"
@@ -30,6 +31,7 @@ public:
 	//Доступ к частной информации
 	double getstock();
 	double getprice();
+	void printinfo();
 
 private:
 

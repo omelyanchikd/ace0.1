@@ -104,3 +104,21 @@ double firm::getprice()
 {
 	return _price;
 }
+
+void firm::printinfo()
+{
+	cout<<"Price: "<<_price;
+	cout<<"Salary: "<<_salary;	
+	cout<<"Sold: "<<_sold;
+	cout<<"Workers: ";
+	for (int i = 0; i < _workers_ids.size(); i++)
+	{
+		cout<<_workers_ids[i];
+	}
+	cout<<"Number of workers: "<<_workers;
+	cout<<"Number of income resumes: "<<_resume_number;
+	cout<<"Money: "<<_money;
+	cout<<"Profit: "<<_profit;
+	cout<<"Desired workers: "<<_desired_workers;
+	cout<<"Stock: "<<_stock;
+}

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <map>
+#include <iostream>
 
 #include "stdlib.h"
 
@@ -17,7 +18,7 @@ class household
 public:
 	//Конструкторы агента
 	household(void);
-	household(int id, double money);
+	household(double money);
 	//Активность на рынке труда
 	vector<int> searchwork(map<int, double> labordemand);
 	int chooseemployee(vector<int> proposals, map<int, double> labordemand);
@@ -35,11 +36,9 @@ public:
 	void buy(offer good, double& available, double& spent);
 	//Доступ к частной информации
 	bool isemployed();
-	int getid();
+	void printinfo();
 
 private:
-	//Идентификатор агента
-	int _id;
 	//Внешняя реакция
 	double _salary;
 	bool _employed;

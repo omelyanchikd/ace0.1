@@ -3,8 +3,6 @@
 
 household::household(void)
 {
-	//Идентификатор агента
-	_id = 0;
 	//Реакция внешнего мира
 	_salary = 0;
 	_employed = false;
@@ -15,10 +13,8 @@ household::household(void)
 	_consumption_budget = 0;
 }
 
-household::household(int id, double money)
+household::household(double money)
 {
-	//Идентификатор агента
-	_id = id;
 	//Реакция внешнего мира
 	_salary = 0;
 	_employed = false;
@@ -133,7 +129,12 @@ void household::buy(offer good, double& available, double& spent)
 	}
 }
 
-int household::getid()
+void household::printinfo()
 {
-	return _id;
+	cout<<"Salary: "<<_salary;
+	cout<<"Employed: "<<_employed;
+	cout<<"Employee: "<<_employee;
+	cout<<"Money: "<<_money;
+	cout<<"Reservation wage: "<<_reservation_wage;
+	cout<<"Consumption budget :"<<_consumption_budget;
 }
