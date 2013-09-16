@@ -131,10 +131,10 @@ void household::buy(offer good, double& available, double& spent)
 
 void household::printinfo()
 {
-	cout<<"Salary: "<<_salary;
-	cout<<"Employed: "<<_employed;
-	cout<<"Employee: "<<_employee;
-	cout<<"Money: "<<_money;
-	cout<<"Reservation wage: "<<_reservation_wage;
-	cout<<"Consumption budget :"<<_consumption_budget;
+	cout<<"Salary: "<<_salary<<endl;
+	cout<<"Employed: "<<_employed<<endl;
+	cout<<"Employee: "<<_employee<<endl;
+	cout<<"Money: "<<_money<<endl;
+	cout<<"Reservation wage: "<<_reservation_wage<<endl;
+	cout<<"Consumption budget :"<<_consumption_budget<<endl;
 }

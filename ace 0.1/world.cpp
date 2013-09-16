@@ -82,12 +82,12 @@ void world::printinfo()
 {
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		cout<<"Firm "<<i->first<<": ";
+		cout<<"Firm "<<i->first<<": "<<endl;
 		(i->second).printinfo();
 	}
 	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 	{
-		cout<<"Household "<<i->first<<": ";
+		cout<<"Household "<<i->first<<": "<<endl;
 		(i->second).printinfo();
 	}
 }

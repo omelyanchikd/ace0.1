@@ -107,18 +107,18 @@ double firm::getprice()
 
 void firm::printinfo()
 {
-	cout<<"Price: "<<_price;
-	cout<<"Salary: "<<_salary;	
-	cout<<"Sold: "<<_sold;
-	cout<<"Workers: ";
+	cout<<"Price: "<<_price<<endl;
+	cout<<"Salary: "<<_salary<<endl;	
+	cout<<"Sold: "<<_sold<<endl;
+	cout<<"Workers: "<<endl;
 	for (int i = 0; i < _workers_ids.size(); i++)
 	{
-		cout<<_workers_ids[i];
+		cout<<_workers_ids[i]<<endl;
 	}
-	cout<<"Number of workers: "<<_workers;
-	cout<<"Number of income resumes: "<<_resume_number;
-	cout<<"Money: "<<_money;
-	cout<<"Profit: "<<_profit;
-	cout<<"Desired workers: "<<_desired_workers;
-	cout<<"Stock: "<<_stock;
+	cout<<"Number of workers: "<<_workers<<endl;
+	cout<<"Number of income resumes: "<<_resume_number<<endl;
+	cout<<"Money: "<<_money<<endl;
+	cout<<"Profit: "<<_profit<<endl;
+	cout<<"Desired workers: "<<_desired_workers<<endl;
+	cout<<"Stock: "<<_stock<<endl;
 }
