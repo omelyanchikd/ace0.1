@@ -43,9 +43,12 @@ void world::step()
 		//Домохозяйства получают предложения работы и выбирают работодателя, а фирмы нанимают на работу домохозяйства, принявшие их предложение
 		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
+			int currentemployee = (i->second).getemployee();
 			int employee = (i->second).chooseemployee(_labormarket.getresumes((i->first)), _labormarket.getvacancies());
-			if ((employee != 0) || (employee != (i->second).getemployee()))
+			if ((employee != 0) && (employee != currentemployee))
+			{
 				firms[employee].hire(i->first);
+			}
 		}
 		_labormarket.clear();
 	}
