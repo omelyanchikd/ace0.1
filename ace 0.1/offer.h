@@ -8,7 +8,7 @@ class offer
 {
 public:
 	offer(void);
-	offer(double count, double price, int firmid): _count(count), _price(price), _firmid(firmid)
+	offer(double price, double count, int firmid): _price(price), _count(count), _firmid(firmid)
 	{
 	}
 	double getprice();
