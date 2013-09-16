@@ -14,7 +14,7 @@ firm::firm(void)
 	_sold = 0;
 	_workers = 0;
 	_resume_number = 0;
-	_buyers = 0;
+//	_buyers = 0;
 	//-----Calculations-----//
 	_money = 0;
 	_profit = 0;
@@ -34,7 +34,7 @@ firm::firm(double money)
 	_sold = 0;
 	_workers = 0;
 	_resume_number = 0;
-	_buyers = 0;
+//	_buyers = 0;
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;

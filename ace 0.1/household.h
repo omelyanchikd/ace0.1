@@ -36,12 +36,14 @@ public:
 	void buy(offer good, double& available, double& spent);
 	//Доступ к частной информации
 	bool isemployed();
+	int getemployee();
 	void printinfo();
 
 private:
 	//Внешняя реакция
 	double _salary;
 	bool _employed;
+	bool _active;
 	int _employee;
 	//Рассчетные показатели
 	double _money;

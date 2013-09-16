@@ -35,8 +35,6 @@ public:
 
 private:
 
-	//-----Identifier-----//
-	int _id;
 	//-----Exogenous-parameters-----//
 	double _elasticity; 
 	double _productivity;
@@ -49,7 +47,7 @@ private:
 	vector <int> _workers_ids;
 	int _workers;
 	int _resume_number;
-	int _buyers;
+//	int _buyers;
 	//-----Calculations-----//
 	double _money;
 	double _profit;

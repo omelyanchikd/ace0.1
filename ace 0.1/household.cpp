@@ -6,6 +6,7 @@ household::household(void)
 	//Реакция внешнего мира
 	_salary = 0;
 	_employed = false;
+	_active = true;
 	_employee = 0;
 	//Рассчетные показатели
 	_money = 0;
@@ -18,6 +19,7 @@ household::household(double money)
 	//Реакция внешнего мира
 	_salary = 0;
 	_employed = false;
+	_active = true;
 	_employee = 0;
 	//Рассчетные показатели
 	_money = money;
@@ -34,20 +36,23 @@ vector<int> household::searchwork(map<int, double> labordemand)
 //      L.quit(HouseholdId);
     }
 	vector<int> possibleemployee; 
-	for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); i++)
-    {
-	   if ((!_employed) || (_employed && (i->second > _salary)))
-       {
-		   possibleemployee.push_back(i->first);
-       }
-    }  
+	if (_active)
+	{
+		for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); i++)
+		{
+			if ((!_employed) || (_employed && (i->second > _salary)))
+				{
+					possibleemployee.push_back(i->first);
+				}
+		}  
+	}
 	return possibleemployee;
 }
 
 int household::chooseemployee(vector<int> proposals, map<int,double> labordemand)
 { 
     if (proposals.size() == 0)
-       return 0;
+       return _employee;
     if (_employed)
     {
        _employed = false;
@@ -66,6 +71,7 @@ int household::chooseemployee(vector<int> proposals, map<int,double> labordemand
     _employed = true;
     _salary = max;
 	_employee = maxid;
+	_active = false;
 	return maxid;    
 }
 
@@ -103,6 +109,11 @@ void household::buygoods(vector<offer> supply)
 bool household::isemployed()
 {
 	return _employed;
+}
+
+int household::getemployee()
+{
+	return _employee;
 }
 
 double household::consumptionbudget()
