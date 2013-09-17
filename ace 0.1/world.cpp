@@ -44,7 +44,7 @@ void world::step()
 		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
 //			int currentemployee = (i->second).getemployee();
-			int employee = (i->second).chooseemployee(_labormarket.getresumes((i->first)), _labormarket.getvacancies());
+			int employee = (i->second).chooseemployee(_labormarket.getinvites((i->first)), _labormarket.getvacancies());
 			if ((employee != 0)) //&& (employee != currentemployee))
 			{
 				firms[employee].hire(i->first);

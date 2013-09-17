@@ -70,7 +70,7 @@ vector<int> firm::checkresumes(vector<int> resumes)
 
 void firm::hire(vector<int> ids)
 {
-	_workers += ids.size();
+	_workers = ids.size();
 	for (int i = 0; i < ids.size(); i++)
 	{
 		_workers_ids.push_back(ids[i]);
@@ -79,8 +79,7 @@ void firm::hire(vector<int> ids)
 
 void firm::hire(int id)
 {
-	_workers++;
-    _workers_ids.push_back(id);	
+	_workers_ids.push_back(id);	
 }
 
 void firm::getsales(double sold)//, int buyers)
@@ -88,10 +87,12 @@ void firm::getsales(double sold)//, int buyers)
 	_sold = sold;
 //	_buyers = buyers;
 	_money += _price * _sold;
+	_profit = _price * _sold - _salary * _workers;
 }
 
 void firm::produce()
 {
+	_workers = _workers_ids.size();
 	_stock = _productivity * _workers;
 	_money -= _salary * _workers;
 }

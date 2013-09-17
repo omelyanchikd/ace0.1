@@ -31,15 +31,21 @@ vector<int> labormarket::getresumes(int firmid)
 
 void labormarket::setinvites(vector<int> invites, int firmid)
 {
-	_resumes.clear();
 	for (int i = 0; i < invites.size(); i++)
 	{
-		_resumes[invites[i]].push_back(firmid);
+		_invites[invites[i]].push_back(firmid);
 	}
 }
+
+vector<int> labormarket::getinvites(int firmid)
+{
+	return _invites[firmid];
+}
+
 
 void labormarket::clear()
 {
 	_vacancies.clear();
 	_resumes.clear();
+	_invites.clear();
 }

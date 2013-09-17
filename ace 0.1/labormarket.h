@@ -19,12 +19,14 @@ public:
 	vector<int> getresumes(int firmid);
 
 	void setinvites(vector<int> invites, int firmid);
+	vector<int> getinvites(int firmid);
 
 	void clear();
 
 private:
 	map<int,double> _vacancies;
 	map<int, vector<int>> _resumes;	
+	map<int, vector<int>> _invites;
 
 };
 
