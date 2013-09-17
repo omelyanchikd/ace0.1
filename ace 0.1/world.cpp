@@ -80,6 +80,10 @@ void world::step()
 	{
 		(i->second).getsales(_goodmarket.getsales(i->first));
 	}
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+//		_log._firms_salary.push_back();
+	}	
 	_goodmarket.clear();
 }
 

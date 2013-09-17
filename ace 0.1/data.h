@@ -5,11 +5,10 @@
 
 using namespace std;
 
-class log
+class data
 {
 public:
-	log(void);
-private:
+	data(void);
 	//Журнал фирм
 	vector<map<int,double>> _firm_salary;
 	vector<map<int,double>> _firm_price;

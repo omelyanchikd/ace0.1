@@ -6,6 +6,8 @@
 #include "labormarket.h"
 #include "goodmarket.h"
 
+#include "data.h"
+
 #include "offer.h"
 
 #include "service.h"
@@ -13,7 +15,7 @@
 #include <vector>
 #include <map>
 
-#include "agents.h"
+//#include "agents.h"
 
 class world
 {
@@ -33,6 +35,8 @@ private:
 	
 	labormarket _labormarket;
 	goodmarket _goodmarket;
+
+	data _log;
 	
 };
 
