@@ -32,6 +32,11 @@ public:
 	double getstock();
 	double getprice();
 	double getsalary();
+	double getsold();
+	int getworkers();
+	double getmoney();
+	double getprofit();
+	int getdesired();
 	void printinfo();
 
 private:

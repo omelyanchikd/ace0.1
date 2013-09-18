@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		earth.step();
 		cout<<"Iteration "<<iteration<<endl;
-		earth.printinfo();
+		//earth.printinfo();
 	}
 	earth._log.printinfo();
 	cin>>n;

@@ -37,6 +37,10 @@ public:
 	//Доступ к частной информации
 	bool isemployed();
 	int getemployee();
+	double getsalary();
+	double getmoney();
+	double getreservation();
+	double getconsumption();
 	void printinfo();
 
 private:

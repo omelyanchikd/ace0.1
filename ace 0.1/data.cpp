@@ -91,6 +91,7 @@ void data::sethouseholdconsumption(int householdid, double consumption)
 
 void data::printinfo()
 {
+	cout<<"Salary"<<endl;
 	for (map<int, vector<double>>::iterator i = _firm_salary.begin(); i != _firm_salary.end(); i++)
 	{
 		cout<<"Firm id: "<<i->first<<endl;
@@ -100,4 +101,144 @@ void data::printinfo()
 		}
 		cout<<endl;
 	}
+	cout<<"Price"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_price.begin(); i != _firm_price.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Sold"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_sold.begin(); i != _firm_sold.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Workers"<<endl;
+	for (map<int, vector<int>>::iterator i = _firm_workers.begin(); i != _firm_workers.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Money"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_money.begin(); i != _firm_money.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Profit"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_profit.begin(); i != _firm_profit.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Desired workers"<<endl;
+	for (map<int, vector<int>>::iterator i = _firm_desired.begin(); i != _firm_desired.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Stock"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_stock.begin(); i != _firm_stock.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Money"<<endl;
+	for (map<int, vector<double>>::iterator i = _firm_money.begin(); i != _firm_money.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Salary"<<endl;
+	for (map<int, vector<double>>::iterator i = _household_salary.begin(); i != _household_salary.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Employed"<<endl;
+	for (map<int, vector<bool>>::iterator i = _household_employed.begin(); i != _household_employed.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Employee"<<endl;
+	for (map<int, vector<int>>::iterator i = _household_employee.begin(); i != _household_employee.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Money"<<endl;
+	for (map<int, vector<double>>::iterator i = _household_money.begin(); i != _household_money.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Reservation wage"<<endl;
+	for (map<int, vector<double>>::iterator i = _household_reservation.begin(); i != _household_reservation.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<"Consumption budget"<<endl;
+	for (map<int, vector<double>>::iterator i = _household_consumption.begin(); i != _household_consumption.end(); i++)
+	{
+		cout<<"Firm id: "<<i->first<<endl;
+		for (int time = 0; time < (i->second).size(); time++)
+		{
+			cout<<(i->second)[time]<<" ";
+		}
+		cout<<endl;
+	}	
 }

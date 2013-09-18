@@ -114,6 +114,24 @@ int household::getemployee()
 	return _employee;
 }
 
+double household::getsalary()
+{
+	return _salary;
+}
+
+double household::getmoney()
+{
+	return _money;
+}
+double household::getreservation()
+{
+	return _reservation_wage;
+}
+double household::getconsumption()
+{
+	return _consumption_budget;
+}
+
 double household::consumptionbudget()
 {
     if (_money > 0.6 * _salary)

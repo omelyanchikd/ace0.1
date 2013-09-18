@@ -40,8 +40,8 @@ private:
 	map<int,vector<double>> _firm_stock;
 	//∆урнал домохоз€йств
 	map<int,vector<double>> _household_salary;
-	map<int,vector<double>> _household_employed;
-	map<int,vector<double>> _household_employee;
+	map<int,vector<bool>> _household_employed;
+	map<int,vector<int>> _household_employee;
 	map<int,vector<double>> _household_money;
 	map<int,vector<double>> _household_reservation;
 	map<int,vector<double>> _household_consumption;

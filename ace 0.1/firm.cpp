@@ -112,6 +112,31 @@ double firm::getsalary()
 	return _salary;
 }
 
+double firm::getsold()
+{
+	return _sold;
+}
+
+int firm::getworkers()
+{
+	return _workers;
+}
+
+double firm::getmoney()
+{
+	return _money;
+}
+
+double firm::getprofit()
+{
+	return _profit;
+}
+
+int firm::getdesired()
+{
+	return _desired_workers;
+}
+
 void firm::printinfo()
 {
 	cout<<"Price: "<<_price<<endl;
