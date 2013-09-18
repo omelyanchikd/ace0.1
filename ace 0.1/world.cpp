@@ -25,22 +25,22 @@ void world::step()
 {
 	for (int iter = 0; iter < 2; iter++)
 	{
-		//Фирмы открывают вакансии на рынке труда
+		// Фирмы открывают вакансии на рынке труда.
 		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 		{
 			_labormarket.setvacancies(i->first, (i->second).postvacancy());	
 		}
-		//Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться
+		// Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться.
 		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
 			_labormarket.setresumes((i->second).searchwork(_labormarket.getvacancies()), i->first);
 		}
-		//Фирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников
+		// Фирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников.
 		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 		{
 			_labormarket.setinvites((i->second).checkresumes(_labormarket.getresumes(i->first)), i->first);
 		}
-		//Домохозяйства получают предложения работы и выбирают работодателя, а фирмы нанимают на работу домохозяйства, принявшие их предложение
+		// Домохозяйства получают предложения работы и выбирают работодателя, а фирмы нанимают на работу домохозяйства, принявшие их предложение.
 		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 		{
 //			int currentemployee = (i->second).getemployee();

@@ -55,6 +55,7 @@ vector<int> firm::checkresumes(vector<int> resumes)
    {
 	   if (resumes.size() == 0)
           return resumes;
+	   // TODO: Make this normal!
        do
        {
            int j = rand()/(double)RAND_MAX * resumes.size();

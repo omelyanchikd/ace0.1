@@ -27,7 +27,7 @@ int offer::getid()
 {
 	return _firmid;
 }
-
+//TODO: Generate random inside this function
 int getrandom(double value, vector<offer> gooddemand)
 {
     vector<double> probabilities;
@@ -43,7 +43,7 @@ int getrandom(double value, vector<offer> gooddemand)
     distribution.push_back(0);
     for (int i = 1; i < probabilities.size(); i++)
     {
-       distribution[i]=probabilities[i] + distribution[i-1];  
+       distribution[i] = probabilities[i] + distribution[i-1];
     }
 	for (int i = 0; i < probabilities.size(); i++)
     {
