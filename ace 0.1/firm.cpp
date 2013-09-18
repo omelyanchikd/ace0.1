@@ -107,6 +107,11 @@ double firm::getprice()
 	return _price;
 }
 
+double firm::getsalary()
+{
+	return _salary;
+}
+
 void firm::printinfo()
 {
 	cout<<"Price: "<<_price<<endl;

@@ -82,7 +82,7 @@ void world::step()
 	}
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-//		_log._firms_salary.push_back();
+		_log.setfirmsalary(i->first, (i->second).getsalary());
 	}	
 	_goodmarket.clear();
 }

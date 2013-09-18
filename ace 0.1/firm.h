@@ -31,6 +31,7 @@ public:
 	//Доступ к частной информации
 	double getstock();
 	double getprice();
+	double getsalary();
 	void printinfo();
 
 private:

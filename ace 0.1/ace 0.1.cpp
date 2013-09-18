@@ -23,6 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout<<"Iteration "<<iteration<<endl;
 		earth.printinfo();
 	}
+	earth._log.printinfo();
 	cin>>n;
 	return 0;
 }

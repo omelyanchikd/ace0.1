@@ -28,6 +28,8 @@ public:
 
 	void printinfo();
 
+	data _log;
+
 private:
 
 	map<int, firm> firms;
@@ -36,7 +38,6 @@ private:
 	labormarket _labormarket;
 	goodmarket _goodmarket;
 
-	data _log;
 	
 };
 
