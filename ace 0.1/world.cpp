@@ -28,7 +28,7 @@ void world::step()
 		// Фирмы открывают вакансии на рынке труда.
 		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 		{
-			_labormarket.setvacancies(i->first, (i->second).postvacancy());	
+			_labormarket.setvacancies(i->first, (i->second).getsalary());	
 		}
 		// Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться.
 		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)

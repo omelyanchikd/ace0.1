@@ -27,18 +27,24 @@ int offer::getid()
 {
 	return _firmid;
 }
-//TODO: Generate random inside this function
-int getrandom(double value, vector<offer> gooddemand)
+
+// Хорошо было бы переписать эту функцию в более удобном и оптимальном виде
+int getrandom(vector<offer> gooddemand)
 {
-    vector<double> probabilities;
+    double value = (double)rand()/RAND_MAX;
+	vector<double> probabilities;
 	vector<double> distribution;
 	distribution.clear();
 	probabilities.clear();
+	double sum = 0;
 	for(int i = 0; i <gooddemand.size(); i++)
 	{
-		probabilities.push_back(1/gooddemand[i].getprice());
+		sum += 1/gooddemand[i].getprice();		
+	}
+	for(int i = 0; i <gooddemand.size(); i++)
+	{
+		probabilities.push_back(1/gooddemand[i].getprice()/sum);
 		distribution.push_back(0);
-
 	}
     distribution.push_back(0);
     for (int i = 1; i < probabilities.size(); i++)

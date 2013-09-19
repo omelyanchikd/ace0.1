@@ -1,6 +1,5 @@
 #include "household.h"
 
-
 household::household(void)
 {
 	//Реакция внешнего мира
@@ -79,12 +78,13 @@ void household::work()
 {
 	_money += _salary;
 	_reservation_wage = _salary * 0.8;
+	_active = true;
 }
 
 void household::gethelp()
 {
 	_money += _reservation_wage;
-	_reservation_wage *= 0.8;
+	_reservation_wage *= 0.8;	
 }
 
 void household::buygoods(vector<offer> &supply)
@@ -93,7 +93,7 @@ void household::buygoods(vector<offer> &supply)
 	double available = _consumption_budget, spent = 0;
 	while ((spent < _consumption_budget) && (supply.size() > 0))
     {
-        int j = getrandom(rand()/(double)RAND_MAX, supply);
+        int j = getrandom(supply);
         buy(supply[j], available, spent);
 		if (supply[j].getcount() == 0)
 		{

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "vacancy.h"
-
 #include <map>
 #include <vector>
 

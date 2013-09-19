@@ -23,7 +23,7 @@ private:
 	int _firmid;
 };
 
-int getrandom(double value, vector<offer> gooddemand);
+int getrandom(vector<offer> gooddemand);
 
 double getcount(int firmid, vector<offer> good);
 

@@ -88,7 +88,6 @@
     <ClInclude Include="service.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="vacancy.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +101,6 @@
     <ClCompile Include="offer.cpp" />
     <ClCompile Include="service.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="vacancy.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

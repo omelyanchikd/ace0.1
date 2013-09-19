@@ -6,7 +6,6 @@
 
 #include "stdlib.h"
 
-#include "vacancy.h"
 #include "offer.h"
 
 #include "service.h"

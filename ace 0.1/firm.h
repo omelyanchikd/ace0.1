@@ -20,7 +20,6 @@ public:
 	firm(void);
 	firm (double money);
 	//-----Labor-market-----//
-	double postvacancy();          //Open vacancy at the local labor market
 	vector<int> checkresumes(vector<int> resumes);         //Check income resumes and select appropriate candidates   
 	void hire(int id);                 //Hire final candidates 
 	void hire(vector<int> ids);
