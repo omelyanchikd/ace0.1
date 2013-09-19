@@ -15,8 +15,6 @@
 #include <vector>
 #include <map>
 
-//#include "agents.h"
-
 class world
 {
 public:

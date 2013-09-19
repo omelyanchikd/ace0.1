@@ -3,7 +3,6 @@
 #include <vector>
 #include <iostream>
 
-#include "agents.h"
 #include "stdlib.h"
 
 #include "offer.h"
