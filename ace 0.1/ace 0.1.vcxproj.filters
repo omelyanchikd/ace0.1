@@ -16,6 +16,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="ClassDiagram11.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -37,9 +38,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="household.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="labormarket.h">
@@ -72,9 +70,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="household.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="labormarket.cpp">

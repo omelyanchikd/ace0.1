@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram11.cd" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -83,7 +84,6 @@
     <ClInclude Include="household.h" />
     <ClInclude Include="labormarket.h" />
     <ClInclude Include="data.h" />
-    <ClInclude Include="message.h" />
     <ClInclude Include="offer.h" />
     <ClInclude Include="service.h" />
     <ClInclude Include="stdafx.h" />
@@ -97,7 +97,6 @@
     <ClCompile Include="household.cpp" />
     <ClCompile Include="labormarket.cpp" />
     <ClCompile Include="data.cpp" />
-    <ClCompile Include="message.cpp" />
     <ClCompile Include="offer.cpp" />
     <ClCompile Include="service.cpp" />
     <ClCompile Include="stdafx.cpp" />
