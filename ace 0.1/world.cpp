@@ -25,61 +25,17 @@ void world::step()
 {
 	for (int iter = 0; iter < 2; iter++)
 	{
-		// ‘ирмы открывают вакансии на рынке труда.
-		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-		{
-			_labormarket.setvacancies(i->first, (i->second).getsalary());	
-		}
-		// ƒомохоз€йства просматривают вакансии этого периода и выбирают, куда устроитьс€.
-		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-		{
-			_labormarket.setresumes((i->second).searchwork(_labormarket.getvacancies()), i->first);
-		}
-		// ‘ирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников.
-		for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-		{
-			_labormarket.setinvites((i->second).checkresumes(_labormarket.getresumes(i->first)), i->first);
-		}
-		// ƒомохоз€йства получают предложени€ работы и выбирают работодател€, а фирмы нанимают на работу домохоз€йства, прин€вшие их предложение.
-		for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-		{
-//			int currentemployee = (i->second).getemployee();
-			int employee = (i->second).chooseemployee(_labormarket.getinvites((i->first)), _labormarket.getvacancies());
-			if ((employee != 0)) //&& (employee != currentemployee))
-			{
-				firms[employee].hire(i->first);
-			}
-		}
+		set_vacancies();
+		set_resumes();
+		set_invites();
+		choose_employer();
 		_labormarket.clear();
 	}
-	//‘ирмы производ€т продукцию
-	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-	{
-		(i->second).produce();
-	}
-	//ƒомохоз€йства получают зарплату или пособие по безработице
-	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-	{
-		if ((i->second).isemployed())
-			(i->second).work();
-		else
-			(i->second).gethelp();
-	}
-	//‘ирмы поставл€ют на рынок товаров продукцию дл€ продажи
-	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-	{
-		_goodmarket.setsupply((i->second).getprice(), (i->second).getstock(), i->first);
-	}
-	//ƒомохоз€йства выбирают товары из предложенных
-	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-	{
-		(i->second).buygoods(_goodmarket._demand);
-	}
-	//‘ирмы забирают полученную выручку
-	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-	{
-		(i->second).getsales(_goodmarket.getsales(i->first));
-	}
+	produce();
+	get_income();
+	set_supply();
+	buy();
+	get_sales();
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
 		_log.setfirmsalary(i->first, (i->second).getsalary());
@@ -117,5 +73,91 @@ void world::printinfo()
 	}
 }
 
+// ‘ирмы открывают вакансии на рынке труда.
+void world::set_vacancies()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		_labormarket.setvacancies(i->first, (i->second).getsalary());	
+	}
+}
 
+// ƒомохоз€йства просматривают вакансии этого периода и выбирают, куда устроитьс€.
+void world::set_resumes()
+{
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		_labormarket.setresumes((i->second).searchwork(_labormarket.getvacancies()), i->first);
+	}
+}
 
+// ‘ирмы рассматривают списки кандидатов и приглашают на работу потенциальных сотрудников.
+void world::set_invites()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		_labormarket.setinvites((i->second).checkresumes(_labormarket.getresumes(i->first)), i->first);
+	}
+}
+
+// ƒомохоз€йства получают предложени€ работы и выбирают работодател€, а фирмы нанимают на работу домохоз€йства, прин€вшие их предложение.
+void world::choose_employer()
+{
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+//		int currentemployee = (i->second).getemployee();
+		int employee = (i->second).chooseemployee(_labormarket.getinvites((i->first)), _labormarket.getvacancies());
+		if ((employee != 0)) //&& (employee != currentemployee))
+		{
+			firms[employee].hire(i->first);
+		}
+	}
+}
+
+//‘ирмы производ€т продукцию
+void world::produce()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		(i->second).produce();
+	}
+}
+
+//ƒомохоз€йства получают зарплату или пособие по безработице
+void world::get_income()
+{
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		if ((i->second).isemployed())
+			(i->second).work();
+		else
+			(i->second).gethelp();
+	}
+}
+
+//‘ирмы поставл€ют на рынок товаров продукцию дл€ продажи
+void world::set_supply()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		_goodmarket.setsupply((i->second).getprice(), (i->second).getstock(), i->first);
+	}
+}
+
+//ƒомохоз€йства выбирают товары из предложенных
+void world::buy()
+{
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		(i->second).buygoods(_goodmarket._demand);
+	}
+}
+
+//‘ирмы забирают полученную выручку
+void world::get_sales()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		(i->second).getsales(_goodmarket.getsales(i->first));
+	}
+}
