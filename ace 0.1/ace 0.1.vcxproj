@@ -50,10 +50,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile>
-      </PrecompiledHeaderOutputFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,6 +87,7 @@
     <ClInclude Include="data.h" />
     <ClInclude Include="offer.h" />
     <ClInclude Include="service.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
@@ -103,6 +100,7 @@
     <ClCompile Include="data.cpp" />
     <ClCompile Include="offer.cpp" />
     <ClCompile Include="service.cpp" />
+    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

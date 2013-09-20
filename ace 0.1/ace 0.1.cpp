@@ -1,11 +1,12 @@
 // ace 0.1.cpp : Defines the entry point for the console application.
 //
-#pragma once
+
+#include "stdafx.h"
 
 #include "world.h"
 
 
-int _tmain(int argc), _TCHAR* argv[])
+int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(1);
 	int n = 2, m = 10, i = 3;
