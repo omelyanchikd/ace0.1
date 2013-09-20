@@ -44,7 +44,7 @@ void data::setfirmmoney(int firmid, double money)
 	_firm_money[firmid].push_back(money);
 }
 
-void data::setfirmsprofit(int firmid, double profit)
+void data::setfirmprofit(int firmid, double profit)
 {
 	_firm_profit[firmid].push_back(profit);
 }
@@ -88,6 +88,47 @@ void data::sethouseholdconsumption(int householdid, double consumption)
 {
 	_household_consumption[householdid].push_back(consumption);
 }
+
+map<int,vector<double>> data::getfirmsalary()
+{
+	return _firm_salary;
+}
+
+map<int, vector<double>> data::getfirmprice()
+{
+	return _firm_price;
+}
+
+
+map<int, vector<double>> data::getfirmsold()
+{
+	return _firm_sold;
+}
+
+map<int, vector<int>> data::getfirmworkers()
+{
+	return _firm_workers;
+}
+
+map<int, vector<double>> data::getfirmmoney()
+{
+	return _firm_money;
+}
+
+map<int, vector<double>> data::getfirmprofit()
+{
+	return _firm_profit;
+}
+
+map<int, vector<int>> data::getfirmdesired()
+{
+	return _firm_desired;
+}
+
+map<int, vector<double>> data::getfirmstock()
+{
+	return _firm_stock;
+}	
 
 void data::printinfo()
 {

@@ -16,7 +16,7 @@ public:
 	void setfirmsold(int firmid, double sold);
 	void setfirmworkers(int firmid, int workers);
 	void setfirmmoney(int firmid, double money);
-	void setfirmsprofit(int firmid, double profit);
+	void setfirmprofit(int firmid, double profit);
 	void setfirmdesired(int firmid, int desired);
 	void setfirmstock(int firmid, double stock);	
 
@@ -26,6 +26,15 @@ public:
 	void sethouseholdmoney(int householdid, double money);
 	void sethouseholdreservation(int householdid, double reservation);
 	void sethouseholdconsumption(int householdid, double consumption);
+
+	map<int,vector<double>> getfirmsalary();
+	map<int, vector<double>> getfirmprice();
+	map<int, vector<double>> getfirmsold();
+	map<int, vector<int>> getfirmworkers();
+	map<int, vector<double>> getfirmmoney();
+	map<int, vector<double>> getfirmprofit();
+	map<int, vector<int>> getfirmdesired();
+	map<int, vector<double>> getfirmstock();	
 
 	void printinfo();
 private:

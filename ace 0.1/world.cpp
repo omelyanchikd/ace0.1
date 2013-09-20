@@ -43,7 +43,7 @@ void world::step()
 		_log.setfirmsold(i->first, (i->second).getsold());
 		_log.setfirmworkers(i->first, (i->second).getworkers());
 		_log.setfirmmoney(i->first, (i->second).getmoney());
-		_log.setfirmsprofit(i->first, (i->second).getprofit());
+		_log.setfirmprofit(i->first, (i->second).getprofit());
 		_log.setfirmdesired(i->first, (i->second).getdesired());
 		_log.setfirmstock(i->first, (i->second).getstock());	
 	}	
