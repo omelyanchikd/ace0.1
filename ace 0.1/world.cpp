@@ -36,26 +36,8 @@ void world::step()
 	set_supply();
 	buy();
 	get_sales();
-	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-	{
-		_log.setfirmsalary(i->first, (i->second).getsalary());
-		_log.setfirmprice(i->first, (i->second).getprice());
-		_log.setfirmsold(i->first, (i->second).getsold());
-		_log.setfirmworkers(i->first, (i->second).getworkers());
-		_log.setfirmmoney(i->first, (i->second).getmoney());
-		_log.setfirmprofit(i->first, (i->second).getprofit());
-		_log.setfirmdesired(i->first, (i->second).getdesired());
-		_log.setfirmstock(i->first, (i->second).getstock());	
-	}	
-	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-	{
-		_log. sethouseholdsalary(i->first, (i->second).getsalary());
-		_log. sethouseholdemployed(i->first, (i->second).isemployed());
-		_log. sethouseholdemployee(i->first, (i->second).getemployee());
-		_log. sethouseholdmoney(i->first, (i->second).getmoney());
-		_log. sethouseholdreservation(i->first, (i->second).getreservation());
-		_log. sethouseholdconsumption(i->first, (i->second).getconsumption());
-	}
+	write_log();
+	firm_learning();
 	_goodmarket.clear();
 }
 
@@ -159,5 +141,39 @@ void world::get_sales()
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
 		(i->second).getsales(_goodmarket.getsales(i->first));
+	}
+}
+
+void world::firm_learning()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		(i->second).set_salary();
+		(i->second).set_price();
+		(i->second).set_desired();
+	}
+}
+
+void world::write_log()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		_log.setfirmsalary(i->first, (i->second).getsalary());
+		_log.setfirmprice(i->first, (i->second).getprice());
+		_log.setfirmsold(i->first, (i->second).getsold());
+		_log.setfirmworkers(i->first, (i->second).getworkers());
+		_log.setfirmmoney(i->first, (i->second).getmoney());
+		_log.setfirmprofit(i->first, (i->second).getprofit());
+		_log.setfirmdesired(i->first, (i->second).getdesired());
+		_log.setfirmstock(i->first, (i->second).getstock());	
+	}	
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		_log. sethouseholdsalary(i->first, (i->second).getsalary());
+		_log. sethouseholdemployed(i->first, (i->second).isemployed());
+		_log. sethouseholdemployee(i->first, (i->second).getemployee());
+		_log. sethouseholdmoney(i->first, (i->second).getmoney());
+		_log. sethouseholdreservation(i->first, (i->second).getreservation());
+		_log. sethouseholdconsumption(i->first, (i->second).getconsumption());
 	}
 }

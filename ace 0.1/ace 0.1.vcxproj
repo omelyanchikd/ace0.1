@@ -75,11 +75,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ClassDiagram11.cd" />
-    <None Include="ClassDiagram12.cd" />
-    <None Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="firm.h" />
     <ClInclude Include="goodmarket.h" />
     <ClInclude Include="household.h" />

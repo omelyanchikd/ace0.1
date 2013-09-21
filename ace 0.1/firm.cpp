@@ -147,3 +147,27 @@ void firm::printinfo()
 	cout<<"Desired workers: "<<_desired_workers<<endl;
 	cout<<"Stock: "<<_stock<<endl;
 }
+
+void firm::set_salary()
+{
+	if (_workers < _desired_workers)
+		_salary *= 1.2;
+	else
+		_salary *= 0.8;
+
+}
+
+void firm::set_price()
+{
+	if (_profit > 0)
+		_price *= 0.8;
+	else
+		_price *= 1.2;
+}
+
+void firm::set_desired()
+{
+	if (_workers == _desired_workers)
+		_desired_workers++;
+
+}

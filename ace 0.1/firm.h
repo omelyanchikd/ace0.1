@@ -36,6 +36,10 @@ public:
 	double getprofit();
 	int getdesired();
 	void printinfo();
+	// Обучение и изменение основных параметров.
+	void set_salary();
+	void set_price();
+	void set_desired();
 
 private:
 
