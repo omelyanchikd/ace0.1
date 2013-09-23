@@ -1,5 +1,6 @@
 #include "offer.h"
 
+boost::mt19937 random_generator(1);
 
 offer::offer(void)
 {
@@ -28,37 +29,6 @@ int offer::getid()
 	return _firmid;
 }
 
-// Хорошо было бы переписать эту функцию в более удобном и оптимальном виде
-int getrandom(vector<offer> gooddemand)
-{
-    double value = (double)rand()/RAND_MAX;
-	vector<double> probabilities;
-	vector<double> distribution;
-	distribution.clear();
-	probabilities.clear();
-	double sum = 0;
-	for(int i = 0; i <gooddemand.size(); i++)
-	{
-		sum += 1/gooddemand[i].getprice();		
-	}
-	for(int i = 0; i <gooddemand.size(); i++)
-	{
-		probabilities.push_back(1/gooddemand[i].getprice()/sum);
-		distribution.push_back(0);
-	}
-    distribution.push_back(0);
-    for (int i = 1; i < probabilities.size(); i++)
-    {
-       distribution[i] = probabilities[i] + distribution[i-1];
-    }
-	for (int i = 0; i < probabilities.size(); i++)
-    {
-        if ((distribution[i] <= value) && (value <= distribution[i+1]))
-           return (gooddemand[i].getid());
-    }
-    return 0;
-}
-
 double getcount(int firmid, vector<offer> good)
 {
 	for (int i = 0; i < good.size(); i++)
@@ -69,5 +39,14 @@ double getcount(int firmid, vector<offer> good)
 	return 0;
 }
 
-
-
+// Разобраться с генератором псевдослучайных чисел.
+int getrandom(vector<offer> gooddemand)
+{
+	vector<double> probabilities;
+	for(int i = 0; i < gooddemand.size(); i++)
+	{
+		probabilities.push_back(1/gooddemand[i].getprice());
+	}
+	boost::random::discrete_distribution<> get_rand(probabilities.begin(), probabilities.end());
+	return get_rand(random_generator);
+}
