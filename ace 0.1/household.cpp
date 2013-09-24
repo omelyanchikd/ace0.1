@@ -32,7 +32,7 @@ vector<int> household::searchwork(map<int, double> labordemand)
     if (_employed && (_salary  < _reservation_wage))
     {
         _employed = false;
-//      L.quit(HouseholdId);
+		_employee = 0;
     }
 	vector<int> possibleemployee; 
 	if (_active)
@@ -52,11 +52,6 @@ int household::chooseemployee(vector<int> proposals, map<int,double> labordemand
 { 
     if (proposals.size() == 0)
        return _employee;
-    if (_employed)
-    {
-       _employed = false;
-//     L.quit(HouseholdId);
-    }  
     double max = labordemand[proposals[0]];
     int maxid = proposals[0];
     for(int i = 1; i < proposals.size(); i++)
@@ -85,6 +80,7 @@ void household::gethelp()
 {
 	_money += _reservation_wage;
 	_reservation_wage *= 0.8;	
+	_active = true;
 }
 
 void household::buygoods(vector<offer> &supply)

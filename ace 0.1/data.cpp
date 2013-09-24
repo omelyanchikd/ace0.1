@@ -34,7 +34,7 @@ void data::setfirmsold(int firmid, double sold)
 	_firm_sold[firmid].push_back(sold);
 }
 
-void data::setfirmworkers(int firmid, int workers)
+void data::setfirmworkers(int firmid, double workers)
 {
 	_firm_workers[firmid].push_back(workers);
 }
@@ -49,7 +49,7 @@ void data::setfirmprofit(int firmid, double profit)
 	_firm_profit[firmid].push_back(profit);
 }
 
-void data::setfirmdesired(int firmid, int desired)
+void data::setfirmdesired(int firmid, double desired)
 {
 	_firm_desired[firmid].push_back(desired);
 }
@@ -69,7 +69,7 @@ void data::sethouseholdemployed(int householdid, bool employed)
 	_household_employed[householdid].push_back(employed);
 }
 
-void data::sethouseholdemployee(int householdid, int employee)
+void data::sethouseholdemployee(int householdid, double employee)
 {
 	_household_employee[householdid].push_back(employee);
 }
@@ -105,7 +105,7 @@ map<int, vector<double>> data::getfirmsold()
 	return _firm_sold;
 }
 
-map<int, vector<int>> data::getfirmworkers()
+map<int, vector<double>> data::getfirmworkers()
 {
 	return _firm_workers;
 }
@@ -120,7 +120,7 @@ map<int, vector<double>> data::getfirmprofit()
 	return _firm_profit;
 }
 
-map<int, vector<int>> data::getfirmdesired()
+map<int, vector<double>> data::getfirmdesired()
 {
 	return _firm_desired;
 }
@@ -163,7 +163,7 @@ void data::printinfo()
 		cout<<endl;
 	}
 	cout<<"Workers"<<endl;
-	for (map<int, vector<int>>::iterator i = _firm_workers.begin(); i != _firm_workers.end(); i++)
+	for (map<int, vector<double>>::iterator i = _firm_workers.begin(); i != _firm_workers.end(); i++)
 	{
 		cout<<"Firm id: "<<i->first<<endl;
 		for (int time = 0; time < (i->second).size(); time++)
@@ -193,7 +193,7 @@ void data::printinfo()
 		cout<<endl;
 	}
 	cout<<"Desired workers"<<endl;
-	for (map<int, vector<int>>::iterator i = _firm_desired.begin(); i != _firm_desired.end(); i++)
+	for (map<int, vector<double>>::iterator i = _firm_desired.begin(); i != _firm_desired.end(); i++)
 	{
 		cout<<"Firm id: "<<i->first<<endl;
 		for (int time = 0; time < (i->second).size(); time++)
@@ -243,7 +243,7 @@ void data::printinfo()
 		cout<<endl;
 	}
 	cout<<"Employee"<<endl;
-	for (map<int, vector<int>>::iterator i = _household_employee.begin(); i != _household_employee.end(); i++)
+	for (map<int, vector<double>>::iterator i = _household_employee.begin(); i != _household_employee.end(); i++)
 	{
 		cout<<"Firm id: "<<i->first<<endl;
 		for (int time = 0; time < (i->second).size(); time++)

@@ -1,6 +1,6 @@
 #include "offer.h"
 
-boost::mt19937 random_generator(1);
+boost::mt19937 random_generator(1000);
 
 offer::offer(void)
 {
@@ -46,6 +46,7 @@ int getrandom(vector<offer> gooddemand)
 	for(int i = 0; i < gooddemand.size(); i++)
 	{
 		probabilities.push_back(1/gooddemand[i].getprice());
+
 	}
 	boost::random::discrete_distribution<> get_rand(probabilities.begin(), probabilities.end());
 	return get_rand(random_generator);
