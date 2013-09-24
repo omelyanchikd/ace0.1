@@ -148,7 +148,7 @@ void world::firm_learning()
 {
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		(i->second).set_salary();
+	//	(i->second).set_salary();
 		(i->second).set_price();
 		(i->second).set_desired();
 	}

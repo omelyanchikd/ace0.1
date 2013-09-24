@@ -87,7 +87,7 @@ void household::buygoods(vector<offer> &supply)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
-	while ((spent < _consumption_budget) && (supply.size() > 0) && can_buy(available, supply))
+	while ((spent < _consumption_budget) && (supply.size() > 0) && (can_buy(available, supply)))
     {
         int j = getrandom(supply);
         buy(supply[j], available, spent);
