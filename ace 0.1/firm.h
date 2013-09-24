@@ -23,14 +23,14 @@ public:
 	void hire(int id);                 //Hire final candidates 
 	void hire(vector<int> ids);
 	//-----Good-market-----//
-	void getsales(double sold);//, int buyers);             //Get money from sales   
+	void getsales(int sold);//, int buyers);             //Get money from sales   
 	//-----Production-----//
 	void produce();
 	//Доступ к частной информации
-	double getstock();
+	int getstock();
 	double getprice();
 	double getsalary();
-	double getsold();
+	int getsold();
 	int getworkers();
 	double getmoney();
 	double getprofit();
@@ -51,7 +51,7 @@ private:
 	double _salary;
 	double _plan;
 	//-----Reaction-----//
-	double _sold;
+	int _sold;
 	vector <int> _workers_ids;
 	int _workers;
 	int _resume_number;
@@ -60,7 +60,7 @@ private:
 	double _money;
 	double _profit;
 	int _desired_workers;
-	double _stock;
+	int _stock;
 };
 
 

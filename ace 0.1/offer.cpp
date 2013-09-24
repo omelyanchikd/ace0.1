@@ -51,3 +51,13 @@ int getrandom(vector<offer> gooddemand)
 	boost::random::discrete_distribution<> get_rand(probabilities.begin(), probabilities.end());
 	return get_rand(random_generator);
 }
+
+bool can_buy(double money, vector<offer> good)
+{
+	for (int i = 0; i < good.size(); i++)
+	{
+		if (money >= good[i].getprice())
+			return true;
+	}
+	return false;
+}

@@ -29,3 +29,5 @@ int getrandom(vector<offer> gooddemand);
 
 double getcount(int firmid, vector<offer> good);
 
+bool can_buy(double money, vector<offer> good);
+
