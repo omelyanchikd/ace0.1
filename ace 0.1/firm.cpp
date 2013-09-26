@@ -46,11 +46,10 @@ vector<int> firm::checkresumes(vector<int> resumes)
    _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
    _resume_number = resumes.size();
    vector <int> invite;
-   invite.clear();
    if (_desired_workers > _workers)
    {
 	   if (resumes.size() == 0)
-          return invite;
+          return resumes;
        do
        {
            int j = rand()/(double)RAND_MAX * (resumes.size() - 1);		      
