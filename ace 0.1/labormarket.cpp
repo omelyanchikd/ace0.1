@@ -43,9 +43,15 @@ vector<int> labormarket::getinvites(int firmid)
 }
 
 
-void labormarket::clear()
+void labormarket::full_clear()
 {
 	_vacancies.clear();
+	_resumes.clear();
+	_invites.clear();
+}
+
+void labormarket::clear()
+{
 	_resumes.clear();
 	_invites.clear();
 }

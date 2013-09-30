@@ -25,6 +25,7 @@ public:
 
 	/*Работа*/
 	void work(); 
+	void quit();
 
 	/*Пособие по безработице*/
 	void gethelp();
@@ -41,6 +42,7 @@ public:
 	double getreservation();
 	double getconsumption();
 	void printinfo();
+
 
 private:
 	//Внешняя реакция

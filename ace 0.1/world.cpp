@@ -23,6 +23,8 @@ world::world(int firmnumber, int householdnumber, double firmmoney, double house
 
 void world::step()
 {
+	set_vacancies();
+	check_laborinfo();
 	for (int iter = 0; iter < 2; iter++)
 	{
 		set_vacancies();
@@ -39,6 +41,7 @@ void world::step()
 	write_log();
 	firm_learning();
 	_goodmarket.clear();
+	_labormarket.full_clear();
 }
 
 void world::printinfo()
@@ -60,9 +63,35 @@ void world::set_vacancies()
 {
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		_labormarket.setvacancies(i->first, (i->second).getsalary());	
+		if ((i->second).getworkers() > (i->second).getdesired())
+		{
+			vector<int> fired;
+			fired = (i->second).fire();
+			for (int j = 0; j < fired.size(); j++)
+			{
+				households[j].quit();
+			}
+		}
+		else
+		{
+			_labormarket.setvacancies(i->first, (i->second).getsalary());	
+		}
 	}
 }
+
+
+// Проверка информации об изменении зарплаты и занятости.
+void world::check_laborinfo()
+{
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		for (int j = 0; j < (i->second).getworkerids().size(); j++)
+		{
+			households[((i->second).getworkerids())[j]] = (i->second).getsalary();
+		}
+	}	
+}
+
 
 // Домохозяйства просматривают вакансии этого периода и выбирают, куда устроиться.
 void world::set_resumes()
@@ -148,7 +177,7 @@ void world::firm_learning()
 {
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-	//	(i->second).set_salary();
+		(i->second).set_salary();
 		(i->second).set_price();
 		(i->second).set_desired();
 	}

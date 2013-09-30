@@ -38,7 +38,7 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 5;
+	_desired_workers = 50;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -73,6 +73,19 @@ void firm::hire(vector<int> ids)
 void firm::hire(int id)
 {
 	_workers_ids.push_back(id);	
+}
+
+vector<int> firm::fire()
+{
+	vector<int> fired;	
+	while (_workers > _desired_workers)
+	{
+           int j = rand()/(double)RAND_MAX * (_workers_ids.size() - 1);	
+		   _workers--;
+		   fired.push_back(_workers_ids[j]);
+		   _workers_ids.erase(_workers_ids.begin() + j);		   
+	}
+	return fired;
 }
 
 void firm::getsales(int sold)//, int buyers)
@@ -113,6 +126,11 @@ int firm::getsold()
 int firm::getworkers()
 {
 	return _workers;
+}
+
+vector<int> firm::getworkerids()
+{
+	return _workers_ids;
 }
 
 double firm::getmoney()
@@ -168,6 +186,8 @@ void firm::set_price()
 void firm::set_desired()
 {
 	if (_workers == _desired_workers)
-		_desired_workers++;
+		_desired_workers--;
+	else
+		_desired_workers += 5;
 
 }

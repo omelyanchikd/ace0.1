@@ -20,6 +20,7 @@ public:
 	vector<int> getinvites(int firmid);
 
 	void clear();
+	void full_clear();
 
 private:
 	map<int,double> _vacancies;

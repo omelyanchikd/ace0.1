@@ -22,6 +22,7 @@ public:
 	vector<int> checkresumes(vector<int> resumes);         //Check income resumes and select appropriate candidates   
 	void hire(int id);                 //Hire final candidates 
 	void hire(vector<int> ids);
+	vector<int> fire();					   // Fire extra workers.
 	//-----Good-market-----//
 	void getsales(int sold);//, int buyers);             //Get money from sales   
 	//-----Production-----//
@@ -32,6 +33,7 @@ public:
 	double getsalary();
 	int getsold();
 	int getworkers();
+	vector<int> getworkerids();
 	double getmoney();
 	double getprofit();
 	int getdesired();

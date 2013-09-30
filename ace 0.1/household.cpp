@@ -76,6 +76,12 @@ void household::work()
 	_active = true;
 }
 
+void household::quit()
+{
+	_employed = false;
+	_employee = 0;
+}
+
 void household::gethelp()
 {
 	_money += _reservation_wage;
