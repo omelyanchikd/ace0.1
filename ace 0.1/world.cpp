@@ -264,5 +264,4 @@ double world::average_salary()
 		workers += (i->second).getworkers();
 	}
 	return sum/workers;
-
 }

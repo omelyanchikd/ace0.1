@@ -3,14 +3,20 @@
 
 macro::macro(void)
 {
-	_inflation = 1;
-	_unemployment_rate = 0;
-	_gdp = 0;
-	_consumption = 0;
-	_average_salary = 0;
-	_average_price = 0;
-	_production = 0;
 }
 
+void macro::set_production(data log)
+{
+	double sum = 0;
+	for (map<int, vector<double>>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getstock();
+	}
+}
+	void set_consumption(data log);
+	void set_unemployment(data log);
+	void set_average_salary(data log);
+	void set_average_price(data log);
+	void set_all(data log);
 
 
