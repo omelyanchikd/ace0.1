@@ -48,6 +48,11 @@ private:
 	void firm_learning();		// ‘ирмы обновл€ют свои параметры по результатам итерации.
 	void write_log();           // ¬ременные р€ды лога пополн€ютс€ новыми значени€ми.
 	void check_laborinfo();		// ѕроверка информации об изменении зарплаты и зан€тости.
+	double unemployment();		// ”ровень безработицы.
+	double production();		// ќбъем производства.
+	double consumption();		// ќбъем потреблени€.
+	double average_price();		// —редн€€ цена.
+	double average_salary();	// —редн€€ заработна€ плата.
 
 };
 

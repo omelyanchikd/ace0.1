@@ -81,6 +81,7 @@
     <ClInclude Include="household.h" />
     <ClInclude Include="labormarket.h" />
     <ClInclude Include="data.h" />
+    <ClInclude Include="macro.h" />
     <ClInclude Include="offer.h" />
     <ClInclude Include="service.h" />
     <ClInclude Include="stdafx.h" />
@@ -94,6 +95,7 @@
     <ClCompile Include="household.cpp" />
     <ClCompile Include="labormarket.cpp" />
     <ClCompile Include="data.cpp" />
+    <ClCompile Include="macro.cpp" />
     <ClCompile Include="offer.cpp" />
     <ClCompile Include="service.cpp" />
     <ClCompile Include="stdafx.cpp" />

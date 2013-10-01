@@ -206,3 +206,63 @@ void world::write_log()
 		_log. sethouseholdconsumption(i->first, (i->second).getconsumption());
 	}
 }
+
+double world::unemployment()
+{
+	int unemployed = 0;
+	int household_number = 0;
+	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
+	{
+		if (!(i->second).isemployed())
+		{
+			unemployed++;
+		}
+		household_number++;
+	}
+	return (double)unemployed/household_number;
+}
+
+double world::production()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getstock();
+	}
+	return sum;
+}
+
+double world::consumption()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getsold();
+	}
+	return sum;
+}
+
+double world::average_price()
+{
+	double sum = 0;
+	int firm_number = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice();
+		firm_number++;
+	}
+	return sum/firm_number;
+}
+
+double world::average_salary()
+{
+	double sum = 0;
+	int workers = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getsalary() * (i->second).getworkers();
+		workers += (i->second).getworkers();
+	}
+	return sum/workers;
+
+}
