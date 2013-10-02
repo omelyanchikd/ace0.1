@@ -2,8 +2,6 @@
 
 #include <vector>
 
-#include "data.h"
-
 using namespace std;
 
 class macro
@@ -11,18 +9,24 @@ class macro
 public:
 	macro(void);
 //-------------------------------------
-	void set_production(data log);
-	void set_consumption(data log);
-	void set_unemployment(data log);
-	void set_average_salary(data log);
-	void set_average_price(data log);
-	void set_all(data log);
+	void set_production(double production);
+	void set_consumption(double consumption);
+	void set_unemployment(double unemployment);
+	void set_average_salary(double salary);
+	void set_average_price(double price);
+	void set_inflation(double inflation);
+	void set_gdp(double gdp);
+	//void set_all();
 //-------------------------------------
-	double get_production();
-	double get_consumption();
-	double get_unemployment();
-	double get_average_salary();
-	double get_average_price();
+	vector<double> get_production();
+	vector<double> get_consumption();
+	vector<double> get_unemployment();
+	vector<double> get_average_salary();
+	vector<double> get_average_price();
+	vector<double> get_inflation();
+	vector<double> get_gdp();
+//-------------------------------------
+	double inflation();
 
 
 private:

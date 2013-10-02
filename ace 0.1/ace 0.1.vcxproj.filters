@@ -24,9 +24,6 @@
     <ClInclude Include="firm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="service.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="offer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,9 +54,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="firm.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="offer.cpp">

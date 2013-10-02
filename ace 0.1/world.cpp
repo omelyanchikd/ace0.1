@@ -38,6 +38,7 @@ void world::step()
 	set_supply();
 	buy();
 	get_sales();
+	get_statistics();
 	write_log();
 	firm_learning();
 	_goodmarket.clear();
@@ -227,7 +228,7 @@ double world::production()
 	double sum = 0;
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		sum += (i->second).getprice() * (i->second).getstock();
+		sum += (i->second).getstock(); // * (i->second).getprice();
 	}
 	return sum;
 }
@@ -264,4 +265,35 @@ double world::average_salary()
 		workers += (i->second).getworkers();
 	}
 	return sum/workers;
+}
+
+double world::inflation()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getstock();
+	}
+	return sum/_statistics.inflation();
+}
+
+double world::gdp()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getstock();
+	}
+	return sum;
+}
+
+void world::get_statistics()
+{
+	_statistics.set_unemployment(unemployment());		// ”ровень безработицы.
+	_statistics.set_production(production());			// ќбъем производства.
+	_statistics.set_consumption(consumption());			// ќбъем потреблени€.
+	_statistics.set_average_price(average_price());		// —редн€€ цена.
+	_statistics.set_average_salary(average_salary());	// —редн€€ заработна€ плата.
+	_statistics.set_inflation(inflation());				// »нфл€ци€.
+	_statistics.set_gdp(gdp());							// ¬аловый внутренний продукт.
 }
