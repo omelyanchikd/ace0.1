@@ -45,6 +45,9 @@
     <ClInclude Include="macro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="unconscious.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="macro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="unconscious.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
