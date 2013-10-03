@@ -142,8 +142,8 @@ void world::get_income()
 	{
 		if ((i->second).isemployed())
 			(i->second).work();
-		else
-			(i->second).gethelp();
+/*		else
+			(i->second).gethelp();//*/
 	}
 }
 
@@ -178,9 +178,7 @@ void world::firm_learning()
 {
 	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
 	{
-		(i->second).set_salary();
-		(i->second).set_price();
-		(i->second).set_desired();
+		(i->second).update();
 	}
 }
 

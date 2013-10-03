@@ -9,7 +9,7 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(1);
-	int n = 3, m = 15, i = 4;
+	int n = 2, m = 200, i = 1000;
 /*	cout<<"Input initial number of firms: "<<endl;
 	cin>>n;
 	cout<<"Input initial number of households: "<<endl;

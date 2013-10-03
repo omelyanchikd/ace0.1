@@ -6,6 +6,7 @@
 #include "stdlib.h"
 
 #include "offer.h"
+#include "unconscious.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ public:
 	int getdesired();
 	void printinfo();
 	// Обучение и изменение основных параметров.
+	void update();
 	void set_salary();
 	void set_price();
 	void set_desired();
@@ -62,6 +64,8 @@ private:
 	double _profit;
 	int _desired_workers;
 	int _stock;
+	//---Learning parameters---
+	unconscious _learning;
 };
 
 

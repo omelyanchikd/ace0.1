@@ -29,11 +29,11 @@ household::household(double money)
 //Представленный алгоритм поиска работы пока не учитывает необходимость уволиться с фирмы при устройстве на другую работу.
 vector<int> household::searchwork(map<int, double> labordemand)
 {
-    if (_employed && (_salary  < _reservation_wage))
+/*    if (_employed && (_salary  < _reservation_wage))
     {
         _employed = false;
 		_employee = 0;
-    }
+    }//*/
 	vector<int> possibleemployee; 
 	if (_active)
 	{
@@ -136,10 +136,11 @@ double household::getconsumption()
 
 double household::consumptionbudget()
 {
-    if (_money > 0.6 * _salary)
+/*    if (_money > 0.6 * _salary)
        return (_money - 0.8 * (_money - 0.6 * _salary));
     else
-       return (_money);
+       return (_money);//*/
+	return (0.5 * _salary);
 }
 
 //Покупка товаров, если товар считается бесконечно делимым. В дальнейшем эту процедуру следует переписать так, чтобы товар имел пределы делимости. Например, нельзя купить 0.00000001-ую часть айфона.

@@ -19,6 +19,7 @@ firm::firm(void)
 	_money = 0;
 	_profit = 0;
 	_desired_workers = 0;
+	_learning.init(27);
 }
 
 firm::firm(double money)
@@ -27,8 +28,8 @@ firm::firm(double money)
 	_elasticity = -1.5; 
 	_productivity = 2;
 	//-----Parameters-----//
-	_price = 0.5;
-	_salary = 1.5;
+	_price = 0.25;
+	_salary = 1;
 	_plan = 0;
 	//-----Reaction-----//
 	_sold = 0;
@@ -38,7 +39,8 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 50;
+	_desired_workers = 100;
+	_learning.init(27);
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -168,26 +170,39 @@ void firm::printinfo()
 
 void firm::set_salary()
 {
-	if (_workers < _desired_workers)
-		_salary *= 1.2;
-	else
-		_salary *= 0.8;
-
+	switch (_learning.get_action() / 9)
+	{
+		case 2: _salary *= 0.8; break;
+		case 1: _salary *= 1.2; break;
+		case 0: break;
+	}
 }
 
 void firm::set_price()
 {
-	if (_profit > 0)
-		_price *= 0.8;
-	else
-		_price *= 1.2;
+	switch ((_learning.get_action() / 3) % 3)
+	{
+		case 2: _price *= 0.8; break;
+		case 1: _price *= 1.2; break;
+		case 0: break;
+	}
 }
 
 void firm::set_desired()
 {
-	if (_workers == _desired_workers)
-		_desired_workers--;
-	else
-		_desired_workers += 5;
+	switch ((_learning.get_action() % 9) % 3)
+	{
+		case 2: _desired_workers--; break;
+		case 1: _desired_workers++; break;
+		case 0: break;
+	}
 
+}
+
+void firm::update()
+{
+	_learning.update(_profit - 10);
+	set_salary();
+	set_price();
+	set_desired();
 }
