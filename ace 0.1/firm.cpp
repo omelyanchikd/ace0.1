@@ -28,8 +28,8 @@ firm::firm(double money)
 	_elasticity = -1.5; 
 	_productivity = 2;
 	//-----Parameters-----//
-	_price = 0.25;
-	_salary = 1;
+	_price = 1;
+	_salary = 4;
 	_plan = 0;
 	//-----Reaction-----//
 	_sold = 0;
@@ -39,7 +39,7 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 100;
+	_desired_workers = 5;
 	_learning.init(27);
 }
 
@@ -75,6 +75,7 @@ void firm::hire(vector<int> ids)
 void firm::hire(int id)
 {
 	_workers_ids.push_back(id);	
+	_workers++;
 }
 
 vector<int> firm::fire()

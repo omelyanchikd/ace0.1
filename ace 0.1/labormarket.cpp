@@ -55,3 +55,8 @@ void labormarket::clear()
 	_resumes.clear();
 	_invites.clear();
 }
+
+void labormarket::erase_vacancy(int i)
+{
+	_vacancies.erase(i);
+}

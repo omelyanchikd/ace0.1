@@ -27,11 +27,11 @@ void world::step()
 	check_laborinfo();
 	for (int iter = 0; iter < 2; iter++)
 	{
-		set_vacancies();
 		set_resumes();
 		set_invites();
 		choose_employer();
 		_labormarket.clear();
+		erase_vacancies();
 	}
 	produce();
 	get_income();
@@ -70,7 +70,7 @@ void world::set_vacancies()
 			fired = (i->second).fire();
 			for (int j = 0; j < fired.size(); j++)
 			{
-				households[j].quit();
+				households[fired[j]].quit();
 			}
 		}
 		else
@@ -294,4 +294,16 @@ void world::get_statistics()
 	_statistics.set_average_salary(average_salary());	// —редн€€ заработна€ плата.
 	_statistics.set_inflation(inflation());				// »нфл€ци€.
 	_statistics.set_gdp(gdp());							// ¬аловый внутренний продукт.
+}
+
+void world::erase_vacancies()
+{
+	map<int, double> vacancies = _labormarket.getvacancies();
+	for (map<int, double>::iterator i = vacancies.begin(); i != vacancies.end(); i++)
+	{
+		if (firms[i->first].getworkers() == firms[i->first].getdesired())
+		{
+			_labormarket.erase_vacancy(i->first);
+		}
+	}
 }
