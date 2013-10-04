@@ -52,6 +52,7 @@ private:
 	void check_laborinfo();		// Проверка информации об изменении зарплаты и занятости.
 	void get_statistics();		// Вычисление основных статистических показателей.
 	void erase_vacancies();		// Очистить заполненные вакансии.
+	void check_workers();		// Проверка уволившихся.
 	// Статистика.
 	double unemployment();		// Уровень безработицы.
 	double production();		// Объем производства.

@@ -23,7 +23,7 @@ public:
 	void full_clear();
 
 	void erase_vacancy(int i);
-
+	
 private:
 	map<int,double> _vacancies;
 	map<int, vector<int>> _resumes;	

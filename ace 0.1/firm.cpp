@@ -45,7 +45,7 @@ firm::firm(double money)
 
 vector<int> firm::checkresumes(vector<int> resumes)
 {
-   _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
+//   _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
    _resume_number = resumes.size();
    vector <int> invite;
    if (_desired_workers > _workers)
@@ -206,4 +206,17 @@ void firm::update()
 	set_salary();
 	set_price();
 	set_desired();
+}
+
+void firm::fire(int id)
+{
+	for (int i = 0; i < _workers_ids.size(); i++)
+	{
+		if (_workers_ids[i] == id)
+		{
+			_workers_ids.erase(_workers_ids.begin() + i);
+			break;
+		}
+
+	}
 }

@@ -117,9 +117,9 @@ void world::choose_employer()
 {
 	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
 	{
-//		int currentemployee = (i->second).getemployee();
+		int currentemployee = (i->second).getemployee();
 		int employee = (i->second).chooseemployee(_labormarket.getinvites((i->first)), _labormarket.getvacancies());
-		if ((employee != 0)) //&& (employee != currentemployee))
+		if ((employee != 0) & (employee != currentemployee))
 		{
 			firms[employee].hire(i->first);
 		}
@@ -305,5 +305,23 @@ void world::erase_vacancies()
 		{
 			_labormarket.erase_vacancy(i->first);
 		}
+	}
+}
+
+void world::check_workers()
+{
+	vector<int> workers;
+	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
+	{
+		
+		workers = (i->second).getworkerids();
+		for (int j = 0; j < workers.size(); j++)
+		{
+			if (households[workers[j]].getemployee() != i->first)
+			{
+				(i->second).fire(workers[j]);
+			}
+		}
+		workers.clear();
 	}
 }
