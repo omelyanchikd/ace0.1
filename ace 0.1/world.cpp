@@ -7,56 +7,39 @@ world::world(void)
 
 world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney)
 {
-	firms.clear();
-	households.clear();
-	for (int i = 1; i <= firmnumber; i++)
-	{
-		firms[i] = firm(firmmoney);
-	}
-	for (int i = 1; i <= householdnumber; i++)
-	{
-		households[i] = household(householdmoney);
-	}
+	_firms = (firms(firmnumber, firmmoney));
+	_households = (households(householdnumber, householdmoney));
 	_goodmarket.clear();
 	_labormarket.clear();
 }
 
 void world::step()
 {
-	set_vacancies();
+	_firms.fire();
 	check_laborinfo();
 	for (int iter = 0; iter < 2; iter++)
 	{
-		set_resumes();
-		set_invites();
-		choose_employer();
+		_labormarket.set_vacancies(_firms.set_vacancies());
+		_labormarket.set_resumes(_households.search_work(_labormarket.get_vacancies()));
+		_labormarket.set_invites(_firms.check_resumes(_labormarket.get_resumes()));
+		_labormarket.set_employer(_households.choose_employee(_labormarket.get_invites(), _labormarket.get_vacancies()));
+		_firms.hire(_labormarket.get_employer());
 		_labormarket.clear();
 		erase_vacancies();
 	}
-	produce();
-	get_income();
-	set_supply();
-	buy();
-	get_sales();
+	_firms.produce();
+	_households.get_income();
+	_firms.set_supply();
+	_households.buy();
+	_firms.get_sales();
 	get_statistics();
-	write_log();
-	firm_learning();
+	_firms.write_log(_log);
+	_households.write_log(_log);
+	_firms.print_info();
+	_households.print_info();
+	_firms.learn();
 	_goodmarket.clear();
-	_labormarket.full_clear();
-}
-
-void world::printinfo()
-{
-	for (map<int, firm>::iterator i = firms.begin(); i != firms.end(); i++)
-	{
-		cout<<"Firm "<<i->first<<": "<<endl;
-		(i->second).printinfo();
-	}
-	for (map<int, household>::iterator i = households.begin(); i != households.end(); i++)
-	{
-		cout<<"Household "<<i->first<<": "<<endl;
-		(i->second).printinfo();
-	}
+	_labormarket.clear();
 }
 
 // Фирмы открывают вакансии на рынке труда.

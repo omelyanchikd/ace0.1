@@ -6,54 +6,71 @@ labormarket::labormarket(void)
 
 }
 
-void labormarket::setvacancies(int firmid, double salary)
+void labormarket::set_vacancies(map<int, double> vacancies)
 {
-	_vacancies[firmid] = salary;
+	_vacancies = vacancies;
 }
 
-map<int, double> labormarket::getvacancies()
+map<int, double> labormarket::get_vacancies()
 {
 	return _vacancies;
 }
 
-void labormarket::setresumes(vector<int> resumes, int householdid)
+void labormarket::set_resumes(map<int, vector<int>> resumes)
 {
-	for (int i = 0; i < resumes.size(); i++)
+	for (map<int,vector<int>>::iterator i = resumes.begin(); i != resumes.end(); i++)
 	{
-		_resumes[resumes[i]].push_back(householdid);
+		for (int j = 0; j < (i->second).size(); j++)
+		{
+			_resumes[j].push_back(i->first);
+		}
 	}
 }
 
-vector<int> labormarket::getresumes(int firmid)
+map<int, vector<int>> labormarket::get_resumes()
 {
-	return _resumes[firmid];
+	return _resumes;
 }
 
-void labormarket::setinvites(vector<int> invites, int firmid)
+void labormarket::set_invites(map<int, vector<int>> invites)
 {
-	for (int i = 0; i < invites.size(); i++)
+	for (map<int,vector<int>>::iterator i = invites.begin(); i != invites.end(); i++)
 	{
-		_invites[invites[i]].push_back(firmid);
+		for (int j = 0; j < (i->second).size(); j++)
+		{
+			_invites[j].push_back(i->first);
+		}
 	}
 }
 
-vector<int> labormarket::getinvites(int firmid)
+map<int, vector<int>> labormarket::get_invites()
 {
-	return _invites[firmid];
+	return _invites;
 }
 
+void labormarket::set_employer()
+{
+}
+
+map<int, int> labormarket::get_employer()
+{
+
+}
 
 void labormarket::full_clear()
 {
 	_vacancies.clear();
 	_resumes.clear();
 	_invites.clear();
+	_employer.clear();
 }
 
 void labormarket::clear()
 {
+	_vacancies.clear();
 	_resumes.clear();
 	_invites.clear();
+	_employer.clear();
 }
 
 void labormarket::erase_vacancy(int i)

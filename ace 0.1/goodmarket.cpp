@@ -7,7 +7,7 @@ goodmarket::goodmarket(void)
 
 void goodmarket::setsupply(double price, double stock, int firmid)
 {
-	offer good(price, stock, firmid);
+	offer good(price, stock);
 	_supply.push_back(good);
 	_demand.push_back(good);
 }

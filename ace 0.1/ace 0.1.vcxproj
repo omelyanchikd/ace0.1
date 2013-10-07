@@ -77,8 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="firm.h" />
+    <ClInclude Include="firms.h" />
     <ClInclude Include="goodmarket.h" />
     <ClInclude Include="household.h" />
+    <ClInclude Include="households.h" />
     <ClInclude Include="labormarket.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="macro.h" />
@@ -91,8 +93,10 @@
   <ItemGroup>
     <ClCompile Include="ace 0.1.cpp" />
     <ClCompile Include="firm.cpp" />
+    <ClCompile Include="firms.cpp" />
     <ClCompile Include="goodmarket.cpp" />
     <ClCompile Include="household.cpp" />
+    <ClCompile Include="households.cpp" />
     <ClCompile Include="labormarket.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="macro.cpp" />

@@ -89,15 +89,15 @@ void household::gethelp()
 	_active = true;
 }
 
-void household::buygoods(vector<offer> &supply)
+void household::buy_goods(map<int, offer> &demand)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
-	while ((spent < _consumption_budget) && (supply.size() > 0) && (can_buy(available, supply)))
+	while ((spent < _consumption_budget) && (demand.size() > 0) && (can_buy(available, demand)))
     {
-        int j = getrandom(supply);
-        buy(supply[j], available, spent);
-		if (supply[j].getcount() == 0)
+        int j = getrandom(demand);
+        buy(demand[j], available, spent);
+		if (demand[j].getcount() == 0)
 		{
 			supply.erase(supply.begin() + j);
 		}

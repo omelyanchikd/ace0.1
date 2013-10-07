@@ -200,7 +200,7 @@ void firm::set_desired()
 
 }
 
-void firm::update()
+void firm::learn()
 {
 	_learning.update(_profit - 10);
 	set_salary();

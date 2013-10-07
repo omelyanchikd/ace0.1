@@ -40,7 +40,7 @@ public:
 	int getdesired();
 	void printinfo();
 	// Обучение и изменение основных параметров.
-	void update();
+	void learn();
 	void set_salary();
 	void set_price();
 	void set_desired();

@@ -10,14 +10,17 @@ class labormarket
 public:
 	labormarket(void);
 
-	void setvacancies(int firmid, double salary);
-	map<int,double> getvacancies();
+	void set_vacancies(map<int, double> vacancies);
+	map<int,double> get_vacancies();
 
-	void setresumes(vector<int> resumes, int householdid);
-	vector<int> getresumes(int firmid);
+	void set_resumes(map<int, vector<int>> resumes);
+	map<int, vector<int>> get_resumes();
 
-	void setinvites(vector<int> invites, int firmid);
-	vector<int> getinvites(int firmid);
+	void set_invites(map<int, vector<int>> invites);
+	map<int, vector<int>> get_invites();
+
+	void set_employer(map<int, int> employer);
+	map<int, int> get_employer();
 
 	void clear();
 	void full_clear();
@@ -25,9 +28,10 @@ public:
 	void erase_vacancy(int i);
 	
 private:
-	map<int,double> _vacancies;
+	map<int, double> _vacancies;
 	map<int, vector<int>> _resumes;	
 	map<int, vector<int>> _invites;
+	map<int, int> _employer;
 
 };
 
