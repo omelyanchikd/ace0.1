@@ -32,7 +32,7 @@ public:
 	// Вывод информации.
 	void print_info();
 	// Хранение информации.
-	void write_log(data _log);
+	void write_log(data &_log);
 	// Очистка.
 	void clear();
 	// Статистика.

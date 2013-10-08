@@ -91,7 +91,7 @@ void firms::learn()
 	}
 }
 
-void firms::write_log(data _log)
+void firms::write_log(data& _log)
 {
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
 	{

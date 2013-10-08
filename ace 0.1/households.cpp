@@ -73,7 +73,7 @@ void households::buy(map<int, offer> &demand)
 	}
 }
 
-void households::write_log(data _log)
+void households::write_log(data& _log)
 {
 	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
 	{
