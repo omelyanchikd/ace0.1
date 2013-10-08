@@ -65,7 +65,7 @@ vector<int> firm::checkresumes(vector<int> resumes)
 
 void firm::hire(vector<int> ids)
 {
-	_workers = ids.size();
+	_workers += ids.size();
 	for (int i = 0; i < ids.size(); i++)
 	{
 		_workers_ids.push_back(ids[i]);
