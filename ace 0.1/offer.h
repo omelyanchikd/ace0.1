@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <map>
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/discrete_distribution.hpp>
 
@@ -10,24 +10,25 @@ class offer
 {
 public:
 	offer(void);
-	offer(double price, double count): _price(price), _count(count)
+	offer(double price, int count): _price(price), _count(count)
 	{
 	}
-	double getprice();
-	double getcount();
+	double get_price();
+	int get_count();
 	
-	void setcount(double value);
+	void set_count(double count);
+
 	int getid();
 
 private:
-	double _count;
+	int _count;
 	double _price;
 	int _firmid;
 };
 
-int getrandom(vector<offer> gooddemand);
+int get_random(map<int, offer> good);
 
-double getcount(int firmid, vector<offer> good);
+int get_count(int firmid, map<int, offer> good);
 
-bool can_buy(double money, vector<offer> good);
+bool can_buy(double money, map<int, offer> good);
 

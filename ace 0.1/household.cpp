@@ -95,23 +95,28 @@ void household::buy_goods(map<int, offer> &demand)
 	double available = _consumption_budget, spent = 0;
 	while ((spent < _consumption_budget) && (demand.size() > 0) && (can_buy(available, demand)))
     {
-        int j = getrandom(demand);
-        buy(demand[j], available, spent);
-		if (demand[j].getcount() == 0)
+        map<int,offer>::iterator j = demand.begin();
+		int rand = get_random(demand);
+		for (int i = 0; i < rand; i++)
 		{
-			supply.erase(supply.begin() + j);
+			j++;
 		}
+        buy(j->second, available, spent);
+		if ((j->second).get_count() == 0)
+		{
+			demand.erase(j);
+		}//*/
 
     }
 	_money -= spent; 
 }
 
-bool household::isemployed()
+bool household::is_employed()
 {
 	return _employed;
 }
 
-int household::getemployee()
+int household::get_employee()
 {
 	return _employee;
 }
@@ -134,6 +139,11 @@ double household::getconsumption()
 	return _consumption_budget;
 }
 
+void household::set_salary(double salary)
+{
+	_salary = salary;
+}
+
 double household::consumptionbudget()
 {
 /*    if (_money > 0.6 * _salary)
@@ -146,16 +156,16 @@ double household::consumptionbudget()
 //Покупка товаров, если товар считается бесконечно делимым. В дальнейшем эту процедуру следует переписать так, чтобы товар имел пределы делимости. Например, нельзя купить 0.00000001-ую часть айфона.
 void household::buy(offer& good, double& available, double& spent)
 {
-	if (good.getcount() * good.getprice() >= available)
+	if (good.get_count() * good.get_price() >= available)
 	{
-		spent += floor(available/good.getprice()) * available;
-		good.setcount(good.getcount() - floor(available/good.getprice()));		
+		spent += floor(available/good.get_price()) * available;
+		good.set_count(good.get_count() - floor(available/good.get_price()));		
 	}
 	else
 	{
-		spent += good.getcount() * good.getprice();
-		available -= good.getcount() * good.getprice();
-		good.setcount(0);
+		spent += good.get_count() * good.get_price();
+		available -= good.get_count() * good.get_price();
+		good.set_count(0);
 	}
 }
 

@@ -5,23 +5,22 @@ goodmarket::goodmarket(void)
 {
 }
 
-void goodmarket::setsupply(double price, double stock, int firmid)
+void goodmarket::set_supply(map<int, offer> supply)
 {
-	offer good(price, stock);
-	_supply.push_back(good);
-	_demand.push_back(good);
+	_supply = supply;
+	_demand = supply;
 }
 
-/*vector<offer> goodmarket::getdemand()
+map<int, int> goodmarket::get_sales()
 {
-	return _demand;
-}//*/
-
-double goodmarket::getsales(int firmid)
-{
-	double stock = getcount(firmid,_supply);
-	double unsold = getcount(firmid, _demand);
-	return (stock - unsold);
+	map<int, int> sales;
+	for (map<int, offer>::iterator i = _supply.begin(); i != _supply.end(); i++)
+	{
+		int stock = (i->second).get_count();
+		int unsold = get_count(i->first, _demand);
+		sales[i->first] = stock - unsold;
+	}
+	return sales;
 }
 
 void goodmarket::clear()

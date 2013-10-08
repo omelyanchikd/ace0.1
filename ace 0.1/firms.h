@@ -19,7 +19,7 @@ public:
 	firms(int n, double money);
 	// Рынок труда.
 	map<int, double> set_vacancies();
-	map<int, vector<int>> fire();
+	vector<int> fire();
 	map<int, vector<int>> check_resumes(map<int, vector<int>> resumes);
 	void hire(map <int, int> employers);
 	// Производство.
@@ -35,6 +35,13 @@ public:
 	void write_log(data _log);
 	// Очистка.
 	void clear();
+	// Статистика.
+	double production();
+	double consumption();
+	double average_price();
+	double average_salary();
+	double gdp();
+//	double inflation();
 private:
 	map<int, firm> _firms;
 };

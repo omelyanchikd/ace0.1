@@ -3,6 +3,7 @@
 #include "offer.h"
 
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -11,18 +12,16 @@ class goodmarket
 public:
 	goodmarket(void);
 
-	void setsupply(double price, double stock, int firmid);	
+	void set_supply(map<int, offer> supply);	
 
-	vector<offer> _demand;
+	map<int,int> get_sales();
 
-	double getsales(int firmid);
+	map<int, offer> _demand;
 
 	void clear();
 
-
-
 private:
-	vector<offer> _supply;
+	map<int, offer> _supply;
 
 };
 

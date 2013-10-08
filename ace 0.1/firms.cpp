@@ -26,14 +26,14 @@ map<int, double> firms::set_vacancies()
 	return vacancies;
 }
 
-map<int, vector<int>> firms::fire()
+vector<int> firms::fire()
 {
-	map<int, vector<int>> fired;
+	vector<int> fired;
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
 	{
 		if ((i->second).getworkers() > (i->second).getdesired())
 		{
-			fired[i->first] = (i->second).fire();
+			fired.insert(fired.end(),(i->second).fire().begin(), (i->second).fire().end());
 		}
 	}
 	return fired;
@@ -118,4 +118,58 @@ void firms::print_info()
 		cout<<"Firm "<<i->first<<": "<<endl;
 		(i->second).printinfo();
 	}
+}
+
+double firms::production()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
+	{
+		sum += (i->second).getstock(); // * (i->second).getprice();
+	}
+	return sum;
+}
+
+double firms::consumption()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getsold();
+	}
+	return sum;
+}
+
+double firms::average_price()
+{
+	double sum = 0;
+	int firm_number = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
+	{
+		sum += (i->second).getprice();
+		firm_number++;
+	}
+	return sum/firm_number;
+}
+
+double firms::average_salary()
+{
+	double sum = 0;
+	int workers = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
+	{
+		sum += (i->second).getsalary() * (i->second).getworkers();
+		workers += (i->second).getworkers();
+	}
+	return sum/workers;
+}
+
+double firms::gdp()
+{
+	double sum = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); i++)
+	{
+		sum += (i->second).getprice() * (i->second).getstock();
+	}
+	return sum;
 }

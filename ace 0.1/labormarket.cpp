@@ -48,21 +48,11 @@ map<int, vector<int>> labormarket::get_invites()
 	return _invites;
 }
 
-void labormarket::set_employer()
-{
-}
-
-map<int, int> labormarket::get_employer()
-{
-
-}
-
 void labormarket::full_clear()
 {
 	_vacancies.clear();
 	_resumes.clear();
 	_invites.clear();
-	_employer.clear();
 }
 
 void labormarket::clear()
@@ -70,10 +60,4 @@ void labormarket::clear()
 	_vacancies.clear();
 	_resumes.clear();
 	_invites.clear();
-	_employer.clear();
-}
-
-void labormarket::erase_vacancy(int i)
-{
-	_vacancies.erase(i);
 }

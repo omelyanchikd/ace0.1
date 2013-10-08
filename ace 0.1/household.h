@@ -33,12 +33,13 @@ public:
 	void buy_goods(map<int, offer> &demand);
 	void buy(offer& good, double& available, double& spent);
 	//Доступ к частной информации
-	bool isemployed();
-	int getemployee();
+	bool is_employed();
+	int get_employee();
 	double getsalary();
 	double getmoney();
 	double getreservation();
 	double getconsumption();
+	void set_salary(double salary);
 	void printinfo();
 
 

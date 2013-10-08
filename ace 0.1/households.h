@@ -18,6 +18,8 @@ public:
 	// Рынок труда.
 	map<int, vector<int>> search_work(map<int,double> vacancies);
 	map<int, int> choose_employee(map<int, vector<int>> invites, map<int, double> vacancies);
+	void quit(vector<int> fired);
+	void update_salary(map<int, double> salaries);
 	// Производство.
 	void get_income();
 	// Рынок товаров.
@@ -28,6 +30,8 @@ public:
 	void print_info();
 	// Очистка.
 	void clear();
+	// Статистика.
+	double unemployment();
 private:
 	map<int, household> _households;
 };

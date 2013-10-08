@@ -9,19 +9,14 @@ offer::offer(void)
 	_firmid = 0;
 }
 
-double offer::getprice()
+double offer::get_price()
 {
 	return _price;
 }
 
-double offer::getcount()
+int offer::get_count()
 {
 	return _count;
-}
-
-void offer::setcount(double value)
-{
-	_count = value;
 }
 
 int offer::getid()
@@ -29,35 +24,39 @@ int offer::getid()
 	return _firmid;
 }
 
-double getcount(int firmid, vector<offer> good)
+int get_count(int firmid, map<int, offer> good)
 {
-	for (int i = 0; i < good.size(); i++)
+	for (map<int,offer>::iterator i = good.begin(); i != good.end(); i++)
 	{
-		if (good[i].getid() == firmid)
-			return (good[i].getcount());
+		if (i->first == firmid)
+			return ((i->second).get_count());
 	}
 	return 0;
 }
 
 // Разобраться с генератором псевдослучайных чисел.
-int getrandom(vector<offer> gooddemand)
+int get_random(map<int, offer> good)
 {
 	vector<double> probabilities;
-	for(int i = 0; i < gooddemand.size(); i++)
+	for(map<int, offer>::iterator i = good.begin(); i != good.end(); i++)
 	{
-		probabilities.push_back(1/gooddemand[i].getprice());
-
+		probabilities.push_back(1/(i->second).get_price());
 	}
 	boost::random::discrete_distribution<> get_rand(probabilities.begin(), probabilities.end());
 	return get_rand(random_generator);
 }
 
-bool can_buy(double money, vector<offer> good)
+bool can_buy(double money, map<int, offer> good)
 {
-	for (int i = 0; i < good.size(); i++)
+	for (map<int,offer>::iterator i = good.begin(); i != good.end(); i++)
 	{
-		if (money >= good[i].getprice())
+		if (money >= (i->second).get_price())
 			return true;
 	}
 	return false;
+}
+
+void offer::set_count(double count)
+{
+	_count = count;
 }
