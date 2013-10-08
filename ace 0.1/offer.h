@@ -23,7 +23,6 @@ public:
 private:
 	int _count;
 	double _price;
-	int _firmid;
 };
 
 int get_random(map<int, offer> good);

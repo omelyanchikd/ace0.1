@@ -37,7 +37,7 @@ vector<int> household::searchwork(map<int, double> labordemand)
 	vector<int> possibleemployee; 
 	if (_active)
 	{
-		for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); i++)
+		for(map<int,double>::iterator i = labordemand.begin(); i != labordemand.end(); ++i)
 		{
 			if ((!_employed) || (_employed && (i->second > _salary)))
 				{

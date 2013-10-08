@@ -21,7 +21,7 @@ public:
 	map<int, double> set_vacancies();
 	vector<int> fire();
 	map<int, vector<int>> check_resumes(map<int, vector<int>> resumes);
-	void hire(map <int, int> employers);
+	void hire(map <int, vector<int>> employers);
 	// Производство.
 	void produce();
 	// Рынок товаров.

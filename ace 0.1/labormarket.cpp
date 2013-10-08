@@ -18,11 +18,11 @@ map<int, double> labormarket::get_vacancies()
 
 void labormarket::set_resumes(map<int, vector<int>> resumes)
 {
-	for (map<int,vector<int>>::iterator i = resumes.begin(); i != resumes.end(); i++)
+	for (map<int,vector<int>>::iterator i = resumes.begin(); i != resumes.end(); ++i)
 	{
 		for (int j = 0; j < (i->second).size(); j++)
 		{
-			_resumes[j].push_back(i->first);
+			_resumes[(i->second)[j]].push_back(i->first);
 		}
 	}
 }
@@ -34,11 +34,11 @@ map<int, vector<int>> labormarket::get_resumes()
 
 void labormarket::set_invites(map<int, vector<int>> invites)
 {
-	for (map<int,vector<int>>::iterator i = invites.begin(); i != invites.end(); i++)
+	for (map<int,vector<int>>::iterator i = invites.begin(); i != invites.end(); ++i)
 	{
 		for (int j = 0; j < (i->second).size(); j++)
 		{
-			_invites[j].push_back(i->first);
+			_invites[(i->second)[j]].push_back(i->first);
 		}
 	}
 }

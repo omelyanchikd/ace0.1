@@ -6,7 +6,6 @@ offer::offer(void)
 {
 	_count = 0;
 	_price = 0;
-	_firmid = 0;
 }
 
 double offer::get_price()
@@ -19,14 +18,9 @@ int offer::get_count()
 	return _count;
 }
 
-int offer::getid()
-{
-	return _firmid;
-}
-
 int get_count(int firmid, map<int, offer> good)
 {
-	for (map<int,offer>::iterator i = good.begin(); i != good.end(); i++)
+	for (map<int,offer>::iterator i = good.begin(); i != good.end(); ++i)
 	{
 		if (i->first == firmid)
 			return ((i->second).get_count());
@@ -38,7 +32,7 @@ int get_count(int firmid, map<int, offer> good)
 int get_random(map<int, offer> good)
 {
 	vector<double> probabilities;
-	for(map<int, offer>::iterator i = good.begin(); i != good.end(); i++)
+	for(map<int, offer>::iterator i = good.begin(); i != good.end(); ++i)
 	{
 		probabilities.push_back(1/(i->second).get_price());
 	}
@@ -48,7 +42,7 @@ int get_random(map<int, offer> good)
 
 bool can_buy(double money, map<int, offer> good)
 {
-	for (map<int,offer>::iterator i = good.begin(); i != good.end(); i++)
+	for (map<int,offer>::iterator i = good.begin(); i != good.end(); ++i)
 	{
 		if (money >= (i->second).get_price())
 			return true;

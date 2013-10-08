@@ -16,23 +16,23 @@ households::households(int n, double money)
 map<int, vector<int>> households::search_work(map<int,double> vacancies)
 {
 	map<int, vector<int>> resumes;
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		resumes[i->first] = (i->second).searchwork(vacancies);
 	}
 	return resumes;
 }
 
-map<int, int> households::choose_employee(map<int, vector<int>> invites, map<int, double> vacancies)
+map<int, vector<int>> households::choose_employee(map<int, vector<int>> invites, map<int, double> vacancies)
 {
-	map<int, int> chosen;
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	map<int, vector<int>> chosen;
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
-		int currentemployee = (i->second).get_employee();
+		int current_employee = (i->second).get_employee();
 		int employee = (i->second).chooseemployee(invites[i->first], vacancies);
-		if ((employee != 0) & (employee != currentemployee))
+		if ((employee != 0) & (employee != current_employee))
 		{
-			chosen[employee] = i->first;
+			chosen[employee].push_back(i->first);
 		}
 	}
 	return chosen;
@@ -48,15 +48,18 @@ void households::quit(vector<int> fired)
 
 void households::update_salary(map<int, double> salaries)
 {
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
-		(i->second).set_salary(salaries[(i->second).get_employee()]);
+		if ((i->second).is_employed())
+		{
+			(i->second).set_salary(salaries[(i->second).get_employee()]);
+		}
 	}
 }
 
 void households::get_income()
 {
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		if ((i->second).is_employed())
 			(i->second).work();
@@ -67,7 +70,7 @@ void households::get_income()
 
 void households::buy(map<int, offer> &demand)
 {
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		(i->second).buy_goods(demand);
 	}
@@ -75,7 +78,7 @@ void households::buy(map<int, offer> &demand)
 
 void households::write_log(data& _log)
 {
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		_log.sethouseholdsalary(i->first, (i->second).getsalary());
 		_log.sethouseholdemployed(i->first, (i->second).is_employed());
@@ -93,7 +96,7 @@ void households::clear()
 
 void households::print_info()
 {
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		cout<<"Household "<<i->first<<": "<<endl;
 		(i->second).printinfo();
@@ -104,7 +107,7 @@ double households::unemployment()
 {
 	int unemployed = 0;
 	int household_number = 0;
-	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); i++)
+	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		if (!(i->second).is_employed())
 		{

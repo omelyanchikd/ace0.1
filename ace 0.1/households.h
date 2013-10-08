@@ -17,7 +17,7 @@ public:
 	households(int n, double money);
 	// Рынок труда.
 	map<int, vector<int>> search_work(map<int,double> vacancies);
-	map<int, int> choose_employee(map<int, vector<int>> invites, map<int, double> vacancies);
+	map<int, vector<int>> choose_employee(map<int, vector<int>> invites, map<int, double> vacancies);
 	void quit(vector<int> fired);
 	void update_salary(map<int, double> salaries);
 	// Производство.
