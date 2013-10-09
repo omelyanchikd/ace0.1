@@ -30,7 +30,7 @@ map<int, vector<int>> households::choose_employee(map<int, vector<int>> invites,
 	{
 		int current_employee = (i->second).get_employee();
 		int employee = (i->second).chooseemployee(invites[i->first], vacancies);
-		if ((employee != 0) & (employee != current_employee))
+		if ((employee != 0))// & (employee != current_employee))
 		{
 			chosen[employee].push_back(i->first);
 		}

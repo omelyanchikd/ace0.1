@@ -34,7 +34,7 @@ void world::step()
 	_firms.write_log(_log);
 	_households.write_log(_log);
 	_firms.print_info();
-	_households.print_info();
+//	_households.print_info();
 	_firms.learn();
 	_goodmarket.clear();
 	_labormarket.clear();

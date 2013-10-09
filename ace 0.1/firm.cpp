@@ -37,13 +37,13 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 5;
+	_desired_workers = 50;
 	_learning.init(27);
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
 {
-//   _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
+   _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
    _resume_number = resumes.size();
    vector <int> invite;
    if (_desired_workers > _workers_ids.size())
