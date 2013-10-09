@@ -12,7 +12,6 @@ firm::firm(void)
 	_plan = 0;
 	//-----Reaction-----//
 	_sold = 0;
-	_workers = 0;
 	_resume_number = 0;
 //	_buyers = 0;
 	//-----Calculations-----//
@@ -33,7 +32,6 @@ firm::firm(double money)
 	_plan = 0;
 	//-----Reaction-----//
 	_sold = 0;
-	_workers = 0;
 	_resume_number = 0;
 //	_buyers = 0;
 	//-----Calculations-----//
@@ -48,7 +46,7 @@ vector<int> firm::checkresumes(vector<int> resumes)
 //   _workers_ids.clear(); // Необходима проверка случая, когда домохозяйство решает уволиться из фирмы.
    _resume_number = resumes.size();
    vector <int> invite;
-   if (_desired_workers > _workers)
+   if (_desired_workers > _workers_ids.size())
    {
 	   if (resumes.size() == 0)
           return resumes;
@@ -58,14 +56,13 @@ vector<int> firm::checkresumes(vector<int> resumes)
            invite.push_back(resumes[j]);
            resumes.erase(resumes.begin() + j);
        }
-       while ((invite.size() < resumes.size() && (invite.size() < _desired_workers - _workers)));
+       while ((invite.size() < resumes.size() && (invite.size() < _desired_workers - _workers_ids.size())));
    }
    return invite;
 }
 
 void firm::hire(vector<int> ids)
 {
-	_workers += ids.size();
 	for (int i = 0; i < ids.size(); i++)
 	{
 		_workers_ids.push_back(ids[i]);
@@ -75,16 +72,14 @@ void firm::hire(vector<int> ids)
 void firm::hire(int id)
 {
 	_workers_ids.push_back(id);	
-	_workers++;
 }
 
 vector<int> firm::fire()
 {
 	vector<int> fired;	
-	while (_workers > _desired_workers)
+	while (_workers_ids.size() > _desired_workers)
 	{
            int j = rand()/(double)RAND_MAX * (_workers_ids.size() - 1);	
-		   _workers--;
 		   fired.push_back(_workers_ids[j]);
 		   _workers_ids.erase(_workers_ids.begin() + j);		   
 	}
@@ -96,14 +91,13 @@ void firm::getsales(int sold)//, int buyers)
 	_sold = sold;
 //	_buyers = buyers;
 	_money += _price * _sold;
-	_profit = _price * _sold - _salary * _workers;
+	_profit = _price * _sold - _salary * _workers_ids.size();
 }
 
 void firm::produce()
 {
-	_workers = _workers_ids.size();
-	_stock = _productivity * _workers;
-	_money -= _salary * _workers;
+	_stock = _productivity * _workers_ids.size();
+	_money -= _salary * _workers_ids.size();
 }
 
 int firm::getstock()
@@ -128,7 +122,7 @@ int firm::getsold()
 
 int firm::getworkers()
 {
-	return _workers;
+	return _workers_ids.size();
 }
 
 vector<int> firm::getworkerids()
@@ -161,7 +155,7 @@ void firm::printinfo()
 	{
 		cout<<_workers_ids[i]<<endl;
 	}
-	cout<<"Number of workers: "<<_workers<<endl;
+	cout<<"Number of workers: "<<_workers_ids.size()<<endl;
 	cout<<"Number of income resumes: "<<_resume_number<<endl;
 	cout<<"Money: "<<_money<<endl;
 	cout<<"Profit: "<<_profit<<endl;

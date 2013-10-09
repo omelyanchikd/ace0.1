@@ -57,7 +57,6 @@ private:
 	//-----Reaction-----//
 	int _sold;
 	vector <int> _workers_ids;
-	int _workers;
 	int _resume_number;
 //	int _buyers;
 	//-----Calculations-----//

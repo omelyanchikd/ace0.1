@@ -42,6 +42,7 @@ public:
 	double average_salary();
 	double gdp();
 //	double inflation();
+	int firm_number();
 private:
 	map<int, firm> _firms;
 };

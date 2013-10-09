@@ -59,5 +59,7 @@ void world::get_statistics()
 	_statistics.set_average_salary(_firms.average_salary());	// Средняя заработная плата.
 	//_statistics.set_inflation(inflation());				// Инфляция.
 	_statistics.set_gdp(_firms.gdp());							// Валовый внутренний продукт.
+	_statistics.set_firm(_firms.firm_number());					// Количество фирм.
+	_statistics.set_household(_households.household_number());	// Количество домохозяйств.
 }
 

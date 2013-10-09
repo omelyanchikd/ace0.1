@@ -106,14 +106,17 @@ void households::print_info()
 double households::unemployment()
 {
 	int unemployed = 0;
-	int household_number = 0;
 	for (map<int, household>::iterator i = _households.begin(); i != _households.end(); ++i)
 	{
 		if (!(i->second).is_employed())
 		{
 			unemployed++;
 		}
-		household_number++;
 	}
-	return (double)unemployed/household_number;
+	return (double)unemployed/household_number();
+}
+
+int households::household_number()
+{
+	return _households.size();
 }

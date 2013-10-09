@@ -3,13 +3,13 @@
 
 macro::macro(void)
 {
-	_inflation.push_back(1);
+/*	_inflation.push_back(1);
 	_unemployment_rate.push_back(0);
 	_gdp.push_back(0);
 	_consumption.push_back(0);
 	_average_salary.push_back(0);
 	_average_price.push_back(0);
-	_production.push_back(0);
+	_production.push_back(0);//*/
 }
 
 double macro::inflation()
@@ -52,6 +52,16 @@ void macro::set_gdp(double gdp)
 	_gdp.push_back(gdp);
 }
 
+void macro::set_firm(double firm_number)
+{
+	_firm_number.push_back(firm_number);
+}
+
+void macro::set_household(double household_number)
+{
+	_household_number.push_back(household_number);
+}
+
 vector<double> macro::get_production()
 {
 	return _production;
@@ -85,4 +95,14 @@ vector<double> macro::get_inflation()
 vector<double> macro::get_gdp()
 {
 	return _gdp;
+}
+
+vector<double> macro::get_firm()
+{
+	return _firm_number;
+}
+
+vector<double> macro::get_household()
+{
+	return _household_number;
 }

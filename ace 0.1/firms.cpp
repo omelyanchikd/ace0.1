@@ -145,13 +145,11 @@ double firms::consumption()
 double firms::average_price()
 {
 	double sum = 0;
-	int firm_number = 0;
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
 		sum += (i->second).getprice();
-		firm_number++;
 	}
-	return sum/firm_number;
+	return sum/firm_number();
 }
 
 double firms::average_salary()
@@ -174,4 +172,9 @@ double firms::gdp()
 		sum += (i->second).getprice() * (i->second).getstock();
 	}
 	return sum;
+}
+
+int firms::firm_number()
+{
+	return _firms.size();
 }

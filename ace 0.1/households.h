@@ -32,6 +32,7 @@ public:
 	void clear();
 	// Статистика.
 	double unemployment();
+	int household_number();
 private:
 	map<int, household> _households;
 };
