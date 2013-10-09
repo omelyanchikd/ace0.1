@@ -66,6 +66,10 @@ private:
 	int _stock;
 	//---Learning parameters---
 	unconscious _learning;
+	double price_change;
+	double salary_change;
+	double desired_change;
+
 };
 
 

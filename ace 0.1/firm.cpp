@@ -19,6 +19,9 @@ firm::firm(void)
 	_profit = 0;
 	_desired_workers = 0;
 	_learning.init(27);
+	price_change = 1;
+	salary_change = 1;
+	desired_change = 1;
 }
 
 firm::firm(double money)
@@ -39,6 +42,9 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 50;
 	_learning.init(27);
+	price_change = 1;
+	salary_change = 1;
+	desired_change = 1;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -167,36 +173,38 @@ void firm::set_salary()
 {
 	switch (_learning.get_action() / 9)
 	{
-		case 2: _salary *= 0.8; break;
-		case 1: _salary *= 1.2; break;
+		case 2: salary_change -= 0.1; break; //_salary *= 0.8; break;
+		case 1: salary_change += 0.1; break; //_salary *= 1.2; break;
 		case 0: break;
 	}
+	_salary *= salary_change;
 }
 
 void firm::set_price()
 {
 	switch ((_learning.get_action() / 3) % 3)
 	{
-		case 2: _price *= 0.8; break;
-		case 1: _price *= 1.2; break;
+		case 2: price_change -= 0.1; break; //_price *= 0.8; break;
+		case 1: price_change += 0.1; break; //_price *= 1.2; break;
 		case 0: break;
 	}
+	_price *= price_change;
 }
 
 void firm::set_desired()
 {
 	switch ((_learning.get_action() % 9) % 3)
 	{
-		case 2: _desired_workers--; break;
-		case 1: _desired_workers++; break;
+		case 2: desired_change -= 0.1; break; //_desired_workers--; break;
+		case 1: desired_change += 0.1; break; //_desired_workers++; break;
 		case 0: break;
 	}
-
+	_desired_workers = floor(desired_change * _desired_workers);
 }
 
 void firm::learn()
 {
-	_learning.update(_profit - 10);
+	_learning.update(_profit);
 	set_salary();
 	set_price();
 	set_desired();
