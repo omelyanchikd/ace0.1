@@ -52,7 +52,7 @@ void households::update_salary(map<int, double> salaries)
 	{
 		if ((i->second).is_employed())
 		{
-			(i->second).set_salary(salaries[(i->second).get_employee()]);
+			(i->second).set_salary(salaries[i->first]);
 		}
 	}
 }
