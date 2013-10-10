@@ -69,6 +69,12 @@ private:
 	double price_change;
 	double salary_change;
 	double desired_change;
+	double price_base;
+	double salary_base;
+	double desired_base;
+	double price_alpha;
+	double salary_alpha;
+	double desired_alpha;
 
 };
 
