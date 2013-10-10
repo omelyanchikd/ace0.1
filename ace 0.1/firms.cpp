@@ -105,6 +105,7 @@ void firms::write_log(data& _log)
 		_log.setfirmprofit(i->first, (i->second).getprofit());
 		_log.setfirmdesired(i->first, (i->second).getdesired());
 		_log.setfirmstock(i->first, (i->second).getstock());	
+		_log.setfirmaction(i->first, (i->second).getaction());
 	}	
 }
 

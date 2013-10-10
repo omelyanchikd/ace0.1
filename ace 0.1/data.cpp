@@ -59,6 +59,11 @@ void data::setfirmstock(int firmid, double stock)
 	_firm_stock[firmid].push_back(stock);
 }
 
+void data::setfirmaction(int firmid, double action)
+{
+	_firm_action[firmid].push_back(action);
+}
+
 void data::sethouseholdsalary(int householdid, double salary)
 {
 	_household_salary[householdid].push_back(salary);
@@ -128,7 +133,12 @@ map<int, vector<double>> data::getfirmdesired()
 map<int, vector<double>> data::getfirmstock()
 {
 	return _firm_stock;
-}	
+}
+
+map<int, vector<double>> data::getfirmaction()
+{
+	return _firm_action;
+}
 
 void data::printinfo()
 {

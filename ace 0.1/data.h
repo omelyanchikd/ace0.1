@@ -19,6 +19,7 @@ public:
 	void setfirmprofit(int firmid, double profit);
 	void setfirmdesired(int firmid, double desired);
 	void setfirmstock(int firmid, double stock);	
+	void setfirmaction(int firmid, double action);
 
 	void sethouseholdsalary(int householdid, double salary);
 	void sethouseholdemployed(int householdid, bool employed);
@@ -34,7 +35,8 @@ public:
 	map<int, vector<double>> getfirmmoney();
 	map<int, vector<double>> getfirmprofit();
 	map<int, vector<double>> getfirmdesired();
-	map<int, vector<double>> getfirmstock();	
+	map<int, vector<double>> getfirmstock();
+	map<int, vector<double>> getfirmaction();
 
 	void printinfo();
 private:
@@ -47,6 +49,7 @@ private:
 	map<int,vector<double>> _firm_profit;
 	map<int,vector<double>> _firm_desired;
 	map<int,vector<double>> _firm_stock;
+	map<int,vector<double>> _firm_action; 
 	//∆урнал домохоз€йств
 	map<int,vector<double>> _household_salary;
 	map<int,vector<bool>> _household_employed;

@@ -164,6 +164,11 @@ int firm::getdesired()
 	return _desired_workers;
 }
 
+double firm::getaction()
+{
+	return _learning.get_action();
+}
+
 void firm::printinfo()
 {
 	cout<<"Price: "<<_price<<endl;

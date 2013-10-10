@@ -38,6 +38,7 @@ public:
 	double getmoney();
 	double getprofit();
 	int getdesired();
+	double getaction();
 	void printinfo();
 	// Обучение и изменение основных параметров.
 	void learn();
