@@ -16,7 +16,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cin>>m;
 	cout<<"Input initial number of iterations: "<<endl;
 	cin>>i;//*/
-	scenario choice (unconscious, value, salary_desired, profit);
+	scenario choice (nonconscious, value, salary_desired, profit);
 	world earth(n,m,10,0, choice);
 	for (int iteration = 0; iteration < i; iteration++)
 	{

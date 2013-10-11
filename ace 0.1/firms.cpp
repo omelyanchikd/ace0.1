@@ -85,11 +85,11 @@ void firms::get_sales(map<int, int> sales)
 	}
 }
 
-void firms::learn()
+void firms::learn(scenario _scenario)
 {
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		(i->second).learn();
+		(i->second).learn(_scenario);
 	}
 }
 

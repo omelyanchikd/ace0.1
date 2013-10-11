@@ -7,6 +7,8 @@
 
 #include "offer.h"
 
+#include "scenario.h"
+
 #include "data.h"
 
 using namespace std;
@@ -28,7 +30,7 @@ public:
 	map<int,offer> set_supply();
 	void get_sales(map<int, int> sales);
 	// Обучение.
-	void learn();
+	void learn(scenario _scenario);
 	// Вывод информации.
 	void print_info();
 	// Хранение информации.

@@ -2,7 +2,7 @@
 
 scenario::scenario(void)
 {
-	method = unconscious;
+	method = nonconscious;
 	way = value;
 	parameters = salary_desired;
 	criteria = profit;
