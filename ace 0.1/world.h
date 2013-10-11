@@ -11,7 +11,7 @@
 
 #include "offer.h"
 
-
+#include "scenario.h"
 
 #include <vector>
 #include <map>
@@ -21,7 +21,7 @@ class world
 public:
 	
 	world(void);
-	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney);
+	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice);
 	
 	void step();
 
@@ -37,6 +37,8 @@ private:
 	
 	labormarket _labormarket;
 	goodmarket _goodmarket;
+
+	scenario _scenario;
 	
 	void get_statistics();		// Вычисление основных статистических показателей.
 };

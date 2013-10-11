@@ -191,8 +191,8 @@ void firm::set_salary()
 {
 	switch (_learning.get_action() / 9)
 	{
-		case 2: salary_alpha -= 0.0005;//salary_change -= 0.1; break; //_salary *= 0.8; break;
-		case 1: salary_alpha += 0.0005;//salary_change += 0.1; break; //_salary *= 1.2; break;
+		case 2: salary_alpha -= 0.0005; break; //salary_change -= 0.1; break; //_salary *= 0.8; break;
+		case 1: salary_alpha += 0.0005; break; //salary_change += 0.1; break; //_salary *= 1.2; break;
 		case 0: break;
 	}
 //	_salary *= salary_change;
@@ -206,8 +206,8 @@ void firm::set_price()
 {
 	switch ((_learning.get_action() / 3) % 3)
 	{
-		case 2: price_alpha -= 0.0005;//price_change -= 0.1; break; //_price *= 0.8; break;
-		case 1: price_alpha += 0.0005;//price_change += 0.1; break; //_price *= 1.2; break;
+		case 2: price_alpha -= 0.0005; break; //price_change -= 0.1; break; //_price *= 0.8; break;
+		case 1: price_alpha += 0.0005; break;//price_change += 0.1; break; //_price *= 1.2; break;
 		case 0: break;
 	}
 //	_price *= price_change;
@@ -221,8 +221,8 @@ void firm::set_desired()
 {
 	switch ((_learning.get_action() % 9) % 3)
 	{
-		case 2: desired_alpha -= 0.0005;//desired_change -= 0.1; break; //_desired_workers--; break;
-		case 1: desired_alpha += 0.0005;//desired_change += 0.1; break; //_desired_workers++; break;
+		case 2: desired_alpha -= 0.0005; break;//desired_change -= 0.1; break; //_desired_workers--; break;
+		case 1: desired_alpha += 0.0005; break;//desired_change += 0.1; break; //_desired_workers++; break;
 		case 0: break;
 	}
 //	_desired_workers = floor(desired_change * _desired_workers);
