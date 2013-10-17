@@ -253,6 +253,137 @@ void firm::set_desired(scenario choice)
 
 }
 
+void firm::set_parameters(scenario choice)
+{
+	switch (choice.parameters)
+	{
+		case salary_price_desired:
+			switch (choice.way)
+			{
+				case value: 
+						switch (_action / 9)
+						{
+							case 2: _salary *= 0.8; break;	
+							case 1: _salary *= 1.2; break;
+							case 0: break;
+						}
+						switch ((_action / 3) % 3)
+						{
+							case 2: _price *= 0.8; break;
+							case 1: _price *= 1.2; break;
+							case 0: break;
+						}
+						switch ((_action % 9) % 3)
+						{
+							case 2: _desired_workers--; break;
+							case 1: _desired_workers++; break;
+							case 0: break;
+						}
+						break;
+				case change:
+						switch (_action / 9)
+						{
+							case 2: salary_change -= 0.1; break; 
+							case 1: salary_change += 0.1; break; 
+							case 0: break;
+						}
+						switch ((_action / 3) % 3)
+						{
+							case 2: price_change -= 0.1; break;
+							case 1: price_change += 0.1; break;
+							case 0: break;
+						}
+						switch ((_action % 9) % 3)
+						{
+							case 2: desired_change -= 0.1; break;
+							case 1: desired_change += 0.1; break;
+							case 0: break;
+						}
+						_salary *= salary_change;
+						_price *= price_change;
+						_desired_workers = floor(desired_change * _desired_workers);
+						break;
+				case share:
+						switch (_action / 9)
+						{
+							case 2: salary_alpha -= 0.0005; break; 
+							case 1: salary_alpha += 0.0005; break; 
+							case 0: break;
+						}
+						switch ((_action / 3) % 3)
+						{
+							case 2: price_change -= 0.1; break;
+							case 1: price_change += 0.1; break;
+							case 0: break;
+						}
+						switch ((_action % 9) % 3)
+						{
+							case 2: desired_change -= 0.1; break;
+							case 1: desired_change += 0.1; break;
+							case 0: break;
+						}
+						_salary += salary_alpha * _profit;
+						_price += price_alpha * _profit;
+						_desired_workers += floor(desired_alpha * _profit);
+						break;
+			}
+			break;
+		case salary_desired:
+			switch (choice.way)
+			{
+				case value: 
+						switch (_action / 3)
+						{
+							case 2: _salary *= 0.8; break;	
+							case 1: _salary *= 1.2; break;
+							case 0: break;
+						}
+						switch (_action % 3)
+						{
+							case 2: _desired_workers--; break;
+							case 1: _desired_workers++; break;
+							case 0: break;
+						}
+						_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));						
+						break;
+				case change:
+						switch (_action / 3)
+						{
+							case 2: salary_change -= 0.1; break; 
+							case 1: salary_change += 0.1; break; 
+							case 0: break;
+						}
+						switch (_action % 3)
+						{
+							case 2: desired_change -= 0.1; break;
+							case 1: desired_change += 0.1; break;
+							case 0: break;
+						}
+						_salary *= salary_change;						
+						_desired_workers = floor(desired_change * _desired_workers);
+						break;
+				case share:
+						switch (_action / 3)
+						{
+							case 2: salary_alpha -= 0.0005; break; 
+							case 1: salary_alpha += 0.0005; break; 
+							case 0: break;
+						}
+						switch (_action % 3)
+						{
+							case 2: desired_change -= 0.1; break;
+							case 1: desired_change += 0.1; break;
+							case 0: break;
+						}
+						_salary += salary_alpha * _profit;						
+						_desired_workers += floor(desired_alpha * _profit);
+						break;				
+			}
+			_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+			break;
+	}
+}
+
 void firm::learn(scenario choice)
 {
 	double reward;
@@ -268,11 +399,12 @@ void firm::learn(scenario choice)
 		case nonconscious: 
 							_unconscious_learning.update(reward);
 							_action = _unconscious_learning.get_action();
+							set_parameters(choice);
 							break;	
 	}
-	set_salary(choice);
-	set_price(choice);
-	set_desired(choice);
+//	set_salary(choice);
+//	set_price(choice);
+//	set_desired(choice);
 }
 
 void firm::fire(int id)

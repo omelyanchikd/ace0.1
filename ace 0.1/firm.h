@@ -48,6 +48,7 @@ public:
 	void set_salary(scenario choice);
 	void set_price(scenario choice);
 	void set_desired(scenario choice);
+	void set_parameters(scenario choice);
 
 private:
 
