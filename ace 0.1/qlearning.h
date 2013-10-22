@@ -15,6 +15,9 @@ public:
 
 private:
 	
+	double max(int state);
+	int argmax();
+
 	int _state;
 	int _action;
 	vector<double> q;
