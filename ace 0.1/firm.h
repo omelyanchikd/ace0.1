@@ -90,7 +90,11 @@ private:
 	// Q-learning.
 	qlearning _qlearning;
 	int get_state();
-	// Oligopoly.
+	// Intuitive.
+	vector<double> _sales;
+	int t;
+	int period;
+	double sum_sales();
 	
 
 };

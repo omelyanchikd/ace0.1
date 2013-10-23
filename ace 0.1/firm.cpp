@@ -33,6 +33,8 @@ firm::firm(void)
 	_a = 0;
 	_b = 0;
 	_f = 0;
+	t = 0;
+	period = 0;
 }
 
 firm::firm(double money)
@@ -41,8 +43,8 @@ firm::firm(double money)
 	_elasticity = -1.5; 
 	_productivity = 2;
 	//-----Parameters-----//
-	_price = 4;
-	_salary = 4;
+	_price = 3;
+	_salary = 6;
 	_plan = 0;
 	//-----Reaction-----//
 	_sold = 0;
@@ -67,6 +69,8 @@ firm::firm(double money)
 	_a = 0;
 	_b = 0;
 	_f = 0;
+	t = 3;
+	period = 0;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -421,10 +425,23 @@ void firm::learn(scenario choice)
 							_action = _qlearning.get_action();
 							set_parameters(choice);
 							break;
-		case oligopoly:		_salary = rand()/(double)RAND_MAX * 4 + 1;
-							double c = _salary/_productivity;
-							_desired_workers = (_a - c)/(_productivity * _b * (_f + 1));
-							_price = (_a + _f * c) / (_f + 1);
+		case oligopoly:		_salary = rand()/(double)RAND_MAX * 4 + 1;							
+							_desired_workers = (_a - _salary/_productivity)/(_productivity * _b * (_f + 1));
+							_price = (_a + _f * _salary/_productivity) / (_f + 1);
+							break;
+		case intuitive:		_salary = rand()/(double)RAND_MAX * 6 + 1;	
+							if (period >= 3)
+							{
+								_desired_workers = (0.5 * _sold + 0.5 * sum_sales() / t)/ _productivity;
+								_sales.erase(_sales.begin());
+								_sales.push_back(_sold);
+							}
+							else
+							{
+								_sales.push_back(_sold);							
+							}
+							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+							break;
 	}			
 //	set_salary(choice);
 //	set_price(choice);
@@ -458,4 +475,14 @@ int firm::get_state()
 		return 4;
 	if ((_sold == 0) && (_workers_ids.size() > 0))
 		return 5;
+}
+
+double firm::sum_sales()
+{
+	double sum = 0;
+	for (int i = 0; i < _sales.size(); i++)
+	{
+		sum += _sales[i];
+	}
+	return sum;
 }
