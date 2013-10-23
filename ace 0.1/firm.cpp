@@ -19,6 +19,7 @@ firm::firm(void)
 	_profit = 0;
 	_desired_workers = 0;
 	_unconscious_learning.init(27);
+	_qlearning.init(6,3);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -49,6 +50,7 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 50;
 	_unconscious_learning.init(27);
+	_qlearning.init(6,3);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -399,9 +401,13 @@ void firm::learn(scenario choice)
 		case nonconscious: 
 							_unconscious_learning.update(reward);
 							_action = _unconscious_learning.get_action();
-							set_parameters(choice);
+							
 							break;	
+		case Qlearning:							
+							_qlearning.update(get_state(), reward);
+							_action = _qlearning.get_action();
 	}
+	set_parameters(choice);
 //	set_salary(choice);
 //	set_price(choice);
 //	set_desired(choice);
@@ -418,4 +424,20 @@ void firm::fire(int id)
 		}
 
 	}
+}
+
+int firm::get_state()
+{
+	if ((_sold == _stock) && (_workers_ids.size() == _desired_workers) && (_sold > 0))
+		return 0;
+	if ((_sold < _stock) && (_workers_ids.size() == _desired_workers) && (_sold > 0))
+		return 1;
+	if ((_sold == _stock) && (_workers_ids.size() == _desired_workers) && (_sold > 0))
+		return 2;
+	if ((_sold == _stock) && (_workers_ids.size() < _desired_workers) && (_sold > 0))
+		return 3;
+	if ((_sold == 0) && (_workers_ids.size() == 0))
+		return 4;
+	if ((_sold == 0) && (_workers_ids.size() > 0))
+		return 5;
 }

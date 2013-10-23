@@ -10,6 +10,7 @@
 #include "scenario.h"
 
 #include "unconscious.h"
+#include "qlearning.h"
 
 using namespace std;
 
@@ -51,7 +52,7 @@ public:
 	void set_parameters(scenario choice);
 
 private:
-
+	
 	//-----Exogenous-parameters-----//
 	double _elasticity; 
 	double _productivity;
@@ -71,7 +72,6 @@ private:
 	int _stock;
 	//---Learning parameters---
 	int _action;
-	unconscious _unconscious_learning;
 	double price_change;
 	double salary_change;
 	double desired_change;
@@ -81,6 +81,11 @@ private:
 	double price_alpha;
 	double salary_alpha;
 	double desired_alpha;
+	// Unconscious learning.
+	unconscious _unconscious_learning;
+	// Q-learning.
+	qlearning _qlearning;
+	int get_state();
 	
 
 };
