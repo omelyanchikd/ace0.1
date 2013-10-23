@@ -179,3 +179,47 @@ int firms::firm_number()
 {
 	return _firms.size();
 }
+
+double firms::b()
+{
+	double xy = 0;
+	double xx = 0;
+	double sum_x = 0;
+	double sum_y = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i) 
+	{
+		xy += (i->second).getsold() * (i->second).getprice();
+		xx += (i->second).getsold() * (i->second).getsold();
+		sum_x += (i->second).getsold();
+		sum_y += (i->second).getprice();
+	}
+	return (xy - sum_x * sum_y) / (xx - sum_x * sum_x);	
+}
+
+double firms::a()
+{
+	double xy = 0;
+	double xx = 0;
+	double sum_x = 0;
+	double sum_y = 0;
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i) 
+	{
+		xy += (i->second).getsold() * (i->second).getprice();
+		xx += (i->second).getsold() * (i->second).getsold();
+		sum_x += (i->second).getsold();
+		sum_y += (i->second).getprice();
+	}
+	double b = (xy - sum_x * sum_y) / (xx - sum_x * sum_x);		
+	return  (b * sum_x + sum_y) / (firm_number() + 1);
+}
+
+void firms::set_info()
+{	
+	double _a = a();
+	double _b = b();
+	int _f = firm_number();
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
+	{
+		(i->second).set_info(_a, _b, _f);
+	}
+}

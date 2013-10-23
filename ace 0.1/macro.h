@@ -43,6 +43,5 @@ private:
 	vector<double> _production;
 	vector<double> _firm_number;
 	vector<double> _household_number;
-
 };
 

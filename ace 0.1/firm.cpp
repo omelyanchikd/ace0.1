@@ -30,6 +30,9 @@ firm::firm(void)
 	salary_alpha = 0;
 	desired_alpha = 0;
 	_action = 0;
+	_a = 0;
+	_b = 0;
+	_f = 0;
 }
 
 firm::firm(double money)
@@ -61,6 +64,9 @@ firm::firm(double money)
 	salary_alpha = 0.001;
 	desired_alpha = 0.001;
 	_action = 0;
+	_a = 0;
+	_b = 0;
+	_f = 0;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -255,6 +261,13 @@ void firm::set_desired(scenario choice)
 
 }
 
+void firm::set_info(double a, double b, int f)
+{
+	_a = a;
+	_b = b;
+	_f = f;
+}
+
 void firm::set_parameters(scenario choice)
 {
 	switch (choice.parameters)
@@ -401,13 +414,18 @@ void firm::learn(scenario choice)
 		case nonconscious: 
 							_unconscious_learning.update(reward);
 							_action = _unconscious_learning.get_action();
-							
+							set_parameters(choice);
 							break;	
 		case Qlearning:							
 							_qlearning.update(get_state(), reward);
 							_action = _qlearning.get_action();
-	}
-	set_parameters(choice);
+							set_parameters(choice);
+							break;
+		case oligopoly:		_salary = rand()/(double)RAND_MAX * 4 + 1;
+							double c = _salary/_productivity;
+							_desired_workers = (_a - c)/(_productivity * _b * (_f + 1));
+							_price = (_a + _f * c) / (_f + 1);
+	}			
 //	set_salary(choice);
 //	set_price(choice);
 //	set_desired(choice);

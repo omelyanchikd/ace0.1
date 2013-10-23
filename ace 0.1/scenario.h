@@ -1,6 +1,6 @@
 #pragma once
 
-enum method_type {intuitive, nonconscious, Qlearning, classifiers, network, evolution};
+enum method_type {intuitive, oligopoly, rls, rlsf, nonconscious, Qlearning, classifiers, neural_network, evolution};
 enum way_type {value, change, share};
 enum parameters_type{salary_price_desired, salary_desired, salary_price_plan, salary_plan}; // Rewrite later.
 enum criteria_type{profit, workers, return_rate, sales_change};

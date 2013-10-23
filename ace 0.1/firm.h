@@ -50,6 +50,7 @@ public:
 	void set_price(scenario choice);
 	void set_desired(scenario choice);
 	void set_parameters(scenario choice);
+	void set_info(double a, double b, int f);
 
 private:
 	
@@ -81,11 +82,15 @@ private:
 	double price_alpha;
 	double salary_alpha;
 	double desired_alpha;
+	double _a;
+	double _b;
+	int _f;
 	// Unconscious learning.
 	unconscious _unconscious_learning;
 	// Q-learning.
 	qlearning _qlearning;
 	int get_state();
+	// Oligopoly.
 	
 
 };

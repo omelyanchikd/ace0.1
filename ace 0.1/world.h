@@ -41,5 +41,6 @@ private:
 	scenario _scenario;
 	
 	void get_statistics();		// Вычисление основных статистических показателей.
+
 };
 

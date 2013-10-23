@@ -32,6 +32,7 @@ void world::step()
 	_households.buy(_goodmarket._demand);
 	_firms.get_sales(_goodmarket.get_sales());
 	get_statistics();
+	_firms.set_info();
 	_firms.write_log(_log);
 	_households.write_log(_log);
 	_firms.print_info();
