@@ -19,7 +19,7 @@ firm::firm(void)
 	_profit = 0;
 	_desired_workers = 0;
 	_unconscious_learning.init(27);
-	_qlearning.init(6,3);
+	_qlearning.init(6,27, 100);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -41,11 +41,11 @@ firm::firm(double money)
 {
 	//-----Exogenous parameters-----//
 	_elasticity = -1.5; 
-	_productivity = 2;
+	_productivity = 3;
 	//-----Parameters-----//
-	_price = 3;
 	_salary = 6;
 	_plan = 0;
+	_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 	//-----Reaction-----//
 	_sold = 0;
 	_resume_number = 0;
@@ -55,7 +55,7 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 50;
 	_unconscious_learning.init(27);
-	_qlearning.init(6,3);
+	_qlearning.init(6,27,100);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -425,11 +425,13 @@ void firm::learn(scenario choice)
 							_action = _qlearning.get_action();
 							set_parameters(choice);
 							break;
-		case oligopoly:		_salary = rand()/(double)RAND_MAX * 4 + 1;							
+		case oligopoly:		if (_workers_ids.size() < _desired_workers)
+								_salary *= 0.2;						
 							_desired_workers = (_a - _salary/_productivity)/(_productivity * _b * (_f + 1));
 							_price = (_a + _f * _salary/_productivity) / (_f + 1);
 							break;
-		case intuitive:		_salary = rand()/(double)RAND_MAX * 6 + 1;	
+		case intuitive:		if (_workers_ids.size() < _desired_workers)
+								_salary *= 1.05;
 							if (period >= 3)
 							{
 								_desired_workers = (0.5 * _sold + 0.5 * sum_sales() / t)/ _productivity;
@@ -439,6 +441,7 @@ void firm::learn(scenario choice)
 							else
 							{
 								_sales.push_back(_sold);							
+								period++;
 							}
 							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;

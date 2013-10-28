@@ -9,7 +9,7 @@ class qlearning
 public:
 	
 	qlearning(void);
-	void init(int state, int action);
+	void init(int state, int action, double value);
 	void update(int state, double reward);
 	int get_action();
 

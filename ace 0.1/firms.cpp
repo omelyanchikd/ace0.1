@@ -193,7 +193,9 @@ double firms::b()
 		sum_x += (i->second).getsold();
 		sum_y += (i->second).getprice();
 	}
-	return (xy - sum_x * sum_y) / (xx - sum_x * sum_x);	
+	if (firm_number() * xx - sum_x * sum_x == 0)
+		return 0;
+	return (firm_number() * xy - sum_x * sum_y) / (firm_number() * xx - sum_x * sum_x);	
 }
 
 double firms::a()
@@ -209,14 +211,16 @@ double firms::a()
 		sum_x += (i->second).getsold();
 		sum_y += (i->second).getprice();
 	}
-	double b = (xy - sum_x * sum_y) / (xx - sum_x * sum_x);		
-	return  (b * sum_x + sum_y) / (firm_number() + 1);
+	if (firm_number() * xx - sum_x * sum_x == 0)
+		return sum_y/firm_number();
+	double b = (firm_number() * xy - sum_x * sum_y) / (firm_number() * xx - sum_x * sum_x);		
+	return  (- b * sum_x + sum_y) / firm_number();
 }
 
 void firms::set_info()
 {	
 	double _a = a();
-	double _b = b();
+	double _b = - b();
 	int _f = firm_number();
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{

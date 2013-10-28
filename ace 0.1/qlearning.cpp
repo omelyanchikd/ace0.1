@@ -5,11 +5,11 @@ qlearning::qlearning(void)
 {
 }
 
-void qlearning::init(int state, int action)
+void qlearning::init(int state, int action, double value)
 {
 	for (int i = 0; i < state * action; i++)
 	{
-		q.push_back(1.0 / (state * action));
+		q.push_back(value);
 	}
 }
 
