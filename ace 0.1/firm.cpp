@@ -425,12 +425,14 @@ void firm::learn(scenario choice)
 							_action = _qlearning.get_action();
 							set_parameters(choice);
 							break;
-		case oligopoly:		if (_workers_ids.size() < _desired_workers)
+		case oligopoly:		
+							if (_workers_ids.size() < _desired_workers)
 								_salary *= 0.2;						
 							_desired_workers = (_a - _salary/_productivity)/(_productivity * _b * (_f + 1));
 							_price = (_a + _f * _salary/_productivity) / (_f + 1);
 							break;
-		case intuitive:		if (_workers_ids.size() < _desired_workers)
+		case intuitive:		
+							if (_workers_ids.size() < _desired_workers)
 								_salary *= 1.05;
 							if (period >= 3)
 							{
@@ -470,9 +472,9 @@ int firm::get_state()
 		return 0;
 	if ((_sold < _stock) && (_workers_ids.size() == _desired_workers) && (_sold > 0))
 		return 1;
-	if ((_sold == _stock) && (_workers_ids.size() == _desired_workers) && (_sold > 0))
-		return 2;
 	if ((_sold == _stock) && (_workers_ids.size() < _desired_workers) && (_sold > 0))
+		return 2;
+	if ((_sold < _stock) && (_workers_ids.size() < _desired_workers) && (_sold > 0))
 		return 3;
 	if ((_sold == 0) && (_workers_ids.size() == 0))
 		return 4;

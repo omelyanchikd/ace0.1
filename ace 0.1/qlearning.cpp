@@ -11,11 +11,17 @@ void qlearning::init(int state, int action, double value)
 	{
 		q.push_back(value);
 	}
+	s_n = state;
+	a_n = action;
+	learning_factor = 0.5;
+	discount_factor = 0.5;
+	_action = 0;
+	_state = 0;
 }
 
 void qlearning::update(int state, double reward)
 {
-	q[s_n * _action + _state] += learning_factor * (reward + discount_factor * max(state) - q[s_n * _action + _state] );   
+	q[s_n * _state + _action] += learning_factor * (reward + discount_factor * max(state) - q[s_n * _state + _action] );   
 	_state = state;
 	double eps = rand() / (double)RAND_MAX;
 	if (eps >= 0.4)
