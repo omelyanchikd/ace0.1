@@ -447,6 +447,11 @@ void firm::learn(scenario choice)
 							}
 							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;
+		case random:
+							_salary = rand()/(double)RAND_MAX * 3 + 4;
+							_desired_workers = rand()/(double)RAND_MAX * 20 + 50;
+							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+							break;
 	}			
 //	set_salary(choice);
 //	set_price(choice);
