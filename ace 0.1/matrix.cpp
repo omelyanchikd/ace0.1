@@ -58,6 +58,21 @@ matrix::matrix(vector<double> a)
 	}
 }
 
+matrix::matrix(int n)
+{
+	_n = n;
+	_m = n;
+	for (int i = 0; i < _n * _m; i++)
+	{
+		_a.push_back(0);		
+	}
+	for (int i = 0; i < _n; i++)
+	{
+		_a[_n * i + i] = 1;
+	}
+
+}
+
 matrix matrix::operator=(const matrix &b)
 {
 	if (this == &b)

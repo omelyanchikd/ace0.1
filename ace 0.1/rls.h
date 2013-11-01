@@ -6,11 +6,13 @@ class rls
 {
 public:
 	rls(void);
-	void update(matrix y, matrix x);
+	rls(vector<double> fi, matrix p); 
+	void update(vector<double> y, vector<double> x);
+	vector<double> get_action(vector<double> x);
 
 private:
-	matrix fi;
-	matrix p;
-	matrix identity;
+	matrix _fi;
+	matrix _p;
+	matrix _identity;
 };
 

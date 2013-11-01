@@ -13,6 +13,7 @@ public:
 	matrix(const matrix &b);
 	matrix(double a);
 	matrix(vector<double> a);
+	matrix(int n);
 	
 	matrix operator=(const matrix &b);
 	
