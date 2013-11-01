@@ -84,6 +84,7 @@
     <ClInclude Include="labormarket.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="macro.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="offer.h" />
     <ClInclude Include="qlearning.h" />
     <ClInclude Include="scenario.h" />
@@ -102,6 +103,7 @@
     <ClCompile Include="labormarket.cpp" />
     <ClCompile Include="data.cpp" />
     <ClCompile Include="macro.cpp" />
+    <ClCompile Include="matrix.cpp" />
     <ClCompile Include="offer.cpp" />
     <ClCompile Include="qlearning.cpp" />
     <ClCompile Include="scenario.cpp" />
