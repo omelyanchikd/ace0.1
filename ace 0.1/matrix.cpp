@@ -5,6 +5,7 @@ matrix::matrix(void)
 {
 	_n = 0; 
 	_m = 0;
+	_a.clear();
 }
 
 
@@ -37,6 +38,23 @@ matrix::matrix(const matrix &b)
 	for (int i = 0; i < _n * _m; i++)
 	{
 		_a.push_back(b._a[i]);
+	}
+}
+
+matrix::matrix(double a)
+{
+	_n = 1;
+	_m = 1;
+	_a.push_back(a);
+}
+
+matrix::matrix(vector<double> a)
+{
+	_n = 1;
+	_m = a.size();
+	for (int i = 0; i < a.size(); i++)
+	{
+		_a.push_back(a[i]);
 	}
 }
 
