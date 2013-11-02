@@ -11,6 +11,8 @@
 
 #include "data.h"
 
+#include "rls.h"
+
 using namespace std;
 
 class firms
@@ -52,5 +54,6 @@ public:
 	double b();
 private:
 	map<int, firm> _firms;
+	rls _rls;
 };
 

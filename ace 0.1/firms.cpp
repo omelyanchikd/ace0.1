@@ -11,6 +11,10 @@ firms::firms(int n, double money)
 	{
 		_firms[i+1] = (firm(money));
 	}
+	vector<double> fi;
+	fi.push_back(104);
+	fi.push_back(-1.0/3);
+	_rls = rls(fi, matrix(2));
 }
 
 map<int, double> firms::set_vacancies()
@@ -219,11 +223,15 @@ double firms::a()
 
 void firms::set_info()
 {	
-	double _a = a();
-	double _b = - b();
+	vector<double> x;
+	x.push_back(1);
+	x.push_back(production());
+	_rls.update(average_price(), x);
+	x.clear();
+	x = _rls.get_action();
 	int _f = firm_number();
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		(i->second).set_info(_a, _b, _f);
+		(i->second).set_info(x[0], x[1], _f);
 	}
 }
