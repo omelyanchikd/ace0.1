@@ -7,10 +7,14 @@
 
 #include "offer.h"
 
+#include "matrix.h"
+
 #include "scenario.h"
 
 #include "unconscious.h"
 #include "qlearning.h"
+#include "rls.h"
+
 
 using namespace std;
 
@@ -95,8 +99,9 @@ private:
 	int t;
 	int period;
 	double sum_sales();
-	
-
+	// Rational.
+	rls _good;
+	rls _labor;
 };
 
 

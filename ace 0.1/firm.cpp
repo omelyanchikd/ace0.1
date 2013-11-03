@@ -71,6 +71,15 @@ firm::firm(double money)
 	_f = 0;
 	t = 3;
 	period = 0;
+	vector<double> fi;
+	fi.push_back(104);
+	fi.push_back(-1.0/3);
+	_good = rls(fi, matrix(2));
+	fi.clear();
+	fi.push_back(14);
+	fi.push_back(6);
+	_labor = rls(fi, matrix(2));
+
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -452,6 +461,22 @@ void firm::learn(scenario choice)
 							_desired_workers = rand()/(double)RAND_MAX * 20 + 50;
 							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;
+		case rational:
+							vector<double> x;
+							x.push_back(1);
+							x.push_back(_sold);
+							_good.update(_price, x);
+							x.clear();
+							x.push_back(1);
+							x.push_back(_salary);
+							_labor.update(_workers_ids.size(), x);
+							vector<double> labor_action, good_action;
+							labor_action = _labor.get_action();
+							good_action = _good.get_action();
+							double q = _productivity * (labor_action[0] + good_action[0] * labor_action[1] * _productivity) / (2 - 2 * good_action[1] * labor_action[1] * _productivity * _productivity);  
+							_price = good_action[0] + good_action[1] * q;
+							_desired_workers = q / _productivity;
+							_salary = (q - _productivity * labor_action[0]) / (labor_action[1] * _productivity); 
 	}			
 //	set_salary(choice);
 //	set_price(choice);

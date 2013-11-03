@@ -19,11 +19,12 @@ void rls::update(double y, vector<double> x)
 {
 	matrix _x = matrix(x);
 //	matrix _y = matrix(y);
-	double real = double(_x * _fi.transpose());
-	double mult = _x * _p * _x.transpose();
-	matrix dobutok = _p * _x.transpose();
-	_fi = _fi + (1.0 / (1 + mult)) * dobutok * (y - real);
-//	_fi = _fi + (1.0 / (1 + double(_x * _p * _x.transpose()))) * _p * _x.transpose() * (y - double(_x * _fi.transpose()));  
+	double var1 = double(_x * _fi.transpose());
+	double var2 = double(_x * _p * _x.transpose());
+	matrix var3 = _p * _x.transpose();
+	matrix var4 = (1/(1+var2)) * var3;
+	matrix var5 = var4 * (y - var1);
+	_fi = _fi + ((1.0 / (1 + double(_x * _p * _x.transpose()))) * _p * _x.transpose() * (y - double(_x * _fi.transpose()))).transpose();  
 	_p = (_identity + ((-1.0 / (1 + double(_x * _p * _x.transpose()))) * _p * _x.transpose()) * _x) * _p;
 }
 
