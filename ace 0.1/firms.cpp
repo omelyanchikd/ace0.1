@@ -232,6 +232,6 @@ void firms::set_info()
 	int _f = firm_number();
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		(i->second).set_info(x[0], x[1], _f);
+		(i->second).set_info(x[0], -x[1], _f);
 	}
 }
