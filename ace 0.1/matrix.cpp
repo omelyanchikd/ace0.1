@@ -68,7 +68,7 @@ matrix::matrix(int n)
 	}
 	for (int i = 0; i < _n; i++)
 	{
-		_a[_n * i + i] = 1;
+		_a[_m * i + i] = 1;
 	}
 
 }
@@ -105,7 +105,7 @@ matrix matrix::operator+(const matrix &b)
 
 double& matrix::operator()(int i, int j)
 {
-	return _a[_n * i + j];
+	return _a[_m * i + j];
 }
 
 matrix operator*(const matrix &a, const matrix &b)
@@ -115,8 +115,8 @@ matrix operator*(const matrix &a, const matrix &b)
 	matrix mult(a._n, b._m);
 	for (int i = 0; i < mult._n; i++)
 		for (int j = 0; j < mult._m; j++)
-			for (int k = 0; k < a._n; k++)
-				mult._a[mult._n * i + j] += a._a[a._n * i + k] * b._a[b._n * k + j];
+			for (int k = 0; k < a._m; k++)
+				mult._a[mult._m * i + j] += a._a[a._m * i + k] * b._a[b._m * k + j];
 	return mult;
 
 }
@@ -140,8 +140,10 @@ matrix operator*(const matrix &b, double c)
 matrix matrix::transpose()
 {
 	matrix trans(_m, _n);
-	for (int i = 0; i < _m; i++)
-		for (int j = 0; j < _n; j++)
-			trans._a[_m * i + j] = _a[_m * j + i];
+	for (int j = 0; j <_m; j++)
+	{
+		for (int i = 0; i < _n; i++)
+			trans._a[_n * j + i] = _a[_m * i + j];
+	}
 	return trans;
 }
