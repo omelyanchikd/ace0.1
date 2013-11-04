@@ -31,6 +31,17 @@ matrix::matrix(int n, int m, vector<double> a)
 	}
 }
 
+matrix::matrix(int n, int m, double* a)
+{
+	_n = n;
+	_m = m;
+	_a.clear();
+	for (int i = 0; i < _n * _m; i++)
+	{
+		_a.push_back(a[i]);
+	}
+}
+
 matrix::matrix(const matrix &b)
 {
 	_n = b._n;

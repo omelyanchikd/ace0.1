@@ -15,5 +15,6 @@ private:
 	matrix _fi;
 	matrix _p;
 	matrix _identity;
+	double _forgetting;
 };
 

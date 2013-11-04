@@ -10,6 +10,7 @@ public:
 	matrix(void);
 	matrix (int n, int m);
 	matrix(int n, int m, vector<double> a);
+	matrix(int n, int m, double *a);
 	matrix(const matrix &b);
 	matrix(double a);
 	matrix(vector<double> a);

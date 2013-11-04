@@ -41,11 +41,11 @@ firm::firm(double money)
 {
 	//-----Exogenous parameters-----//
 	_elasticity = -1.5; 
-	_productivity = 3;
+	_productivity = 2;
 	//-----Parameters-----//
-	_salary = 6;
+	_salary = 10;
 	_plan = 0;
-	_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+	_price = 5;//_salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 	//-----Reaction-----//
 	_sold = 0;
 	_resume_number = 0;
@@ -53,7 +53,7 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 50;
+	_desired_workers = 20;
 	_unconscious_learning.init(27);
 	_qlearning.init(6,27,100);
 	price_change = 1;
@@ -72,13 +72,14 @@ firm::firm(double money)
 	t = 3;
 	period = 0;
 	vector<double> fi;
-	fi.push_back(104);
-	fi.push_back(-1.0/3);
-	_good = rls(fi, matrix(2));
+	double p[4] = {1,1,1,1};
+	fi.push_back(45);
+	fi.push_back(-1);
+	_good = rls(fi, matrix(2,2,p));
 	fi.clear();
-	fi.push_back(14);
-	fi.push_back(6);
-	_labor = rls(fi, matrix(2));
+	fi.push_back(10);
+	fi.push_back(2);
+	_labor = rls(fi, matrix(2,2,p));
 
 }
 
@@ -477,6 +478,7 @@ void firm::learn(scenario choice)
 							_price = good_action[0] + good_action[1] * q;
 							_desired_workers = q / _productivity;
 							_salary = (q - _productivity * labor_action[0]) / (labor_action[1] * _productivity); 
+							break;
 	}			
 //	set_salary(choice);
 //	set_price(choice);
