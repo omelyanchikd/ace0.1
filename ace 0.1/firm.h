@@ -15,7 +15,6 @@
 #include "qlearning.h"
 #include "rls.h"
 
-
 using namespace std;
 
 class firm 

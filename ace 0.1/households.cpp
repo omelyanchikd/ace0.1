@@ -63,7 +63,7 @@ void households::get_income()
 	{
 		if ((i->second).is_employed())
 			(i->second).work();
-/*		else
+		else
 			(i->second).gethelp();//*/
 	}
 }

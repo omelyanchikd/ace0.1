@@ -55,7 +55,7 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 20;
 	_unconscious_learning.init(27);
-	_qlearning.init(6,27,100);
+	_qlearning.init(6,27,50);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -139,7 +139,7 @@ void firm::getsales(int sold)//, int buyers)
 
 void firm::produce()
 {
-	_stock = _productivity * _workers_ids.size();
+	_stock = _productivity * _workers_ids.size(); //sqrtf(_workers_ids.size());
 	_money -= _salary * _workers_ids.size();
 }
 
@@ -416,11 +416,13 @@ void firm::set_parameters(scenario choice)
 void firm::learn(scenario choice)
 {
 	double reward;
+	vector<double> x, labor_action, good_action;
 	switch (choice.criteria)
 	{
 		case profit:	  reward = _profit; break;
 		case workers:	  reward = _workers_ids.size(); break;
 		case return_rate: reward = _salary * _workers_ids.size() / _profit; break; 
+		case forecast:	  reward = 0.333 * (_desired_workers -_workers_ids.size()) + 0.333 * (_stock - _sold) + 0.333 * (_profit);		 
 //		case sales_change: reward =  
 	}
 	switch (choice.method)
@@ -430,7 +432,7 @@ void firm::learn(scenario choice)
 							_action = _unconscious_learning.get_action();
 							set_parameters(choice);
 							break;	
-		case Qlearning:							
+		case q_learning:							
 							_qlearning.update(get_state(), reward);
 							_action = _qlearning.get_action();
 							set_parameters(choice);
@@ -462,8 +464,28 @@ void firm::learn(scenario choice)
 							_desired_workers = rand()/(double)RAND_MAX * 20 + 50;
 							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;
-		case rational:
-							vector<double> x;
+		case rational_quantity:
+							x.clear();
+							x.push_back(1);
+							x.push_back(_sold);
+							_good.update(_price, x);
+							x.clear();
+							x.push_back(1);
+							x.push_back(_salary);
+							_labor.update(_workers_ids.size(), x);
+							labor_action.clear();
+							good_action.clear();
+							labor_action = _labor.get_action();
+							good_action = _good.get_action();
+							_plan = _productivity * (labor_action[0] + good_action[0] * labor_action[1] * _productivity) / (2 - 2 * good_action[1] * labor_action[1] * _productivity * _productivity);  
+							_price = good_action[0] + good_action[1] * _plan;
+							_desired_workers = _plan / _productivity;
+							_salary = (_desired_workers - labor_action[0]) / labor_action[1];
+							break;
+		case rational_salary:
+							x.clear();				
+							labor_action.clear();
+							good_action.clear();
 							x.push_back(1);
 							x.push_back(_sold);
 							_good.update(_price, x);
@@ -474,10 +496,9 @@ void firm::learn(scenario choice)
 							vector<double> labor_action, good_action;
 							labor_action = _labor.get_action();
 							good_action = _good.get_action();
-							double q = _productivity * (labor_action[0] + good_action[0] * labor_action[1] * _productivity) / (2 - 2 * good_action[1] * labor_action[1] * _productivity * _productivity);  
-							_price = good_action[0] + good_action[1] * q;
-							_desired_workers = q / _productivity;
-							_salary = (q - _productivity * labor_action[0]) / (labor_action[1] * _productivity); 
+							_salary = (_productivity * good_action[0] * labor_action[1] + 2 * _productivity * _productivity * good_action[1] * labor_action[0] * labor_action[1] - 1) / (2 * labor_action[1] - 2 * _productivity * _productivity * good_action[1] * labor_action[1] * labor_action[1]); 
+							_desired_workers = labor_action[0] + labor_action[1] * _salary; 
+							_price = good_action[0] + good_action[1] * _productivity * _desired_workers;							
 							break;
 	}			
 //	set_salary(choice);
@@ -512,6 +533,8 @@ int firm::get_state()
 		return 4;
 	if ((_sold == 0) && (_workers_ids.size() > 0))
 		return 5;
+	int k = 0;
+	return 6;
 }
 
 double firm::sum_sales()

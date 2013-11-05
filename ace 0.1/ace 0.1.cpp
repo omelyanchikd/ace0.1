@@ -9,14 +9,14 @@
 int _tmain(int argc, _TCHAR* argv[])
 {
 	srand(1);
-	int n = 2, m = 50, i = 10;
+	int n = 2, m = 50, i = 400;
 /*	cout<<"Input initial number of firms: "<<endl;
 	cin>>n;
 	cout<<"Input initial number of households: "<<endl;
 	cin>>m;
 	cout<<"Input initial number of iterations: "<<endl;
 	cin>>i;//*/
-	scenario choice (rational, value, salary_price_desired, profit);
+	scenario choice (q_learning, value, salary_price_desired, profit);
 	world earth(n,m,10,0, choice);
 	for (int iteration = 0; iteration < i; iteration++)
 	{

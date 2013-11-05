@@ -1,9 +1,9 @@
 #pragma once
 
-enum method_type {random, rational, intuitive, oligopoly, recursive_least_squares, rlsf, nonconscious, Qlearning, classifiers, neural_network, evolution};
+enum method_type {random, rational_quantity, rational_salary, intuitive, oligopoly, recursive_least_squares, rlsf, nonconscious, q_learning, classifiers, neural_network, evolution};
 enum way_type {value, change, share};
 enum parameters_type{salary_price_desired, salary_desired, salary_price_plan, salary_plan}; // Rewrite later.
-enum criteria_type{profit, workers, return_rate, sales_change};
+enum criteria_type{profit, workers, return_rate, sales_change, forecast};
 
 class scenario
 {

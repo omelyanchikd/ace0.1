@@ -85,7 +85,7 @@ void household::quit()
 void household::gethelp()
 {
 	_money += _reservation_wage;
-	_reservation_wage *= 0.8;	
+//	_reservation_wage *= 0.8;	
 	_active = true;
 }
 
@@ -146,11 +146,10 @@ void household::set_salary(double salary)
 
 double household::consumptionbudget()
 {
-/*    if (_money > 0.6 * _salary)
+    if (_money > 0.6 * _salary)
        return (_money - 0.8 * (_money - 0.6 * _salary));
     else
-       return (_money);//*/
-	return 0.9 * _money;
+       return (_money);
 }
 
 //Покупка товаров, если товар считается бесконечно делимым. В дальнейшем эту процедуру следует переписать так, чтобы товар имел пределы делимости. Например, нельзя купить 0.00000001-ую часть айфона.
