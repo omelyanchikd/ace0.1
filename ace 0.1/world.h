@@ -21,13 +21,13 @@ class world
 public:
 	
 	world(void);
-	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, char* filename);
+	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string filename);
 	
 	void step();
 
 	void printinfo();
 
-	char* _log;
+	string _log;
 //	data _log;
 	macro _statistics;
 

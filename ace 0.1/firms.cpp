@@ -113,10 +113,17 @@ void firms::write_log(data& _log)
 	}	
 }
 
-void firms::write_log(char* _log)
+void firms::write_log(string _log)
 {
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
+		ofstream fout;
+		fout.open((_log  + "_salary.txt").c_str(), ios_base::app);
+		fout<<(i->second).getsalary();
+		fout.close();
+		fout.open((_log + "_firm" + (i->first).ToString() + "_price.txt").c_str(), ios_base::app);
+		fout<<(i->second).getprice();
+		fout.close();
 		_log.setfirmsalary(i->first, (i->second).getsalary());
 		_log.setfirmprice(i->first, (i->second).getprice());
 		_log.setfirmsold(i->first, (i->second).getsold());

@@ -5,7 +5,7 @@ world::world(void)
 {
 }
 
-world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, char *filename)
+world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string filename)
 {
 	_firms = (firms(firmnumber, firmmoney));
 	_households = (households(householdnumber, householdmoney));
@@ -35,7 +35,7 @@ void world::step()
 	get_statistics();
 	_firms.set_info();
 	_firms.write_log(_log);
-	_households.write_log(_log);
+//	_households.write_log(_log);
 	_firms.print_info();
 //	_households.print_info();
 	_firms.learn(_scenario);

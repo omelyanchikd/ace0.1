@@ -40,7 +40,7 @@ public:
 	void print_info();
 	// Хранение информации.
 	void write_log(data &_log);
-	void write_log(char* _log);
+	void write_log(string _log);
 	// Очистка.
 	void clear();
 	// Статистика.
