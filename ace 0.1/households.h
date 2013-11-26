@@ -26,6 +26,7 @@ public:
 	void buy(map<int, offer> &demand);
 	// Хранение информации.
 	void write_log(data& _log);
+	void write_log(char* _log);
 	// Вывод информации.
 	void print_info();
 	// Очистка.

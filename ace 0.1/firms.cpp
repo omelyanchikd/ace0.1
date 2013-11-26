@@ -113,6 +113,22 @@ void firms::write_log(data& _log)
 	}	
 }
 
+void firms::write_log(char* _log)
+{
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
+	{
+		_log.setfirmsalary(i->first, (i->second).getsalary());
+		_log.setfirmprice(i->first, (i->second).getprice());
+		_log.setfirmsold(i->first, (i->second).getsold());
+		_log.setfirmworkers(i->first, (i->second).getworkers());
+		_log.setfirmmoney(i->first, (i->second).getmoney());
+		_log.setfirmprofit(i->first, (i->second).getprofit());
+		_log.setfirmdesired(i->first, (i->second).getdesired());
+		_log.setfirmstock(i->first, (i->second).getstock());	
+		_log.setfirmaction(i->first, (i->second).getaction());
+	}	
+}
+
 void firms::clear()
 {
 	_firms.clear();

@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <fstream>
 
 #include "firm.h"
 
@@ -39,6 +40,7 @@ public:
 	void print_info();
 	// Хранение информации.
 	void write_log(data &_log);
+	void write_log(char* _log);
 	// Очистка.
 	void clear();
 	// Статистика.

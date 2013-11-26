@@ -5,13 +5,14 @@ world::world(void)
 {
 }
 
-world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice)
+world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, char *filename)
 {
 	_firms = (firms(firmnumber, firmmoney));
 	_households = (households(householdnumber, householdmoney));
 	_goodmarket.clear();
 	_labormarket.clear();
 	_scenario = choice;
+	_log = filename;
 }
 
 void world::step()
