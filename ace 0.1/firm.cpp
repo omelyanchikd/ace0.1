@@ -54,7 +54,7 @@ firm::firm(double money)
 	_money = money;
 	_profit = 0;
 	_desired_workers = 20;
-	_unconscious_learning.init(27);
+	_unconscious_learning.init(100);
 	_qlearning.init(6,27,50);
 	price_change = 1;
 	salary_change = 1;
@@ -290,24 +290,33 @@ void firm::set_parameters(scenario choice)
 			switch (choice.way)
 			{
 				case value: 
-						switch (_action / 9)
+						/*switch (_action / 5)
 						{
-							case 2: _salary *= 0.8; break;	
-							case 1: _salary *= 1.2; break;
-							case 0: break;
+							case 4: _salary = 1; break; 
+							case 3: _salary = 2; break;
+							case 2: _salary = 4; break;//_salary *= 0.8; break;	
+							case 1: _salary = 5; break;//_salary *= 1.2; break;
+							case 0: _salary = 3; break;
 						}
+						/*
+
 						switch ((_action / 3) % 3)
 						{
-							case 2: _price *= 0.8; break;
-							case 1: _price *= 1.2; break;
+							case 2:  //_price *= 0.8; break;
+							case 1: //_price *= 1.2; break;
 							case 0: break;
-						}
-						switch ((_action % 9) % 3)
+						}//*/
+						/*switch (_action % 5)
 						{
-							case 2: _desired_workers--; break;
-							case 1: _desired_workers++; break;
-							case 0: break;
-						}
+							case 4: _desired_workers = 15; break;
+							case 3: _desired_workers = 25; break;
+							case 2: _desired_workers = 10; break;//_desired_workers--; break;
+							case 1: _desired_workers = 30; break; //_desired_workers++; break;
+							case 0: _desired_workers = 20; break;
+						}//*/
+						_salary = 3 + (_action - 50) / 100.0;
+						_desired_workers = 30 + (_action - 50) / 10.0;
+						_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));	
 						break;
 				case change:
 						switch (_action / 9)
