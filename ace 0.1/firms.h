@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <fstream>
 
 #include "firm.h"
 
@@ -20,7 +21,7 @@ class firms
 public:
 	// Конструкторы.
 	firms(void);
-	firms(int n, double money);
+	firms(int n, double money, string model_name);
 	// Рынок труда.
 	map<int, double> set_vacancies();
 	vector<int> fire();
@@ -39,6 +40,7 @@ public:
 	void print_info();
 	// Хранение информации.
 	void write_log(data &_log);
+	void write_log(string model_name);
 	// Очистка.
 	void clear();
 	// Статистика.

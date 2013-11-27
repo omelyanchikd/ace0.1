@@ -5,7 +5,7 @@ firms::firms(void)
 {
 }
 
-firms::firms(int n, double money)
+firms::firms(int n, double money, string model_name)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -15,6 +15,51 @@ firms::firms(int n, double money)
 	fi.push_back(104);
 	fi.push_back(-1.0/3);
 	_rls = rls(fi, matrix(2));
+	for (int i = 1; i < n+1; i++)
+	{
+		ofstream fout;
+		ostringstream fn;
+		fn<<model_name<<"_salary"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_price"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");;
+		fn<<model_name<<"_sold"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_workers"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_money"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_profit"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_desired"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_stock"<<"_firm_"<<i<<".txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+	}
 }
 
 map<int, double> firms::set_vacancies()
@@ -110,6 +155,15 @@ void firms::write_log(data& _log)
 		_log.setfirmdesired(i->first, (i->second).getdesired());
 		_log.setfirmstock(i->first, (i->second).getstock());	
 		_log.setfirmaction(i->first, (i->second).getaction());
+	}	
+}
+
+void firms::write_log(string model_name)
+{
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
+	{
+		(i->second).write_log(model_name, i->first);
+		//_log.setfirmaction(i->first, (i->second).getaction());
 	}	
 }
 
