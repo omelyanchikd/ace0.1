@@ -5,7 +5,7 @@ firms::firms(void)
 {
 }
 
-firms::firms(int n, double money)
+firms::firms(int n, double money, string model_name)
 {
 	for (int i = 0; i < n; i++)
 	{
@@ -15,6 +15,51 @@ firms::firms(int n, double money)
 	fi.push_back(104);
 	fi.push_back(-1.0/3);
 	_rls = rls(fi, matrix(2));
+	for (int i = 1; i < n+1; i++)
+	{
+		ofstream fout;
+		ostringstream fn;
+		fn<<model_name<<"_firm_"<<i<<"_salary.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_price.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");;
+		fn<<model_name<<"_firm_"<<i<<"_sold.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_workers.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_money.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_profit.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_desired.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+		fn<<model_name<<"_firm_"<<i<<"_stock.txt";
+		fout.open(fn.str());
+		fout.clear();
+		fout.close();
+		fn.str("");
+	}
 }
 
 map<int, double> firms::set_vacancies()
@@ -113,26 +158,12 @@ void firms::write_log(data& _log)
 	}	
 }
 
-void firms::write_log(string _log)
+void firms::write_log(string model_name)
 {
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		ofstream fout;
-		fout.open((_log  + "_salary.txt").c_str(), ios_base::app);
-		fout<<(i->second).getsalary();
-		fout.close();
-		fout.open((_log + "_firm" + (i->first).ToString() + "_price.txt").c_str(), ios_base::app);
-		fout<<(i->second).getprice();
-		fout.close();
-		_log.setfirmsalary(i->first, (i->second).getsalary());
-		_log.setfirmprice(i->first, (i->second).getprice());
-		_log.setfirmsold(i->first, (i->second).getsold());
-		_log.setfirmworkers(i->first, (i->second).getworkers());
-		_log.setfirmmoney(i->first, (i->second).getmoney());
-		_log.setfirmprofit(i->first, (i->second).getprofit());
-		_log.setfirmdesired(i->first, (i->second).getdesired());
-		_log.setfirmstock(i->first, (i->second).getstock());	
-		_log.setfirmaction(i->first, (i->second).getaction());
+		(i->second).write_log(model_name, i->first);
+		//_log.setfirmaction(i->first, (i->second).getaction());
 	}	
 }
 

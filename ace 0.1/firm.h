@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 #include "stdlib.h"
 
@@ -35,6 +37,8 @@ public:
 	void getsales(int sold);//, int buyers);             //Get money from sales   
 	//-----Production-----//
 	void produce();
+	// Запись информации в лог.
+	void write_log(string model_name, int firm_id);
 	//Доступ к частной информации
 	int getstock();
 	double getprice();

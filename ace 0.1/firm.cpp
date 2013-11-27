@@ -55,8 +55,7 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 20;
 	_unconscious_learning.init(27);
-	_qlearning.init(6,27,50);
-	price_change = 1;
+	_qlearning.init(6,27,50);	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
 	price_base = 1;
@@ -80,7 +79,6 @@ firm::firm(double money)
 	fi.push_back(10);
 	fi.push_back(2);
 	_labor = rls(fi, matrix(2,2,p));
-
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -545,4 +543,50 @@ double firm::sum_sales()
 		sum += _sales[i];
 	}
 	return sum;
+}
+
+void firm::write_log(string model_name, int firm_id)
+{
+	ofstream fout;
+	ostringstream fn;
+	fn<<model_name<<"_firm_"<<firm_id<<"_salary.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_salary<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_price.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_price<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_sold.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_sold<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_workers.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_workers_ids.size()<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_money.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_money<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_profit.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_profit<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_desired.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_desired_workers<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_"<<firm_id<<"_stock.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<_stock<<" ";
+	fout.close();
+	fn.str("");
 }

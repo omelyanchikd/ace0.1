@@ -21,13 +21,12 @@ class world
 public:
 	
 	world(void);
-	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string filename);
+	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name);
 	
 	void step();
 
 	void printinfo();
 
-	string _log;
 //	data _log;
 	macro _statistics;
 
@@ -40,6 +39,8 @@ private:
 	goodmarket _goodmarket;
 
 	scenario _scenario;
+
+	string _model;
 	
 	void get_statistics();		// Вычисление основных статистических показателей.
 
