@@ -19,7 +19,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cin>>i;//*/
 	cout<<"Input model name: ";
 	cin>>model;
-	scenario choice (q_learning, value, salary_price_desired, profit);
+	scenario choice (nonconscious, value, salary_price_desired, profit);
 	world earth(n,m,10,0, choice, model);
 	for (int iteration = 0; iteration < i; iteration++)
 	{

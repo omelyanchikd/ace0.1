@@ -93,7 +93,7 @@ void household::buy_goods(map<int, offer> &demand)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
-	while ((spent < _consumption_budget) && (demand.size() > 0)) //&& (can_buy(available, demand)))
+	while ((spent < _consumption_budget) && (demand.size() > 0))// && (can_buy(available, demand)))
     {
         map<int,offer>::iterator j = demand.begin();
 		int rand = get_random(demand);
@@ -158,7 +158,7 @@ void household::buy(offer& good, double& available, double& spent)
 	if (good.get_count() * good.get_price() >= available)
 	{
 		spent += available/good.get_price() * available;
-		good.set_count(good.get_count() - available/good.get_price());
+		good.set_count(good.get_count() - available/good.get_price());//*/
 	/*	spent += floor(available/good.get_price()) * available;
 		good.set_count(good.get_count() - floor(available/good.get_price()));	//*/	
 	}

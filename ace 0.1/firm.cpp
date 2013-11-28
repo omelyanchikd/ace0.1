@@ -41,7 +41,7 @@ firm::firm(double money)
 {
 	//-----Exogenous parameters-----//
 	_elasticity = -1.5; 
-	_productivity = 2;
+	_productivity = 5;
 	//-----Parameters-----//
 	_salary = 10;
 	_plan = 0;
@@ -541,7 +541,6 @@ int firm::get_state()
 		return 4;
 	if ((_sold == 0) && (_workers_ids.size() > 0))
 		return 5;
-	int k = 0;
 	return 6;
 }
 
@@ -550,7 +549,7 @@ double firm::sum_sales()
 	double sum = 0;
 	for (int i = 0; i < _sales.size(); i++)
 	{
-		sum += _sales[i];
+		sum += _sales[i];  
 	}
 	return sum;
 }
