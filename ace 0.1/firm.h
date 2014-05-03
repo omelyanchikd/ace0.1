@@ -105,6 +105,19 @@ private:
 	// Rational.
 	rls _good;
 	rls _labor;
+	// Rule learning.
+	int get_state_profit();
+	int get_state_sold();
+	int get_state_workers();
+	// Previous state
+	double prev_profit;
+	double prev_sold;
+	int prev_workers;
+	// Rule action.
+	void set_price(int state);
+	void set_salary(int state);
+	void set_workers(int state);
+
 };
 
 

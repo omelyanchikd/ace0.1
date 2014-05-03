@@ -18,8 +18,8 @@ firm::firm(void)
 	_money = 0;
 	_profit = 0;
 	_desired_workers = 0;
-	_unconscious_learning.init(27);
-	_qlearning.init(6,27, 100);
+	_unconscious_learning.init(100);
+	_qlearning.init(6, 100, 100);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -55,7 +55,7 @@ firm::firm(double money)
 	_profit = 0;
 	_desired_workers = 20;
 	_unconscious_learning.init(100);
-	_qlearning.init(6,27,50);
+	_qlearning.init(6,100,50);
 	price_change = 1;
 	salary_change = 1;
 	desired_change = 1;
@@ -72,14 +72,17 @@ firm::firm(double money)
 	t = 3;
 	period = 0;
 	vector<double> fi;
-	double p[4] = {1,1,1,1};
+	double p[4] = {1,2,3,4};
 	fi.push_back(45);
-	fi.push_back(-1);
+	fi.push_back(1);
 	_good = rls(fi, matrix(2,2,p));
 	fi.clear();
 	fi.push_back(10);
 	fi.push_back(2);
 	_labor = rls(fi, matrix(2,2,p));
+	prev_sold = 500;
+	prev_profit = 300;
+	prev_workers = 20;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -289,33 +292,31 @@ void firm::set_parameters(scenario choice)
 			switch (choice.way)
 			{
 				case value: 
-						/*switch (_action / 5)
+/*						switch (_action / 9)
 						{
-							case 4: _salary = 1; break; 
-							case 3: _salary = 2; break;
-							case 2: _salary = 4; break;//_salary *= 0.8; break;	
-							case 1: _salary = 5; break;//_salary *= 1.2; break;
-							case 0: _salary = 3; break;
+//							case 4: _salary = 1; break; 
+//							case 3: _salary = 2; break;
+							case 2: _salary *= 0.8; break;	
+							case 1: _salary *= 1.2; break;
+							case 0: break; //_salary = 3; break;
 						}
-						/*
-
 						switch ((_action / 3) % 3)
 						{
-							case 2:  //_price *= 0.8; break;
-							case 1: //_price *= 1.2; break;
+							case 2: _price *= 0.8; break;
+							case 1: _price *= 1.2; break;
 							case 0: break;
 						}//*/
-						/*switch (_action % 5)
+/*						switch ((_action % 9) % 3)
 						{
-							case 4: _desired_workers = 15; break;
-							case 3: _desired_workers = 25; break;
-							case 2: _desired_workers = 10; break;//_desired_workers--; break;
-							case 1: _desired_workers = 30; break; //_desired_workers++; break;
-							case 0: _desired_workers = 20; break;
+//							case 4: _desired_workers = 15; break;
+//							case 3: _desired_workers = 25; break;
+							case 2: _desired_workers--; break;
+							case 1: _desired_workers++; break;
+							case 0: break;//_desired_workers = 20; break;
 						}//*/
 						_salary = 3 + (_action - 50) / 100.0;
 						_desired_workers = 30 + (_action - 50) / 10.0;
-						_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));	
+						_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));	//*/
 						break;
 				case change:
 						switch (_action / 9)
@@ -422,12 +423,19 @@ void firm::set_parameters(scenario choice)
 }
 
 void firm::learn(scenario choice)
-{
+{ 
+/*	set_salary(get_state_profit());
+	set_price(get_state_sold());
+	set_workers(get_state_workers());
+	prev_profit = _profit;
+	prev_sold = _sold;
+	prev_workers = _workers_ids.size();//*/
+	
 	double reward;
 	vector<double> x, labor_action, good_action;
 	switch (choice.criteria)
 	{
-		case profit:	  reward = _profit; break;
+		case profit:	  reward = _profit - 100; break;
 		case workers:	  reward = _workers_ids.size(); break;
 		case return_rate: reward = _salary * _workers_ids.size() / _profit; break; 
 		case forecast:	  reward = 0.333 * (_desired_workers -_workers_ids.size()) + 0.333 * (_stock - _sold) + 0.333 * (_profit);		 
@@ -447,7 +455,7 @@ void firm::learn(scenario choice)
 							break;
 		case oligopoly:		
 							if (_workers_ids.size() < _desired_workers)
-								_salary *= 0.2;						
+								_salary *= 1.05;						
 							_desired_workers = (_a - _salary/_productivity)/(_productivity * _b * (_f + 1));
 							_price = (_a + _f * _salary/_productivity) / (_f + 1);
 							break;
@@ -469,7 +477,7 @@ void firm::learn(scenario choice)
 							break;
 		case random:
 							_salary = rand()/(double)RAND_MAX * 3 + 4;
-							_desired_workers = rand()/(double)RAND_MAX * 20 + 50;
+							_desired_workers = rand()/(double)RAND_MAX * 50 + 50;
 							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;
 		case rational_quantity:
@@ -511,7 +519,7 @@ void firm::learn(scenario choice)
 	}			
 //	set_salary(choice);
 //	set_price(choice);
-//	set_desired(choice);
+//	set_desired(choice);//*/
 }
 
 void firm::fire(int id)
@@ -523,7 +531,6 @@ void firm::fire(int id)
 			_workers_ids.erase(_workers_ids.begin() + i);
 			break;
 		}
-
 	}
 }
 
@@ -598,4 +605,148 @@ void firm::write_log(string model_name, int firm_id)
 	fout<<_stock<<" ";
 	fout.close();
 	fn.str("");
+}
+
+int firm::get_state_profit()
+{
+	double change;
+	if (prev_profit == 0)
+		change = _profit * 100;
+	else
+		change = (_profit - prev_profit)/prev_profit * 100;
+	if (change < - 100)
+		return 0;
+	if (change < - 50)
+		return 1;
+	if (change < - 20)
+		return 2;
+	if (change < - 10)
+		return 3;
+	if (change < - 5)
+		return 4;
+	if (change < 5)
+		return 5;
+	if (change < 10)
+		return 6;
+	if (change < 20)
+		return 7;
+	if (change < 50)
+		return 8;
+	if (change < 100)
+		return 9;
+	return 10;
+}
+
+int firm::get_state_sold()
+{
+	double change;
+	if (prev_sold == 0)
+		change = _sold * 100;
+	else
+		change = (_sold - prev_sold)/prev_sold * 100;
+	if (change < - 100)
+		return 0;
+	if (change < - 50)
+		return 1;
+	if (change < - 20)
+		return 2;
+	if (change < - 10)
+		return 3;
+	if (change < - 5)
+		return 4;
+	if (change < 5)
+		return 5;
+	if (change < 10)
+		return 6;
+	if (change < 20)
+		return 7;
+	if (change < 50)
+		return 8;
+	if (change < 100)
+		return 9;
+	return 10;
+}
+
+int firm::get_state_workers()
+{
+	double change;
+	if (prev_workers == 0)
+		change = _workers_ids.size() * 100;
+	else
+		change = (_workers_ids.size() - prev_workers)/prev_workers * 100;
+	if (change < - 100)
+		return 0;
+	if (change < - 50)
+		return 1;
+	if (change < - 20)
+		return 2;
+	if (change < - 10)
+		return 3;
+	if (change < - 5)
+		return 4;
+	if (change < 5)
+		return 5;
+	if (change < 10)
+		return 6;
+	if (change < 20)
+		return 7;
+	if (change < 50)
+		return 8;
+	if (change < 100)
+		return 9;
+	return 10;
+}
+
+void firm::set_price(int state)
+{
+	switch (state)
+	{
+		case 0:	_price *= 0,5; break;
+		case 1: _price *= 0,6; break;
+		case 2: _price *= 0,8; break;
+		case 3: _price *= 0,9; break;
+		case 4: _price *= 0,95; break;
+		case 5: break;
+		case 6: _price *= 1,05; break;
+		case 7: _price *= 1,1; break;
+		case 8: _price *= 1,2; break;
+		case 9: _price *= 1,4; break;
+		case 10: _price *= 1,5; break; 
+	}	
+}
+
+void firm::set_salary(int state)
+{
+	switch (state)
+	{
+		case 0:	_salary *= 0,5; break;
+		case 1: _salary *= 0,6; break;
+		case 2: _salary *= 0,8; break;
+		case 3: _salary *= 0,9; break;
+		case 4: _salary *= 0,95; break;
+		case 5: break;
+		case 6: _salary *= 1,05; break;
+		case 7: _salary *= 1,1; break;
+		case 8: _salary *= 1,2; break;
+		case 9: _salary *= 1,4; break;
+		case 10: _salary *= 1,5; break; 
+	}	
+}
+
+void firm::set_workers(int state)
+{
+	switch (state)
+	{
+		case 0:	_desired_workers *= 0,5; break;
+		case 1: _desired_workers *= 0,6; break;
+		case 2: _desired_workers *= 0,8; break;
+		case 3: _desired_workers *= 0,9; break;
+		case 4: _desired_workers *= 0,95; break;
+		case 5: break;
+		case 6: _desired_workers *= 1,05; break;
+		case 7: _desired_workers *= 1,1; break;
+		case 8: _desired_workers *= 1,2; break;
+		case 9: _desired_workers *= 1,4; break;
+		case 10: _desired_workers *= 1,5; break; 
+	}	
 }

@@ -8,7 +8,7 @@ world::world(void)
 world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name)
 {
 	_firms = (firms(firmnumber, firmmoney, model_name));
-	_households = (households(householdnumber, householdmoney));
+	_households = (households(householdnumber, householdmoney, model_name));
 	_goodmarket.clear();
 	_labormarket.clear();
 	_scenario = choice;
@@ -17,6 +17,8 @@ world::world(int firmnumber, int householdnumber, double firmmoney, double house
 
 void world::step()
 {
+	_households.die();
+	_households.birth();
 	_households.quit(_firms.fire());
 	_households.update_salary(_firms.set_vacancies());
 	for (int iter = 0; iter < 2; iter++)
@@ -35,7 +37,7 @@ void world::step()
 	get_statistics();
 	_firms.set_info();
 	_firms.write_log(_model);
-//	_households.write_log(_log);
+	_households.write_log(_model);
 	_firms.print_info();
 //	_households.print_info();
 	_firms.learn(_scenario);

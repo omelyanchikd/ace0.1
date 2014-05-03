@@ -15,10 +15,10 @@ firms::firms(int n, double money, string model_name)
 	fi.push_back(104);
 	fi.push_back(-1.0/3);
 	_rls = rls(fi, matrix(2));
+	ofstream fout;
+	ostringstream fn;
 	for (int i = 1; i < n+1; i++)
 	{
-		ofstream fout;
-		ostringstream fn;
 		fn<<model_name<<"_salary"<<"_firm_"<<i<<".txt";
 		fout.open(fn.str());
 		fout.clear();
@@ -60,6 +60,36 @@ firms::firms(int n, double money, string model_name)
 		fout.close();
 		fn.str("");
 	}
+	fn<<model_name<<"_average_price.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_average_salary.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_gdp.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_consumption.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_production.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_number.txt";
+	fout.open(fn.str());
+	fout.clear();
+	fout.close();
+	fn.str("");
 }
 
 map<int, double> firms::set_vacancies()
@@ -165,6 +195,38 @@ void firms::write_log(string model_name)
 		(i->second).write_log(model_name, i->first);
 		//_log.setfirmaction(i->first, (i->second).getaction());
 	}	
+	ofstream fout;
+	ostringstream fn;
+	fn<<model_name<<"_average_price.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<average_price()<<" ";;
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_average_salary.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<average_salary()<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_gdp.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<gdp()<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_consumption.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<consumption()<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_production.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<production()<<" ";
+	fout.close();
+	fn.str("");
+	fn<<model_name<<"_firm_number.txt";
+	fout.open(fn.str(), ios_base::app);
+	fout<<firm_number()<<" ";
+	fout.close();
+	fn.str("");
 }
 
 void firms::clear()
@@ -196,7 +258,7 @@ double firms::consumption()
 	double sum = 0;
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		sum += (i->second).getprice() * (i->second).getsold();
+		sum += (i->second).getsold();
 	}
 	return sum;
 }

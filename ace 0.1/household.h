@@ -39,6 +39,9 @@ public:
 	double getmoney();
 	double getreservation();
 	double getconsumption();
+	int get_starve();
+	int get_fed();
+	void set_fed(int fed);
 	void set_salary(double salary);
 	void printinfo();
 
@@ -53,5 +56,8 @@ private:
 	double _money;
 	double _reservation_wage;
 	double _consumption_budget;
+	// Entry & exit parameters
+	int _starve;
+	int _fed;
 };
 

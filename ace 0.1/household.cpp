@@ -11,6 +11,8 @@ household::household(void)
 	_money = 0;
 	_reservation_wage = 0;
 	_consumption_budget = 0;
+	_starve = 0;
+	_fed = 0;
 }
 
 household::household(double money)
@@ -24,6 +26,8 @@ household::household(double money)
 	_money = money;
 	_reservation_wage = 1;
 	_consumption_budget = 0;
+	_starve = 0;
+	_fed = 0;
 }
 
 //ѕредставленный алгоритм поиска работы пока не учитывает необходимость уволитьс€ с фирмы при устройстве на другую работу.
@@ -93,7 +97,7 @@ void household::buy_goods(map<int, offer> &demand)
 {
     _consumption_budget = consumptionbudget();
 	double available = _consumption_budget, spent = 0;
-	while ((spent < _consumption_budget) && (demand.size() > 0))// && (can_buy(available, demand)))
+	while ((spent < _consumption_budget) && (demand.size() > 0) && (can_buy(available, demand)))
     {
         map<int,offer>::iterator j = demand.begin();
 		int rand = get_random(demand);
@@ -108,6 +112,16 @@ void household::buy_goods(map<int, offer> &demand)
 		}//*/
 
     }
+	if (spent > 0)
+	{
+		_fed++;
+		_starve = 0;
+	}
+	else
+	{
+		_fed = 0;
+		_starve++;
+	}
 	_money -= spent; 
 }
 
@@ -137,6 +151,21 @@ double household::getreservation()
 double household::getconsumption()
 {
 	return _consumption_budget;
+}
+
+int household::get_starve()
+{
+	return _starve;
+}
+
+int household::get_fed()
+{
+	return _fed;
+}
+
+void household::set_fed(int fed)
+{
+	_fed = fed;
 }
 
 void household::set_salary(double salary)
