@@ -51,14 +51,17 @@ public:
 	int getdesired();
 	double getaction();
 	void printinfo();
-	// Обучение и изменение основных параметров.
+	// Обучение и изменение основных параметров на базе сценариев.
 	void learn(scenario choice);
 	void set_salary(scenario choice);
 	void set_price(scenario choice);
 	void set_desired(scenario choice);
 	void set_parameters(scenario choice);
 	void set_info(double a, double b, int f);
-
+	// Обучение и изменение основных параметров на базе правил.
+	void learn(vector<vector<double>> rule_price, vector<vector<double>> rule_salary, vector<vector<double>> rule_plan);
+	double set(vector<double> state, vector<vector<double>> rule);
+	
 private:
 	
 	//-----Exogenous-parameters-----//

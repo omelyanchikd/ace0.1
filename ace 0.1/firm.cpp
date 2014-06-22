@@ -53,7 +53,7 @@ firm::firm(double money)
 	//-----Calculations-----//
 	_money = money;
 	_profit = 0;
-	_desired_workers = 20;
+	_desired_workers = 100;
 	_unconscious_learning.init(100);
 	_qlearning.init(6,100,50);
 	price_change = 1;
@@ -80,9 +80,9 @@ firm::firm(double money)
 	fi.push_back(10);
 	fi.push_back(2);
 	_labor = rls(fi, matrix(2,2,p));
-	prev_sold = 500;
-	prev_profit = 300;
-	prev_workers = 20;
+	prev_sold = 0;//500;
+	prev_profit = 0;//300;
+	prev_workers = 0;//20;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -108,6 +108,7 @@ vector<int> firm::checkresumes(vector<int> resumes)
 
 void firm::hire(vector<int> ids)
 {
+	prev_workers = _workers_ids.size();
 	for (int i = 0; i < ids.size(); i++)
 	{
 		_workers_ids.push_back(ids[i]);
@@ -133,9 +134,11 @@ vector<int> firm::fire()
 
 void firm::getsales(int sold)//, int buyers)
 {
+	prev_sold = _sold;
 	_sold = sold;
 //	_buyers = buyers;
 	_money += _price * _sold;
+	prev_profit = _profit;
 	_profit = _price * _sold - _salary * _workers_ids.size();
 }
 
@@ -749,4 +752,45 @@ void firm::set_workers(int state)
 		case 9: _desired_workers *= 1,4; break;
 		case 10: _desired_workers *= 1,5; break; 
 	}	
+}
+
+void firm::learn(vector<vector<double>> rules_price, vector<vector<double>> rules_salary, vector<vector<double>> rules_plan)
+{
+	vector<double> state;
+	if (prev_sold == 0)
+		state.push_back(_sold * 100);
+	else
+		state.push_back((_sold - prev_sold)/prev_sold*100);
+	if (prev_workers == 0)
+		state.push_back(_workers_ids.size() * 100);
+	else
+		state.push_back((_workers_ids.size() - prev_workers)/prev_workers*100);
+/*	if (prev_sold == 0)
+		state.push_back(_sold);
+	else
+		state.push_back((_sold - prev_sold)/prev_sold*100);//*/
+	_price *= (1 + set(state, rules_price)/100);
+	_salary *= (1 + set(state, rules_salary)/100);
+//	_desired_workers = _desired_workers * (1 + set(state, rules_plan)/100);
+	if ((_profit < 0) && (prev_profit > 0))
+		_desired_workers++;
+	if ((_profit < 0) && (prev_profit < 0))
+		_desired_workers--;
+}
+
+double firm::set(vector<double> state, vector<vector<double>> rules)
+{
+	for (int i = 0; i < rules.size(); i++)
+	{
+		int j = 0;
+		for (j = 0; j < rules[i].size() - 2; j += 2)
+		{
+			if (!((rules[i][j] <= state[j/2]) && (state[j/2] < rules[i][j+1])))
+				break;
+		}
+		if (j == rules.size() - 2)
+			return (rules[i][j] + rand()/(double)RAND_MAX * (rules[i][j+1] - rules[i][j]));
+	}
+	int choice = rand() % rules.size();
+	return (rules[choice][rules[choice].size()-2] + rand()/(double)RAND_MAX * (rules[choice][rules[choice].size()-1] - rules[choice][rules[choice].size()-2]));
 }

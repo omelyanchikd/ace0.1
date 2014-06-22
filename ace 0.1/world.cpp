@@ -5,7 +5,7 @@ world::world(void)
 {
 }
 
-world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name)
+world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name, string rules_price, string rules_salary, string rules_plan)
 {
 	_firms = (firms(firmnumber, firmmoney, model_name));
 	_households = (households(householdnumber, householdmoney, model_name));
@@ -13,6 +13,61 @@ world::world(int firmnumber, int householdnumber, double firmmoney, double house
 	_labormarket.clear();
 	_scenario = choice;
 	_model = model_name;
+	ifstream fin;
+	fin.open(rules_price);
+	while (!fin.eof())
+	{
+		string line;
+		getline(fin, line);
+		stringstream input(line);
+		vector<double> values;
+		while (!input.eof())
+		{
+			double val;
+			input>>val;
+			values.push_back(val);
+		}
+		_rules_price.push_back(values);
+		values.clear();
+		input.str("");
+	}
+	fin.close();
+	fin.open(rules_salary);
+	while (!fin.eof())
+	{
+		string line;
+		getline(fin, line);
+		stringstream input(line);
+		vector<double> values;
+		while (!input.eof())
+		{
+			double val;
+			input>>val;
+			values.push_back(val);
+		}
+		_rules_salary.push_back(values);
+		values.clear();
+		input.str("");
+	}
+	fin.close();
+    fin.open(rules_plan);
+	while (!fin.eof())
+	{
+		string line;
+		getline(fin, line);
+		stringstream input(line);
+		vector<double> values;
+		while (!input.eof())
+		{
+			double val;
+			input>>val;
+			values.push_back(val);
+		}
+		_rules_plan.push_back(values);
+		values.clear();
+		input.str("");
+	}
+	fin.close();
 }
 
 void world::step()
@@ -40,6 +95,7 @@ void world::step()
 	_households.write_log(_model);
 	_firms.print_info();
 //	_households.print_info();
+//	_firms.learn(_rules_price, _rules_salary, _rules_plan);
 	_firms.learn(_scenario);
 	_goodmarket.clear();
 	_labormarket.clear();

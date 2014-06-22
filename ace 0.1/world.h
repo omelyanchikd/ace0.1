@@ -21,7 +21,7 @@ class world
 public:
 	
 	world(void);
-	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name);
+	world(int firmnuumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name, string rules_price, string rules_salary, string rules_plan);
 	
 	void step();
 
@@ -37,6 +37,10 @@ private:
 	
 	labormarket _labormarket;
 	goodmarket _goodmarket;
+
+	vector<vector<double>> _rules_price;
+	vector<vector<double>> _rules_salary;
+	vector<vector<double>> _rules_plan;
 
 	scenario _scenario;
 

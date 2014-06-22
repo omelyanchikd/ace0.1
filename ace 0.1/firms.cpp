@@ -97,10 +97,10 @@ map<int, double> firms::set_vacancies()
 	map<int, double> vacancies;
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
-		if ((i->second).getworkers() < (i->second).getdesired())
-		{
+//		if ((i->second).getworkers() < (i->second).getdesired())
+//		{
 			vacancies[i->first] = (i->second).getsalary();			
-		}
+//		}
 	}
 	return vacancies;
 }
@@ -161,6 +161,14 @@ void firms::get_sales(map<int, int> sales)
 	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
 	{
 		(i->second).getsales(sales[i->first]);
+	}
+}
+
+void firms::learn(vector<vector<double>> rules_price, vector<vector<double>> rules_salary, vector<vector<double>> rules_plan)
+{
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
+	{
+		(i->second).learn(rules_price, rules_salary, rules_plan);
 	}
 }
 

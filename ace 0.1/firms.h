@@ -34,6 +34,7 @@ public:
 	void get_sales(map<int, int> sales);
 	// Обучение.
 	void learn(scenario _scenario);
+	void learn(vector<vector<double>> rule_price, vector<vector<double>> rule_salary, vector<vector<double>> rule_plan);
 	// Информация про окружающий мир.
 	void set_info();
 	// Вывод информации.

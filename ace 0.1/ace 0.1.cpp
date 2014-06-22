@@ -20,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Input model name: ";
 	cin>>model;
 	scenario choice (nonconscious, value, salary_price_desired, profit);
-	world earth(n,m,10,0, choice, model);
+	world earth(n,m,10,0, choice, model, "output_lviv_month_price.txt", "output_lviv_month_salary.txt", "output_lviv_month_plan.txt");
 	for (int iteration = 0; iteration < i; iteration++)
 	{
 		earth.step();
