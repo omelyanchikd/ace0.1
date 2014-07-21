@@ -42,6 +42,8 @@ private:
 	vector<vector<double>> _rules_salary;
 	vector<vector<double>> _rules_plan;
 
+	double _raw;
+
 	scenario _scenario;
 
 	string _model;

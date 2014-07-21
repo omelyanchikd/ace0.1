@@ -22,6 +22,8 @@ public:
 	// Конструкторы.
 	firms(void);
 	firms(int n, double money, string model_name);
+	// Рынок сырья.
+	void buy_raw(double price);
 	// Рынок труда.
 	map<int, double> set_vacancies();
 	vector<int> fire();

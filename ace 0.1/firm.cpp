@@ -6,6 +6,8 @@ firm::firm(void)
 	//-----Exogenous parameters-----//
 	_elasticity = 0; 
 	_productivity = 0;
+	_raw_need = 4;
+	_raw_price = 0;
 	//-----Parameters-----//
 	_price = 0;
 	_salary = 0;
@@ -13,7 +15,9 @@ firm::firm(void)
 	//-----Reaction-----//
 	_sold = 0;
 	_resume_number = 0;
+	_raw = 0;
 //	_buyers = 0;
+
 	//-----Calculations-----//
 	_money = 0;
 	_profit = 0;
@@ -42,6 +46,8 @@ firm::firm(double money)
 	//-----Exogenous parameters-----//
 	_elasticity = -1.5; 
 	_productivity = 5;
+	_raw_need = 4;
+	_raw_price = 0;
 	//-----Parameters-----//
 	_salary = 10;
 	_plan = 0;
@@ -49,6 +55,7 @@ firm::firm(double money)
 	//-----Reaction-----//
 	_sold = 0;
 	_resume_number = 0;
+	_raw = 0;
 //	_buyers = 0;
 	//-----Calculations-----//
 	_money = money;
@@ -83,6 +90,13 @@ firm::firm(double money)
 	prev_sold = 0;//500;
 	prev_profit = 0;//300;
 	prev_workers = 0;//20;
+}
+
+void firm::buy_raw(double price)
+{
+	_raw_price = price;
+	_money -= _raw_price * price * _productivity *_raw_need * _desired_workers;
+	_raw = _productivity *_raw_need * _desired_workers;
 }
 
 vector<int> firm::checkresumes(vector<int> resumes)
@@ -139,7 +153,7 @@ void firm::getsales(int sold)//, int buyers)
 //	_buyers = buyers;
 	_money += _price * _sold;
 	prev_profit = _profit;
-	_profit = _price * _sold - _salary * _workers_ids.size();
+	_profit = _price * _sold - _salary * _workers_ids.size() - _raw_price * _raw;
 }
 
 void firm::produce()
@@ -420,7 +434,7 @@ void firm::set_parameters(scenario choice)
 						_desired_workers += floor(desired_alpha * _profit);
 						break;				
 			}
-			_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+			_price = (_salary + _raw_price * _productivity * _raw_need)/_productivity * ( 1 / (1 + 1 / _elasticity));
 			break;
 	}
 }
@@ -481,7 +495,7 @@ void firm::learn(scenario choice)
 		case random:
 							_salary = rand()/(double)RAND_MAX * 3 + 4;
 							_desired_workers = rand()/(double)RAND_MAX * 50 + 50;
-							_price = _salary/_productivity * ( 1 / (1 + 1 / _elasticity));
+							_price = (_salary + _raw_price * _raw_need * _productivity)/_productivity * ( 1 / (1 + 1 / _elasticity));
 							break;
 		case rational_quantity:
 							x.clear();

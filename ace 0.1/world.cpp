@@ -7,6 +7,7 @@ world::world(void)
 
 world::world(int firmnumber, int householdnumber, double firmmoney, double householdmoney, scenario choice, string model_name, string rules_price, string rules_salary, string rules_plan)
 {
+	_raw = 1;
 	_firms = (firms(firmnumber, firmmoney, model_name));
 	_households = (households(householdnumber, householdmoney, model_name));
 	_goodmarket.clear();
@@ -84,6 +85,7 @@ void world::step()
 		_firms.hire(_households.choose_employee(_labormarket.get_invites(), _labormarket.get_vacancies()));
 		_labormarket.clear();
 	}
+	_firms.buy_raw(_raw);
 	_firms.produce();
 	_households.get_income();
 	_goodmarket.set_supply(_firms.set_supply());

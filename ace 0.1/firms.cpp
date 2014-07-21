@@ -92,6 +92,14 @@ firms::firms(int n, double money, string model_name)
 	fn.str("");
 }
 
+void firms::buy_raw(double price)
+{
+	for (map<int, firm>::iterator i = _firms.begin(); i != _firms.end(); ++i)
+	{
+			(i->second).buy_raw(price);			
+	}
+}
+
 map<int, double> firms::set_vacancies()
 {
 	map<int, double> vacancies;

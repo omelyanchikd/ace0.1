@@ -27,6 +27,8 @@ public:
 	//-----Constructor-----//
 	firm(void);
 	firm (double money);
+	// Закупка сырья
+	void buy_raw(double price);
 	//-----Labor-market-----//
 	vector<int> checkresumes(vector<int> resumes);         //Check income resumes and select appropriate candidates   
 	void hire(int id);                 //Hire final candidates 
@@ -67,6 +69,8 @@ private:
 	//-----Exogenous-parameters-----//
 	double _elasticity; 
 	double _productivity;
+	double _raw_need;
+	double _raw_price;
 	//-----Parameters-----//
 	double _price;
 	double _salary;
@@ -75,6 +79,7 @@ private:
 	int _sold;
 	vector <int> _workers_ids;
 	int _resume_number;
+	double _raw;
 //	int _buyers;
 	//-----Calculations-----//
 	double _money;
